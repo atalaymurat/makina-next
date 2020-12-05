@@ -1,0 +1,27 @@
+{
+  "name": "makina-next",
+  "version": "1.0.0",
+  "description": "js application",
+  "main": "index.js",
+  "dependencies": {
+    "next": "^10.0.3",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atalaymurat/makina-next.git"
+  },
+  "author": "mata",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/atalaymurat/makina-next/issues"
+  },
+  "homepage": "https://github.com/atalaymurat/makina-next#readme"
+}
