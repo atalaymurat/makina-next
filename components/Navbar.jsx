@@ -2,29 +2,27 @@ import Link from 'next/link'
 
 const Navbar = () => {
   return (
-    <div>
-      <ul>
-        <li>
-          <Link href="/">
-            <a>Giriş</a>
-          </Link>
-        </li>
-        <li>Hakkımızda</li>
-        <li>Geliştiriciler</li>
-      </ul>
-      <style jsx>{`
-        ul {
-          display: flex;
-          list-style: none;
-          margin: 0;
-          padding: 0;
-          border: solid 1px cyan;
-        }
-        ul li {
-          margin-right: 10px;
-        }
-      `}</style>
-    </div>
+    <nav className="navbar navbar-expand navbar-dark bg-dark mb-4">
+      <div className="container">
+        <a className="navbar-brand" href="#">
+          makinaTr
+        </a>
+        <div className="collapse navbar-collapse">
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <Link href="/">
+                <a className="nav-link">Giriş</a>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link href="/">
+                <a className="nav-link">Geliştirme</a>
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   )
 }
 
