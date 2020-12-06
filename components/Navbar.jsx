@@ -15,8 +15,8 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link href="/">
-                <a className="nav-link">Geliştirme</a>
+              <Link href="/kayit">
+                <a className="nav-link">Üye Ol</a>
               </Link>
             </li>
           </ul>
