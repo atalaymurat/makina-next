@@ -1,23 +1,16 @@
 import Layout from '../components/Layout'
+import LeadList from '../components/LeadList'
 
 const Index = (props) => {
   return (
     <Layout>
-      <h1>Welcome to Index at Next of makinaTr</h1>
-      <p>We develop nodejs and react apps for web interfaces</p>
+      <h1>Welcome to Index dev.makinatr this site under development</h1>
+      <p>We develop nodejs and reacta apps for web interfaces</p>
+      <div className="row">
       {props.data.leads.map((lead) => (
-        <div className="mb-1">
-          <img
-            src={lead.images && `https://api.makinatr.com${lead.images[0].url.thumb}`}
-            alt="image"
-          />
-          <h1 className="h4">{lead.title}</h1>
-          <p>
-            {lead.modelYear} {lead.brand.name} {lead.modelType} {lead.category.name}
-          </p>
-          <hr />
-        </div>
+        <LeadList ad={lead} />
       ))}
+      </div>
     </Layout>
   )
 }
@@ -33,7 +26,7 @@ export async function getServerSideProps() {
   }
 
   return {
-    props: { data }
+    props: { data },
   }
 }
 
