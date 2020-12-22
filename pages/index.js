@@ -11,7 +11,7 @@ const Index = (props) => {
 			<p>We develop nodejs and reacta apps for web interfaces</p>
 			<div className="row">
 				{props.data.success ? <p className="text-success">api test [{props.data.message}]</p> : <p className="text-danger">Api Test [FAIL]</p>}
-		{process.env.NODE_ENV}
+		{process.env.SECRET}
 			</div>
 		</Layout>
 	)

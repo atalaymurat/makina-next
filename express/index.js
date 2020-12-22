@@ -21,6 +21,11 @@ app
     server.listen(PORT, (err) => {
       if (err) throw err
       console.log(`> Running on MODE: [${process.env.NODE_ENV}] Listening on PORT: [${PORT}]`)
+			console.log(`
+					------------------------------
+					secret : ${process.env.SECRET}
+					------------------------------
+				`)
     })
   })
   .catch((err) => {
