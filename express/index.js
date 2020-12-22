@@ -20,7 +20,7 @@ app
 
     server.listen(PORT, (err) => {
       if (err) throw err
-      console.log(`>Running on mode ${process.env.NODE_ENV} Ready on ${PORT}`)
+      console.log(`> Running on MODE [${process.env.NODE_ENV}] Ready on PORT [${PORT}]`)
     })
   })
   .catch((err) => {
