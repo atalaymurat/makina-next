@@ -12,6 +12,7 @@ const Index = (props) => {
 			<div className="row">
 				{props.data.success ? <p className="text-success">api test [{props.data.message}]</p> : <p className="text-danger">Api Test [FAIL]</p>}
 		{process.env.SECRET}
+		{process.env.NODE_ENV}
 			</div>
 		</Layout>
 	)
