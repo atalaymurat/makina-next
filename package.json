@@ -15,7 +15,7 @@
   "scripts": {
     "dev": "nodemon express/index.js",
     "build": "next build",
-    "start": "next start"
+    "start": "NODE_ENV=production node express/index.js"
   },
   "repository": {
     "type": "git",
