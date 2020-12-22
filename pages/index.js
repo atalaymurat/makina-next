@@ -2,7 +2,7 @@ import Layout from '../components/Layout'
 import LeadList from '../components/LeadList'
 import axios from 'axios'
 
-axios.defaults.baseURL = 'https://localhost:3000'
+axios.defaults.baseURL = 'https://dev.makinatr.com'
 
 const Index = (props) => {
 	return (
