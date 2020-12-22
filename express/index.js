@@ -3,7 +3,7 @@ const next = require('next')
 
 const PORT = process.env.PORT || 5000
 const dev = process.NODE_ENV !== 'production'
-const app = next({ })
+const app = next({ dev })
 const handle = app.getRequestHandler()
 
 app
@@ -21,7 +21,7 @@ app
 
 		server.listen(PORT, (err) => {
 			if (err) throw err
-			console.log(`> Ready on ${PORT}`)
+			console.log(`>Running on mode ${process.NODE_ENV} Ready on ${PORT}`)
 		})
 	})
 	.catch((err) => {
