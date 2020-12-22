@@ -16,7 +16,7 @@ const Layout = (props) => (
       <meta property="og:title" content="makinaTr.com — Endüstriyel Makina ve Ekipmanlar" />
       <meta
         property="og:description"
-        content="2.el veya yeni makina ekipman pazarlama ve satınalma servisleri, her sektör ile ilgili endüstriyel makina, ekipman, yedekparça, yazılım veya hizmetleri makinaTr.com platformuda paylaşabilir ve müşterilere ulaşabilirsiniz."
+        content="2.el veya yeni makina ekipman pazarlama ve satınalma servisleri, her sektör ile ilgili endüstriyel makina, ekipman, yedekparça, yazılım veya hizmetleri makinaTr.com platformunda paylaşabilir ve müşterilerilerinize ulaşabilirsiniz."
       />
       <meta property="og:image" content="https://api.makinatr.com/cover_robotics.jpg" />
 
@@ -28,7 +28,6 @@ const Layout = (props) => (
         content="2.el veya yeni makina ekipman pazarlama ve satınalma servisleri, her sektör ile ilgili endüstriyel makina, ekipman, yedekparça, yazılım veya hizmetleri makinaTr.com platformuda paylaşabilir ve müşterilere ulaşabilirsiniz."
       />
       <meta property="twitter:image" content="https://api.makinatr.com/cover_robotics.jpg" />
-      <link rel="stylesheet" href="https://bootswatch.com/4/simplex/bootstrap.min.css" />
     </Head>
     <Navbar />
     <div className="container">{props.children}</div>
