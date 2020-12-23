@@ -14,15 +14,15 @@ const Navbar = () => {
             className="block text-gray-300 hover:text-white focus:outline-none"
             onClick={() => setIsOpen(!isOpen)}
           >
-            <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+            <svg className="h-8 w-8 fill-current" viewBox="0 0 24 24">
               {isOpen ? (
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z"
                 />
               ) : (
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
                 />
               )}
@@ -30,9 +30,9 @@ const Navbar = () => {
           </button>
         </div>
         <div className="flex items-center ml-2">
-          <img src="/siteLogo.svg" alt="Site Logo" className="h-6 w-6" />
+          <img src="/siteLogo.svg" alt="Site Logo" className="h-7 w-7" />
           <Link href="/">
-            <a className="text-2xl text-white mx-1">makinaTr</a>
+            <a className="text-3xl text-white mx-1">makinaTr</a>
           </Link>
         </div>
       </div>
@@ -45,7 +45,7 @@ const Navbar = () => {
       >
         <Link href="/kayit">
           <a
-            className="block mt-1 sm:mt-0 px-2 sm:mx-2 py-1 text-gray-300 font-semibold hover:bg-green-600 rounded "
+            className="block mt-1 sm:mt-0 px-2 sm:ml-2 py-1 text-gray-300 font-semibold hover:bg-green-600 rounded "
             onClick={() => setIsOpen(false)}
           >
             Makina Sat
@@ -53,7 +53,7 @@ const Navbar = () => {
         </Link>
         <Link href="/kayit">
           <a
-            className="block mt-1 sm:mt-0 px-2 sm:mx-2 py-1 text-gray-300 font-semibold hover:bg-green-600 rounded "
+            className="block mt-1 sm:mt-0 px-2 py-1 text-gray-300 font-semibold hover:bg-green-600 rounded "
             onClick={() => setIsOpen(false)}
           >
             Makina Talep et
@@ -61,7 +61,7 @@ const Navbar = () => {
         </Link>
         <Link href="/kayit">
           <a
-            className="block mt-1 sm:mt-0 px-2 sm:mx-2 py-1 text-gray-300 font-semibold hover:bg-green-600 rounded "
+            className="block mt-1 sm:mt-0 px-2 py-1 text-gray-300 font-semibold hover:bg-green-600 rounded "
             onClick={() => setIsOpen(false)}
           >
             Satıcı Hesabı Oluştur
@@ -69,7 +69,7 @@ const Navbar = () => {
         </Link>
         <Link href="/kayit">
           <a
-            className="block mt-1 sm:mt-0 px-2 sm:mx-1 py-1 text-gray-300 font-semibold hover:bg-green-600 rounded sm:ml-auto"
+            className="block mt-1 sm:mt-0 sm:mr-1 px-2 py-1 text-gray-300 font-semibold hover:bg-green-600 rounded sm:ml-auto"
             onClick={() => setIsOpen(false)}
           >
             Giriş Yap
@@ -77,7 +77,7 @@ const Navbar = () => {
         </Link>
         <Link href="/#">
           <a
-            className="block mt-1 sm:mt-0 px-2 sm:mx-1 py-1 text-gray-300 font-extrabold hover:bg-green-600 hover:text-white sm:shadow-sm rounded sm:bg-white sm:text-green-900"
+            className="block mt-1 sm:mt-0 px-2 py-1 text-gray-300 font-extrabold hover:bg-green-600 hover:text-white sm:shadow-sm rounded sm:bg-white sm:text-green-900"
             onClick={() => setIsOpen(false)}
           >
             ÜYE OL
