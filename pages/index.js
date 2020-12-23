@@ -1,5 +1,4 @@
 import Layout from '../components/Layout'
-import LeadList from '../components/LeadList'
 import axios from 'axios'
 
 axios.defaults.baseURL = process.env.API_BASE_URL
@@ -7,7 +6,7 @@ axios.defaults.baseURL = process.env.API_BASE_URL
 const Index = (props) => {
 	return (
 		<Layout>
-				{props.data.success ? <p className="text-success">api test [{props.data.message}]</p> : <p className="text-danger">Api Test [FAIL]</p>}
+				{props.data.success ? <p className="text-red-500">api test [{props.data.message}]</p> : <p className="text-danger">Api Test [FAIL]</p>}
 		</Layout>
 	)
 }

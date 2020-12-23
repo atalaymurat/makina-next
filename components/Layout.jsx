@@ -2,7 +2,7 @@ import Navbar from './Navbar'
 import Head from 'next/head'
 
 const Layout = (props) => (
-  <div>
+  <div className="h-full">
     <Head>
       <title>makinaTr.com — Endüstriyel Makina ve Ekipmanlar</title>
       <meta name="title" content="makinaTr.com — Endüstriyel Makina ve Ekipmanlar" />
@@ -30,7 +30,7 @@ const Layout = (props) => (
       <meta property="twitter:image" content="https://api.makinatr.com/cover_robotics.jpg" />
     </Head>
     <Navbar />
-    <div className="container">{props.children}</div>
+    <div className="h-full bg-gray-200">{props.children}</div>
   </div>
 )
 

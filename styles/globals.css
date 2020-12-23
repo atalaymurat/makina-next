@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 body {
-  overflow-y: scroll !important;
+  overflow-y: scroll;
+	height : 100vh;
 }
 
