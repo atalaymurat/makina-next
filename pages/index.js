@@ -6,7 +6,7 @@ axios.defaults.baseURL = process.env.API_BASE_URL
 const Index = (props) => {
 	return (
 		<Layout>
-				{props.data.success ? <p className="text-red-500">api test [{props.data.message}]</p> : <p className="text-danger">Api Test [FAIL]</p>}
+				{props.data.success ? <p className="text-red-400">api test [{props.data.message}]</p> : <p className="text-danger">Api Test [FAIL]</p>}
 		</Layout>
 	)
 }
