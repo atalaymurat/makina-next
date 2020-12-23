@@ -4,7 +4,7 @@ import Image from 'next/image'
 const Navbar = () => {
   return (
     <header className="bg-gradient-to-r from-green-700 via-green-900 to-gray-800">
-      <div className="flex items-center justify-start px-1 py-2">
+      <div className="flex items-center justify-start px-4 py-2">
         <button
           type="button"
           className="block text-gray-300 hover:text-white focus:outline-none"
@@ -23,15 +23,18 @@ const Navbar = () => {
           </Link>
         </div>
       </div>
-      <div className="">
+      <div className="pb-4 px-2">
         <Link href="/kayit">
-          <a className="block text-gray-300 font-semibold">Makina Sat</a>
+          <a className="block px-2 py-1 text-gray-300 font-semibold hover:bg-green-600 rounded ">Makina Sat</a>
         </Link>
         <Link href="/kayit">
-          <a className="block text-gray-300 font-semibold">Makina Talep et</a>
+          <a className="block px-2 py-1 text-gray-300 font-semibold hover:bg-green-600 rounded ">Makina Talep et</a>
         </Link>
         <Link href="/kayit">
-          <a className="block text-gray-300 font-semibold">Satıcı Hesapları</a>
+          <a className="block px-2 py-1 text-gray-300 font-semibold hover:bg-green-600 rounded ">Satıcı Hesabı Oluştur</a>
+        </Link>
+        <Link href="/kayit">
+          <a className="block px-2 py-1 text-gray-300 font-semibold hover:bg-green-600 rounded ">Giriş Yap</a>
         </Link>
       </div>
     </header>
