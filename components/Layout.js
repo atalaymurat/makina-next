@@ -4,30 +4,60 @@ import Head from 'next/head'
 const Layout = (props) => (
   <div className="h-full">
     <Head>
-      <title>makinaTr.com — Endüstriyel Makina ve Ekipmanlar</title>
-      <meta name="title" content="makinaTr.com — Endüstriyel Makina ve Ekipmanlar" />
+      <title>
+        {props.title && `${props.title} -- ${process.env.NEXT_PUBLIC_SITE_NAME}` ||
+          process.env.NEXT_PUBLIC_SITE_TITLE}
+      </title>
+      <meta
+        name="title"
+        content={
+          props.title && `${props.title} -- ${process.env.NEXT_PUBLIC_SITE_NAME}` ||
+          process.env.NEXT_PUBLIC_SITE_TITLE
+        }
+      />
       <meta
         name="description"
-        content="2.el veya yeni makina ekipman pazarlama ve satınalma servisleri, her sektör ile ilgili endüstriyel makina, ekipman, yedekparça, yazılım veya hizmetleri makinaTr.com platformuda paylaşabilir ve müşterilere ulaşabilirsiniz."
+        content={process.env.NEXT_PUBLIC_SITE_DESCRIPTION}
       />
 
       <meta property="og:type" content="website" />
-      <meta property="og:url" content="https://makinatr.com/" />
-      <meta property="og:title" content="makinaTr.com — Endüstriyel Makina ve Ekipmanlar" />
+      <meta property="og:url" content={process.env.NEXT_PUBLIC_API_BASE_URL} />
+      <meta
+        property="og:title"
+        content={
+          props.title && `${props.title} -- ${process.env.NEXT_PUBLIC_SITE_NAME}` ||
+          process.env.NEXT_PUBLIC_SITE_TITLE
+        }
+      />
       <meta
         property="og:description"
-        content="2.el veya yeni makina ekipman pazarlama ve satınalma servisleri, her sektör ile ilgili endüstriyel makina, ekipman, yedekparça, yazılım veya hizmetleri makinaTr.com platformunda paylaşabilir ve müşterilerilerinize ulaşabilirsiniz."
+        content={process.env.NEXT_PUBLIC_SITE_DESCRIPTION}
       />
-      <meta property="og:image" content="https://api.makinatr.com/cover_robotics.jpg" />
+      <meta
+        property="og:image"
+        content={process.env.NEXT_PUBLIC_API_BASE_URL + '/siteLogo.svg'}
+      />
 
       <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:url" content="https://makinatr.com/" />
-      <meta property="twitter:title" content="makinaTr.com — Endüstriyel Makina ve Ekipmanlar" />
+      <meta
+        property="twitter:url"
+        content={process.env.NEXT_PUBLIC_API_BASE_URL}
+      />
+      <meta
+        property="twitter:title"
+        content={
+          props.title && `${props.title} -- ${process.env.NEXT_PUBLIC_SITE_NAME}` ||
+          process.env.NEXT_PUBLIC_SITE_TITLE
+        }
+      />
       <meta
         property="twitter:description"
-        content="2.el veya yeni makina ekipman pazarlama ve satınalma servisleri, her sektör ile ilgili endüstriyel makina, ekipman, yedekparça, yazılım veya hizmetleri makinaTr.com platformuda paylaşabilir ve müşterilere ulaşabilirsiniz."
+        content={process.env.NEXT_PUBLIC_SITE_DESCRIPTION}
       />
-      <meta property="twitter:image" content="https://api.makinatr.com/cover_robotics.jpg" />
+      <meta
+        property="twitter:image"
+        content={process.env.NEXT_PUBLIC_API_BASE_URL + '/siteLogo.svg'}
+      />
     </Head>
     <Navbar />
     <div className="h-full bg-gray-200">{props.children}</div>

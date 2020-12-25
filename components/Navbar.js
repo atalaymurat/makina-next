@@ -32,7 +32,7 @@ const Navbar = () => {
         <div className="flex items-center ml-2">
           <img src="/siteLogo.svg" alt="Site Logo" className="h-7 w-7" />
           <Link href="/">
-            <a className="text-3xl text-white mx-1">makinaTr</a>
+            <a className="text-3xl text-white mx-1">{process.env.NEXT_PUBLIC_SITE_NAME}</a>
           </Link>
         </div>
       </div>
@@ -65,6 +65,14 @@ const Navbar = () => {
             onClick={() => setIsOpen(false)}
           >
             Satıcı Hesabı Oluştur
+          </a>
+        </Link>
+        <Link href="/panel">
+          <a
+            className="block mt-1 sm:mt-0 sm:mr-1 px-2 py-1 text-gray-300 font-semibold hover:bg-green-600 rounded"
+            onClick={() => setIsOpen(false)}
+          >
+            Üye Paneli
           </a>
         </Link>
         <Link href="/kayit">
