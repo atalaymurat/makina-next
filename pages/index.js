@@ -1,7 +1,7 @@
 import Layout from '../components/Layout'
 import axios from 'axios'
 
-axios.defaults.baseURL = process.env.API_BASE_URL
+
 
 const Index = (props) => {
 	return (

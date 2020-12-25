@@ -15,7 +15,7 @@ const Panel = ({ user }) => (
 export const getServerSideProps = withSession(async ({ req, res }) => {
   const user = req.session.get('user')
   if (!user) {
-    res.statusCode = 404
+    res.statusCode = 401 //unauthorized
     res.end()
     return { props: {} }
   }

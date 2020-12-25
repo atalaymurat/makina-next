@@ -1,9 +1,10 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { useState } from 'react'
+import useUser from "../lib/useUser"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const { user, isLoading } = useUser()
 
   return (
     <header className="bg-gradient-to-r from-green-700 via-green-900 to-gray-800">
@@ -72,7 +73,7 @@ const Navbar = () => {
             className="block mt-1 sm:mt-0 sm:mr-1 px-2 py-1 text-gray-300 font-semibold hover:bg-green-600 rounded"
             onClick={() => setIsOpen(false)}
           >
-            Üye Paneli
+            { isLoading ? "spin" : user.name}
           </a>
         </Link>
         <Link href="/kayit">
