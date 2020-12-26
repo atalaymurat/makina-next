@@ -8,5 +8,5 @@ body {
 }
 
 .logo {
-  @apply text-yellow-600 mx-1;
+  @apply text-gray-200 mx-1;
 }
