@@ -143,7 +143,7 @@ const Kayit = (props) => {
                     className="w-4 h-4 transition duration-300 rounded focus:ring-2 focus:ring-offset-0 focus:outline-none focus:ring-blue-200"
                   />
                   <label
-                    for="remember"
+                    htmlFor="remember"
                     className="text-sm font-semibold text-gray-500"
                   >
                     Üyelik Sözleşmesini Okudum ve Kabul Ediyorum
