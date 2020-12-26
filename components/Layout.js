@@ -2,16 +2,18 @@ import Navbar from './Navbar'
 import Head from 'next/head'
 
 const Layout = (props) => (
-  <div className="h-full">
+  <>
     <Head>
       <title>
-        {props.title && `${props.title} -- ${process.env.NEXT_PUBLIC_SITE_NAME}` ||
+        {(props.title &&
+          `${props.title} -- ${process.env.NEXT_PUBLIC_SITE_NAME}`) ||
           process.env.NEXT_PUBLIC_SITE_TITLE}
       </title>
       <meta
         name="title"
         content={
-          props.title && `${props.title} -- ${process.env.NEXT_PUBLIC_SITE_NAME}` ||
+          (props.title &&
+            `${props.title} -- ${process.env.NEXT_PUBLIC_SITE_NAME}`) ||
           process.env.NEXT_PUBLIC_SITE_TITLE
         }
       />
@@ -25,7 +27,8 @@ const Layout = (props) => (
       <meta
         property="og:title"
         content={
-          props.title && `${props.title} -- ${process.env.NEXT_PUBLIC_SITE_NAME}` ||
+          (props.title &&
+            `${props.title} -- ${process.env.NEXT_PUBLIC_SITE_NAME}`) ||
           process.env.NEXT_PUBLIC_SITE_TITLE
         }
       />
@@ -46,7 +49,8 @@ const Layout = (props) => (
       <meta
         property="twitter:title"
         content={
-          props.title && `${props.title} -- ${process.env.NEXT_PUBLIC_SITE_NAME}` ||
+          (props.title &&
+            `${props.title} -- ${process.env.NEXT_PUBLIC_SITE_NAME}`) ||
           process.env.NEXT_PUBLIC_SITE_TITLE
         }
       />
@@ -59,9 +63,16 @@ const Layout = (props) => (
         content={process.env.NEXT_PUBLIC_API_BASE_URL + '/siteLogo.svg'}
       />
     </Head>
-    <Navbar />
-    <div className="h-full overflow-x-auto">{props.children}</div>
-  </div>
+    <header>
+      <Navbar />
+    </header>
+    <div className="main-content">{props.children}</div>
+    <div className="footer-content w-full">
+      <div className="h-20 bg-gray-700 text-white font-semibold">
+      <div className="mx-auto w-44 text-2xl text-center">{process.env.NEXT_PUBLIC_SITE_NAME}</div>
+      </div>
+    </div>
+  </>
 )
 
 export default Layout

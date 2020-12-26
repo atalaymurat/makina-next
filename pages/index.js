@@ -4,7 +4,7 @@ import axios from 'axios'
 const Index = (props) => {
   return (
     <Layout>
-      <div className="md:min-h-(screen-24) min-h-screen bg-gray-900 flex items-start pt-12 flex-col">
+      <div className="h-full bg-gray-900 flex items-start pt-12 flex-col">
         <h1 className="text-6xl sm:text-7xl lg:text-9xl  px-8 text-white font-bold mx-auto max-w-5xl">
           <span className="text-transparent bg-gradient-to-r bg-clip-text from-blue-500 to-green-500">
             Bir sonraki aşamaya

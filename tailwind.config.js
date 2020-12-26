@@ -1,3 +1,4 @@
+const colors = require('tailwindcss/colors')
 
 module.exports = {
   purge: {
@@ -10,9 +11,16 @@ module.exports = {
   theme: {
     extend: {
       minHeight: {
-        '(screen-24)' : 'calc(100vh - 6rem)',
+        '(screen-24)': 'calc(100vh - 6rem)',
       },
       colors: {
+        transparent: 'transparent',
+        current: 'currentColor',
+        gray: colors.coolGray,
+        purple: colors.violet,
+        red: colors.red,
+        lime: colors.lime,
+        yellow: colors.amber,
         green: {
           750: '#617f41',
         },

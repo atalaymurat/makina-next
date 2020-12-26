@@ -2,9 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+html, body, div#__next{
+	height : 100%;
   overflow-y: scroll;
-	height : 100vh;
+}
+div#__next {
+  display: flex;
+  flex-direction: column;
+}
+
+div.main-content {
+  flex: 1 0 auto;
+}
+
+div.footer-content {
+  flex-shrink: 0;
 }
 
 .logo {
