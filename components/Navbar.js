@@ -44,7 +44,7 @@ const Navbar = () => {
             : 'hidden pb-4 px-2 sm:flex'
         }
       >
-        <Link href="/kayit">
+        <Link href="/">
           <a
             className="block mt-1 sm:mt-0 px-2 sm:ml-2 py-1 text-gray-300 font-semibold hover:bg-green-600 rounded "
             onClick={() => setIsOpen(false)}
@@ -52,7 +52,7 @@ const Navbar = () => {
             Makina Sat
           </a>
         </Link>
-        <Link href="/kayit">
+        <Link href="/">
           <a
             className="block mt-1 sm:mt-0 px-2 py-1 text-gray-300 font-semibold hover:bg-green-600 rounded "
             onClick={() => setIsOpen(false)}
@@ -76,7 +76,7 @@ const Navbar = () => {
             { isLoading ? "spin" : user.firstName}
           </a>
         </Link>
-        <Link href="/kayit">
+        <Link href="/">
           <a
             className="block mt-1 sm:mt-0 sm:mr-1 px-2 py-1 text-gray-300 font-semibold hover:bg-green-600 rounded sm:ml-auto"
             onClick={() => setIsOpen(false)}
@@ -84,7 +84,7 @@ const Navbar = () => {
             Giriş Yap
           </a>
         </Link>
-        <Link href="/#">
+        <Link href="/kayit">
           <a
             className="block mt-1 sm:mt-0 px-2 py-1 text-gray-300 font-extrabold hover:bg-green-600 hover:text-white sm:shadow-sm rounded sm:bg-white sm:text-green-900"
             onClick={() => setIsOpen(false)}

@@ -60,7 +60,7 @@ const Layout = (props) => (
       />
     </Head>
     <Navbar />
-    <div className="h-full">{props.children}</div>
+    <div className="h-full overflow-x-auto">{props.children}</div>
   </div>
 )
 
