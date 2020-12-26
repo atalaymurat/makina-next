@@ -7,7 +7,7 @@ const Navbar = () => {
   const { user, isLoading } = useUser()
 
   return (
-    <header className="bg-gradient-to-r from-green-700 via-green-900 to-gray-800">
+    <header className="bg-gradient-to-r from-green-700 to-gray-900">
       <div className="flex items-center justify-start px-4 py-2">
         <div className="sm:hidden">
           <button

@@ -5,7 +5,7 @@ const Index = (props) => {
   return (
     <Layout>
       <div className="bg-gray-900 min-h-screen flex items-start pt-12">
-        <h1 className="text-9xl px-8 text-white font-bold mx-auto max-w-5xl">
+        <h1 className="sm:text-5xl lg:text-9xl  px-8 text-white font-bold mx-auto max-w-5xl">
           <span className="text-transparent bg-gradient-to-r bg-clip-text from-blue-500 to-green-500">
             Bir sonraki aşamaya
           </span>

@@ -5,7 +5,7 @@ module.exports = {
       console.log('CTRL SIGNUP USER DATA POSTED:', req.body)
       // We will check user from db here
       const email = req.body.email
-      req.session.set('user', { email, name: req.body.name, id:"001" })
+      req.session.set('user', { email, firstName: req.body.firstName, id:"001" })
       await req.session.save()
       return res.json({ message: 'Session Saved' })
     } catch (err) {
