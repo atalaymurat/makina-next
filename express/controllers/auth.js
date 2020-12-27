@@ -1,3 +1,5 @@
+const User = require('../models/user')
+
 module.exports = {
   signUp: async (req, res) => {
     console.log('controller signIn')
@@ -5,13 +7,26 @@ module.exports = {
       console.log('CTRL SIGNUP USER DATA POSTED:', req.body)
       // We will check user from db here
       const email = req.body.email
+			const firstName = req.body.firstName
+			const lastName = req.body.lastName
+			const newUser = new User({
+			name: {firstName, lastName },
+				email
+			})
+
+			await newUser.save()
+			console.log("newUser: ", newUser )
+
+
+
       req.session.set('user', { email, firstName: req.body.firstName, id:"001" })
       await req.session.save()
-      return res.json({ message: 'Session Saved' })
+      return res.json({ message: 'Session Saved', newUser })
     } catch (err) {
       console.error('Server Error')
     }
   },
+
   user: async (req, res) => {
     try {
       const user = req.session.get('user')
