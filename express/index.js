@@ -16,7 +16,7 @@ app
 		var mongoose = require('mongoose')
 
 		//Set up default mongoose connection
-		var mongoDB = 'mongodb://127.0.0.1/makina_nextdb'
+		var mongoDB = process.env.APP_MONGO_DB_URL
 		mongoose.connect(mongoDB, {
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
