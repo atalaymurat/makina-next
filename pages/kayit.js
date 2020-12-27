@@ -1,10 +1,13 @@
 import Layout from '../components/Layout'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import axios from 'axios'
 import * as Yup from 'yup'
 
 const Kayit = (props) => {
+  const router = useRouter()
+
   return (
     <Layout title="Üye Kaydı" baseURL={props.base}>
       <div className="h-full flex items-center p-4 bg-gray-100 lg:justify-center">
@@ -65,6 +68,7 @@ const Kayit = (props) => {
               onSubmit={(values, { setSubmitting }) => {
                 axios.post('/api/auth/signup', values)
                 setSubmitting(false)
+                router.push("/panel")
               }}
             >
               <Form className="bg-transparent mx-auto max-w-xl">

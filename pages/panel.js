@@ -13,14 +13,18 @@ const Panel = ({ user }) => (
 )
 
 export const getServerSideProps = withSession(async ({ req, res }) => {
-  const user = req.session.get('user')
-  if (!user) {
-    res.statusCode = 401 //unauthorized
-    res.redirect("/404")
-    return { props: {} }
-  }
-  return {
-    props: { user },
+  try {
+    const user = req.session.get('user')
+    if (!user) {
+      res.statusCode = 401 //unauthorized
+      res.redirect('/404')
+      return { props: {} }
+    }
+    return {
+      props: { user },
+    }
+  } catch (err) {
+    console.error('Error: Panel.js')
   }
 })
 

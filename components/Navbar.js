@@ -1,13 +1,13 @@
 import Link from 'next/link'
 import { useState } from 'react'
-import useUser from "../lib/useUser"
+import useUser from '../lib/useUser'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const { user, isLoading } = useUser()
 
   return (
-    <header className="bg-gradient-to-r from-green-600 to-gray-800">
+    <header className="bg-gradient-to-r from-gray-800 to-gray-900 border-b-2 border-white">
       <div className="flex items-center justify-start px-4 py-2">
         <div className="sm:hidden">
           <button
@@ -46,7 +46,7 @@ const Navbar = () => {
       >
         <Link href="/">
           <a
-            className="block mt-1 sm:mt-0 px-2 sm:ml-2 py-1 text-gray-300 font-semibold hover:bg-green-600 rounded "
+            className="block mt-1 sm:mt-0 px-2 sm:ml-2 py-1 text-gray-300 font-semibold hover:bg-white rounded hover:text-gray-800 "
             onClick={() => setIsOpen(false)}
           >
             Makina Sat
@@ -54,31 +54,33 @@ const Navbar = () => {
         </Link>
         <Link href="/">
           <a
-            className="block mt-1 sm:mt-0 px-2 py-1 text-gray-300 font-semibold hover:bg-green-600 rounded "
+            className="block mt-1 sm:mt-0 px-2 py-1 text-gray-300 font-semibold hover:bg-white hover:text-gray-800 rounded "
             onClick={() => setIsOpen(false)}
           >
-            Makina Talep et
+            Makinalar
           </a>
         </Link>
         <Link href="/kayit">
           <a
-            className="block mt-1 sm:mt-0 px-2 py-1 text-gray-300 font-semibold hover:bg-green-600 rounded "
+            className="block mt-1 sm:mt-0 px-2 py-1 text-gray-300 font-semibold hover:bg-white hover:text-gray-800 rounded "
             onClick={() => setIsOpen(false)}
           >
-            Satıcı Hesabı Oluştur
+            Hizmetler
           </a>
         </Link>
-        <Link href="/panel">
-          <a
-            className="block mt-1 sm:mt-0 sm:mr-1 px-2 py-1 text-gray-300 font-semibold hover:bg-green-600 rounded"
-            onClick={() => setIsOpen(false)}
-          >
-            { isLoading ? "spin" : user.firstName}
-          </a>
-        </Link>
+        {user ? (
+          <Link href="/panel">
+            <a
+              className="block mt-1 sm:mt-0 sm:mr-1 px-2 py-1 text-gray-300 font-semibold hover:bg-white hover:text-gray-800 rounded"
+              onClick={() => setIsOpen(false)}
+            >
+              {isLoading ? 'spin' : user.firstName}
+            </a>
+          </Link>
+        ) : null}
         <Link href="/">
           <a
-            className="block mt-1 sm:mt-0 sm:mr-1 px-2 py-1 text-gray-300 font-semibold hover:bg-green-600 rounded sm:ml-auto"
+            className="block mt-1 sm:mt-0 sm:mr-1 px-2 py-1 text-gray-300 font-semibold border border-gray-900  hover:border-gray-50 hover:text-white rounded sm:ml-auto"
             onClick={() => setIsOpen(false)}
           >
             Giriş Yap
@@ -86,7 +88,7 @@ const Navbar = () => {
         </Link>
         <Link href="/kayit">
           <a
-            className="block mt-1 sm:mt-0 px-2 py-1 text-gray-300 font-extrabold hover:bg-green-600 hover:text-white sm:shadow-sm rounded sm:bg-white sm:text-green-900"
+            className="block mt-1 sm:mt-0 px-2 py-1 text-gray-300 font-extrabold  hover:bg-gray-700 hover:text-white rounded sm:bg-white sm:text-gray-800"
             onClick={() => setIsOpen(false)}
           >
             ÜYE OL
