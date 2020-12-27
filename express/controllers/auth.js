@@ -9,19 +9,20 @@ module.exports = {
       const email = req.body.email
 			const firstName = req.body.firstName
 			const lastName = req.body.lastName
+
 			const newUser = new User({
 			name: {firstName, lastName },
 				email
 			})
 
 			await newUser.save()
-			console.log("newUser: ", newUser )
+			console.log("newUser saved:", newUser)
 
 
 
-      req.session.set('user', { email, firstName: req.body.firstName, id:"001" })
+      req.session.set('user', {firstName: newUser.name.firstName, _id: newUser._id } )
       await req.session.save()
-      return res.json({ message: 'Session Saved', newUser })
+      return res.json({ message: 'Session Saved', ...newUser._doc  })
     } catch (err) {
       console.error('Server Error')
     }
@@ -40,7 +41,7 @@ module.exports = {
 
       res
         .status(200)
-        .json({ success: true, id: user.id, firstName: user.firstName, email: user.email,  info: 'USER INFOS...' })
+        .json({ success: true, id: user.id, firstName: user.firstName, email: user.email})
     } catch (err) {
       console.error('Server Error')
     }
