@@ -1,7 +1,6 @@
 import '../styles/globals.css'
 import { SWRConfig } from 'swr'
 import axios from 'axios'
-import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 
 axios.defaults.baseURL = process.env.API_BASE_URL
 
@@ -14,9 +13,7 @@ export default function MyApp({ Component, pageProps }) {
 				onError: (err) => console.error(err),
 			}}
 		>
-			<GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY} language="tr">
 				<Component {...pageProps} />
-			</GoogleReCaptchaProvider>
 		</SWRConfig>
 	)
 }
