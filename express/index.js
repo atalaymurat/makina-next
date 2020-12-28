@@ -27,7 +27,11 @@ app
 		//Get the default connection
 		var db = mongoose.connection
 		db.once('open', function () {
-			console.log('mongoDb connection status [OK]')
+			console.log(`
+--------------------------------
+MongoDb connection status [OK]')
+--------------------------------
+			`)
 		})
 
 		//Bind connection to error event (to get notification of connection errors)
@@ -49,7 +53,7 @@ app
 			console.log(`> Running on MODE: [${process.env.NODE_ENV}] Listening on PORT: [${PORT}]`)
 			console.log(`
  ------------------------------------
- envProduction : ${process.env.SECRET}
+ envProduction values : ${process.env.SECRET && 'OK'}
  ------------------------------------
 				`)
 		})
