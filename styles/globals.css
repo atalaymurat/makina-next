@@ -2,21 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body, div#__next{
-	height : 100%;
+html,
+body,
+div#__next {
+  height: 100%;
   overflow-y: scroll;
 }
 div#__next {
-  display: flex;
-  flex-direction: column;
+  /* display: flex; */
+  /* flex-direction: column; */
+  @apply flex flex-col;
 }
 
 div.main-content {
-  flex: 1 0 auto;
+  /* flex: 1 0 100%; */
+  @apply flex-1;
 }
 
 div.footer-content {
-  flex-shrink: 0;
+  /* flex-shrink: 0; */
+  @apply flex-none;
 }
 
 .logo {
