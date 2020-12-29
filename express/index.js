@@ -39,10 +39,12 @@ MongoDb connection status [OK]')
 		/// mongodb end
 		const apiRoutes = require('./routes')
 		const authRoutes = require('./routes/auth')
+		const userRoutes = require('./routes/user')
 
 		server.use(bodyParser.json())
 		server.use('/api', apiRoutes)
 		server.use('/api/auth', authRoutes)
+		server.use('/api/user', userRoutes)
 
 		server.get('*', (req, res) => {
 			return handle(req, res)

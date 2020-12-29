@@ -3,6 +3,7 @@ import { SWRConfig } from 'swr'
 import axios from 'axios'
 
 axios.defaults.baseURL = process.env.API_BASE_URL
+axios.defaults.withCredentials = true
 
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {

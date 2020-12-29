@@ -28,6 +28,7 @@ module.exports = {
   },
 
   user: async (req, res) => {
+		// this controller only getting user info from cookie 
     try {
       const user = req.session.get('user')
       console.log('CTRL USER REQUESTED SESSION USER:', user)
@@ -40,7 +41,7 @@ module.exports = {
 
       res
         .status(200)
-        .json({ success: true, id: user.id, firstName: user.firstName, email: user.email})
+        .json({ success: true, _id: user._id, firstName: user.firstName, email: user.email})
     } catch (err) {
       console.error('Server Error')
     }
