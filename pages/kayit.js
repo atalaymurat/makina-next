@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import Layout from '../components/Layout'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import Link from 'next/link'
@@ -6,7 +7,43 @@ import axios from 'axios'
 import * as Yup from 'yup'
 
 const Kayit = (props) => {
+	const [response, setResponse] = useState(null)
 	const router = useRouter()
+
+	const getReCAPTCHA = (e) => {
+		console.log(window)
+		window.grecaptcha.ready(() => {
+			window.grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_KEY, { action: 'submit' }).then((token) => {
+				alert(token)
+			})
+		})
+	}
+
+	useEffect(() => {
+		const loadScriptByUrl = (id, url, cb) => {
+			const isScriptExist = document.getElementById(id)
+
+			if (!isScriptExist) {
+				var script = document.createElement('script')
+				script.type = 'text/javascript'
+				script.src = url
+				script.id = id
+				script.onload = function () {
+					if (cb) cb()
+				}
+				document.body.appendChild(script)
+			}
+			if (isScriptExist && cb) cb()
+		}
+
+		loadScriptByUrl(
+			'recaptcha-key',
+			`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_KEY}&explicit&hl=tr`,
+			function () {
+				console.log('Script Loaded')
+			}
+		)
+	}, [])
 
 	return (
 		<Layout title="Üye Kaydı" baseURL={props.base}>
@@ -58,6 +95,7 @@ const Kayit = (props) => {
 								email: Yup.string().email('Geçersiz email adresi !').required('Gerekli !'),
 							})}
 							onSubmit={async (values, { setSubmitting }) => {
+								getReCAPTCHA()
 
 								// await axios.post('/api/auth/signup', values)
 								// router.push('/panel')
