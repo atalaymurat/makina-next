@@ -16,13 +16,12 @@ module.exports = {
 			})
 
 			await newUser.save()
-			console.log("newUser saved:", newUser)
 
 
 
       req.session.set('user', {firstName: newUser.name.firstName, _id: newUser._id } )
       await req.session.save()
-      return res.json({ message: 'Session Saved', ...newUser._doc  })
+      return res.json({success: true, ...newUser._doc  })
     } catch (err) {
       console.error('Server Error')
     }
@@ -33,7 +32,7 @@ module.exports = {
       const user = req.session.get('user')
       console.log('CTRL USER REQUESTED SESSION USER:', user)
       if (user === undefined) {
-        res.status(403).json({ success: false, error: 'Not Found' })
+        res.end()
         return
       }
       // Find user from db
@@ -46,6 +45,7 @@ module.exports = {
       console.error('Server Error')
     }
   },
+
   logOut: (req, res) => {
     console.log('Session Destroyed', req.session.get("user"))
     const user = req.session.get("user")
