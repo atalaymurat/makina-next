@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 import * as Yup from 'yup'
 
-const FormKayit = (props) => {
+const Kayit = (props) => {
 	const router = useRouter()
 
 	return (
@@ -230,11 +230,5 @@ const FormKayit = (props) => {
 		</Layout>
 	)
 }
-
-const Kayit = () => (
-	<GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY}>
-		<FormKayit />
-	</GoogleReCaptchaProvider>
-)
 
 export default Kayit
