@@ -3,6 +3,7 @@ import { useState } from 'react'
 import useUser from '../lib/useUser'
 import axios from 'axios'
 import { useRouter } from 'next/router'
+import UserDropDown from './UserDropDown'
 
 const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false)
@@ -19,7 +20,9 @@ const Navbar = () => {
 
 	return (
 		<header className="border-b-2 border-white bg-gradient-to-r from-gray-800 to-gray-900">
+			{/* FIRST ROW LOGO AND OTHER STUFF */}
 			<div className="flex items-center justify-start px-4 py-2">
+				{/* BURGER ICON */}
 				<div className="sm:hidden">
 					<button
 						type="button"
@@ -41,6 +44,8 @@ const Navbar = () => {
 						</svg>
 					</button>
 				</div>
+
+				{/*SITE LOGO */}
 				<div className="flex items-center ml-2">
 					<img src="/siteLogo.svg" alt="Site Logo" className="h-7 w-7" />
 					<Link href="/">
@@ -48,9 +53,12 @@ const Navbar = () => {
 					</Link>
 				</div>
 			</div>
-			<div
+
+			{/*NAVBAR 2nd ROW LINKS */}
+			<nav
 				className={isOpen ? 'block pb-4 px-2 sm:flex sm:justify-start' : 'hidden pb-4 px-2 sm:flex'}
 			>
+				{/* NAV MENU LINKS */}
 				<Link href="/">
 					<a
 						className="block px-2 py-1 mt-1 font-semibold text-gray-300 rounded sm:mt-0 sm:ml-2 hover:bg-white hover:text-gray-800 "
@@ -59,6 +67,7 @@ const Navbar = () => {
 						Makina Sat
 					</a>
 				</Link>
+
 				<Link href="/">
 					<a
 						className="block px-2 py-1 mt-1 font-semibold text-gray-300 rounded sm:mt-0 hover:bg-white hover:text-gray-800 "
@@ -67,6 +76,7 @@ const Navbar = () => {
 						Makinalar
 					</a>
 				</Link>
+
 				<Link href="/">
 					<a
 						className="block px-2 py-1 mt-1 font-semibold text-gray-300 rounded sm:mt-0 hover:bg-white hover:text-gray-800 "
@@ -76,21 +86,11 @@ const Navbar = () => {
 					</a>
 				</Link>
 
-				{user ? (
-					<Link href="/panel">
-						<a
-							className="block px-2 py-1 mt-1 font-semibold text-gray-300 rounded sm:mt-0 sm:mr-1 hover:bg-white hover:text-gray-800"
-							onClick={() => setIsOpen(false)}
-						>
-							{user.firstName}
-						</a>
-					</Link>
-				) : null}
-
+				{/* LINK TO LOGIN */}
 				{!user && (
 					<Link href="/">
 						<a
-							className="block px-2 py-1 mt-1 font-semibold text-gray-300 border border-gray-900 rounded sm:mt-0 sm:mr-1 hover:border-gray-50 hover:text-white sm:ml-auto"
+							className="block px-2 py-1 mt-1 font-semibold text-gray-300 rounded sm:mt-0 sm:mr-1 hover:bg-white hover:text-gray-800 sm:ml-auto"
 							onClick={() => setIsOpen(false)}
 						>
 							Giriş Yap
@@ -98,26 +98,75 @@ const Navbar = () => {
 					</Link>
 				)}
 
-				{user && (
-					<button
-						className="block px-2 py-1 mt-1 font-semibold text-gray-300 border border-gray-900 rounded sm:mt-0 sm:mr-1 hover:border-gray-50 hover:text-white sm:ml-auto"
-						onClick={() => handleLogout()}
-					>
-						Çıkış Yap
-					</button>
+				{!user && (
+					<>
+						{/* BURGER MENU LINK SIGNUP */}
+						<Link href="/kayit" className="block sm:hidden">
+							<a
+								className="block px-2 py-1 mt-1 font-semibold text-gray-300 rounded sm:hidden hover:bg-white hover:text-gray-800"
+								onClick={() => setIsOpen(false)}
+							>
+								ÜYE OL
+							</a>
+						</Link>
+
+						{/* WIDE SCREEN LINK SIGNUP */}
+						<Link href="/kayit" className="hidden sm:block">
+							<a
+								className="hidden px-2 py-1 mr-2 font-semibold text-gray-800 bg-white rounded sm:block hover:bg-gray-700 hover:text-white"
+								onClick={() => setIsOpen(false)}
+							>
+								ÜYE OL
+							</a>
+						</Link>
+					</>
 				)}
 
-				{!user && (
-					<Link href="/kayit">
-						<a
-							className="block px-2 py-1 mt-1 font-extrabold text-gray-300 rounded sm:mt-0 hover:bg-gray-700 hover:text-white sm:bg-white sm:text-gray-800"
-							onClick={() => setIsOpen(false)}
-						>
-							ÜYE OL
-						</a>
-					</Link>
+				{/* USER DROPDOWN WİDGET */}
+				{user && (
+					<UserDropDown
+						user={user}
+						isOpen={isOpen}
+						setIsOpen={setIsOpen}
+						handleLogout={handleLogout}
+					/>
 				)}
-			</div>
+				{/* USER BURGER MENU DISPLAY */}
+				{user && (
+					<div className="block sm:hidden">
+						<div className="block px-2 py-1 font-semibold text-gray-400">
+							<span>{user.firstName}</span>
+							<hr />
+						</div>
+						<div className="ml-2">
+							<Link href="/panel">
+								<a
+									className="block px-2 py-1 text-gray-300 rounded hover:bg-white hover:text-gray-800"
+									onClick={() => setIsOpen(false)}
+								>
+									Hesabım
+								</a>
+							</Link>
+							<Link href="/">
+								<a
+									className="block px-2 py-1 text-gray-300 rounded hover:bg-white hover:text-gray-800"
+									onClick={() => setIsOpen(false)}
+								>
+									Destek
+								</a>
+							</Link>
+							<Link href="/goodby">
+								<a
+									className="block px-2 py-1 text-gray-300 rounded hover:bg-white hover:text-gray-800"
+									onClick={() => handleLogout()}
+								>
+									Çıkış
+								</a>
+							</Link>
+						</div>
+					</div>
+				)}
+			</nav>
 		</header>
 	)
 }
