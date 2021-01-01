@@ -88,7 +88,7 @@ const Navbar = () => {
 				{!user && (
 					<Link href="/">
 						<a
-							className="block px-4 py-1 mt-1 font-semibold text-gray-300 rounded sm:mt-0 sm:mr-1 hover:bg-white hover:text-gray-800 sm:ml-auto"
+							className="block px-4 py-1 mt-1 font-semibold text-gray-300 sm:mt-0 sm:mr-1 hover:bg-gray-700 hover:text-white sm:ml-auto"
 							onClick={() => setIsOpen(false)}
 						>
 							Giriş Yap
@@ -101,7 +101,7 @@ const Navbar = () => {
 						{/* BURGER MENU LINK SIGNUP */}
 						<Link href="/kayit" className="block sm:hidden">
 							<a
-								className="block px-4 py-1 mt-1 font-semibold text-gray-300 rounded sm:hidden hover:bg-white hover:text-gray-800"
+								className="block px-4 py-1 mt-1 font-semibold text-gray-300 sm:hidden hover:bg-gray-700 hover:text-white"
 								onClick={() => setIsOpen(false)}
 							>
 								ÜYE OL
@@ -140,7 +140,7 @@ const Navbar = () => {
 									{user.firstName[0].toUpperCase()}
 								</span>
 							</div>
-							<span>{user.firstName}</span>
+							<span className="tracking-wide uppercase">{user.firstName}</span>
 						</div>
 						<div className="border-t border-gray-600">
 							<Link href="/panel">
@@ -159,14 +159,12 @@ const Navbar = () => {
 									Destek
 								</a>
 							</Link>
-							<Link href="/goodby">
-								<a
-									className="block px-4 py-1 text-gray-300 hover:bg-gray-700 hover:text-white"
-									onClick={() => handleLogout()}
-								>
-									Çıkış
-								</a>
-							</Link>
+							<a
+								className="block px-4 py-1 text-gray-300 hover:bg-gray-700 hover:text-white"
+								onClick={() => handleLogout()}
+							>
+								Çıkış
+							</a>
 						</div>
 					</div>
 				)}

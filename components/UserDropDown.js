@@ -52,14 +52,12 @@ const UserDropDown = ({ user, setIsOpen, isOpen, handleLogout }) => {
 							Destek
 						</a>
 					</Link>
-					<Link href="/goodby">
 						<a
 							className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white"
 							onClick={() => handleLogout()}
 						>
 							Çıkış
 						</a>
-					</Link>
 				</div>
 			)}
 		</div>
