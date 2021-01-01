@@ -23,12 +23,12 @@ const UserDropDown = ({ user, setIsOpen, isOpen, handleLogout }) => {
 	})
 
 	return (
-		<div className="relative hidden ml-auto sm:block">
+		<div className="relative hidden sm:block">
 			<button
-				className="relative z-10 block w-8 h-8 text-white bg-indigo-500 border-2 rounded-full focus:outline-none focus:border-white"
+				className="relative z-10 block w-8 h-8 text-white bg-indigo-700 border-2 rounded-full focus:outline-none focus:border-white"
 				onClick={() => handleClick()}
 			>
-				<span className="w-full h-full text-sm text-center align-baseline font-extralight">MA</span>
+				<span className="w-full h-full text-lg font-bold text-center align-baseline">{user.firstName[0].toUpperCase()} </span>
 			</button>
 			{isDropOpen && (
 				<button

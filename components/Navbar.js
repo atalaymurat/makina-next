@@ -55,13 +55,11 @@ const Navbar = () => {
 			</div>
 
 			{/*NAVBAR 2nd ROW LINKS */}
-			<nav
-				className={isOpen ? 'block pb-4 px-2 sm:flex sm:justify-start' : 'hidden pb-4 px-2 sm:flex'}
-			>
+			<nav className={isOpen ? 'block pb-4 sm:flex sm:justify-start' : 'hidden pb-4 px-2 sm:flex'}>
 				{/* NAV MENU LINKS */}
 				<Link href="/">
 					<a
-						className="block px-2 py-1 mt-1 font-semibold text-gray-300 rounded sm:mt-0 sm:ml-2 hover:bg-white hover:text-gray-800 "
+						className="block px-4 py-1 mt-1 font-semibold text-gray-300 sm:px-2 sm:mt-0 sm:ml-2 hover:bg-gray-700 hover:text-white "
 						onClick={() => setIsOpen(false)}
 					>
 						Makina Sat
@@ -70,7 +68,7 @@ const Navbar = () => {
 
 				<Link href="/">
 					<a
-						className="block px-2 py-1 mt-1 font-semibold text-gray-300 rounded sm:mt-0 hover:bg-white hover:text-gray-800 "
+						className="block px-4 py-1 mt-1 font-semibold text-gray-300 sm:px-2 sm:mt-0 hover:bg-gray-700 hover:text-white "
 						onClick={() => setIsOpen(false)}
 					>
 						Makinalar
@@ -79,7 +77,7 @@ const Navbar = () => {
 
 				<Link href="/">
 					<a
-						className="block px-2 py-1 mt-1 font-semibold text-gray-300 rounded sm:mt-0 hover:bg-white hover:text-gray-800 "
+						className="block px-4 py-1 mt-1 font-semibold text-gray-300 sm:px-2 sm:mt-0 hover:bg-gray-700 hover:text-white "
 						onClick={() => setIsOpen(false)}
 					>
 						Hizmetler
@@ -90,7 +88,7 @@ const Navbar = () => {
 				{!user && (
 					<Link href="/">
 						<a
-							className="block px-2 py-1 mt-1 font-semibold text-gray-300 rounded sm:mt-0 sm:mr-1 hover:bg-white hover:text-gray-800 sm:ml-auto"
+							className="block px-4 py-1 mt-1 font-semibold text-gray-300 rounded sm:mt-0 sm:mr-1 hover:bg-white hover:text-gray-800 sm:ml-auto"
 							onClick={() => setIsOpen(false)}
 						>
 							Giriş Yap
@@ -103,7 +101,7 @@ const Navbar = () => {
 						{/* BURGER MENU LINK SIGNUP */}
 						<Link href="/kayit" className="block sm:hidden">
 							<a
-								className="block px-2 py-1 mt-1 font-semibold text-gray-300 rounded sm:hidden hover:bg-white hover:text-gray-800"
+								className="block px-4 py-1 mt-1 font-semibold text-gray-300 rounded sm:hidden hover:bg-white hover:text-gray-800"
 								onClick={() => setIsOpen(false)}
 							>
 								ÜYE OL
@@ -124,24 +122,30 @@ const Navbar = () => {
 
 				{/* USER DROPDOWN WİDGET */}
 				{user && (
-					<UserDropDown
-						user={user}
-						isOpen={isOpen}
-						setIsOpen={setIsOpen}
-						handleLogout={handleLogout}
-					/>
+					<div className="ml-auto mr-2">
+						<UserDropDown
+							user={user}
+							isOpen={isOpen}
+							setIsOpen={setIsOpen}
+							handleLogout={handleLogout}
+						/>
+					</div>
 				)}
 				{/* USER BURGER MENU DISPLAY */}
 				{user && (
 					<div className="block sm:hidden">
-						<div className="block px-2 py-1 font-semibold text-gray-400">
+						<div className="flex items-center px-4 py-2 font-semibold text-gray-400">
+							<div className="w-8 h-8 mr-3 text-center text-white bg-indigo-700 border-2 rounded-full">
+								<span className="w-full h-full text-lg font-bold">
+									{user.firstName[0].toUpperCase()}
+								</span>
+							</div>
 							<span>{user.firstName}</span>
-							<hr />
 						</div>
-						<div className="ml-2">
+						<div className="border-t border-gray-600">
 							<Link href="/panel">
 								<a
-									className="block px-2 py-1 text-gray-300 rounded hover:bg-white hover:text-gray-800"
+									className="block px-4 py-1 text-gray-300 hover:bg-gray-700 hover:text-white"
 									onClick={() => setIsOpen(false)}
 								>
 									Hesabım
@@ -149,7 +153,7 @@ const Navbar = () => {
 							</Link>
 							<Link href="/">
 								<a
-									className="block px-2 py-1 text-gray-300 rounded hover:bg-white hover:text-gray-800"
+									className="block px-4 py-1 text-gray-300 hover:bg-gray-700 hover:text-white"
 									onClick={() => setIsOpen(false)}
 								>
 									Destek
@@ -157,7 +161,7 @@ const Navbar = () => {
 							</Link>
 							<Link href="/goodby">
 								<a
-									className="block px-2 py-1 text-gray-300 rounded hover:bg-white hover:text-gray-800"
+									className="block px-4 py-1 text-gray-300 hover:bg-gray-700 hover:text-white"
 									onClick={() => handleLogout()}
 								>
 									Çıkış
