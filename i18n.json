@@ -3,6 +3,8 @@
 	"defaultLocale": "tr",
 	"pages": {
 		"*": ["menu"],
-		"/": ["index"]
+		"/": ["index"],
+		"/panel": ["panel"],
+		"/kayit": ["sign_up"]
 	}
 }

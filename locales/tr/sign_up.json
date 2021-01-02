@@ -1,2 +1,22 @@
 {
+	"title": "Yeni Üye Kayıt Formu",
+	"name": "Ad",
+	"surname": "Soyad",
+	"email": "E-posta",
+	"account": "Hesap Tipi",
+	"acceptUserAgreement" :"Üye olarak,  kişisel verilerin korunması, Gizlilik Politikası ve Çerezler ile ilgili kullanım koşullarını kabul ediyorsunuz ",
+	"save": "Üye Ol",
+	"otherAccounts": "Diğer hesaplar ile",
+	"description": "Digital pazarlama gereksinimleriniz ile uğraşmak için farklı bir çözüm mü arıyorsunuz ? Farkılı pazarlama enstrümanlarına mı ihtiyaç duyuyorsunuz ? Hesabınızı oluşturun, ve müşterilerilerin size ulaşmasına olanak sağlayın.",
+	"alreadyHaveAccount": "Zaten hesabım var.",
+	"login": "Giriş Yap",
+	"userAgrement": "Kullanıcı Anlaşması",
+	"privacyPolicy": "Gizlilik Politikası",
+	"maxChar": "Maksimum {{num}} karakter olabilir",
+	"minChar": "Minimum {{num}} karakter gerekli",
+	"required": "Gerekli !",
+	"invalidEmail": "E-posta adresi geçersiz",
+	"user": "Üye Hesabı",
+	"seller": "Satıcı Hesabı",
+	"manufacturer": "Üretici Hesabı"
 }

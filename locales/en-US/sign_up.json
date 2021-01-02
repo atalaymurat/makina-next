@@ -1,3 +1,22 @@
 {
-	"menuString": "Welcome to ....."
+	"title": "New User Registration Form",
+	"name": "Name",
+	"surname": "Surname",
+	"email": "Email",
+	"account": "Account Type",
+	"acceptUserAgreement" :"By clicking Join Now, you agree to User Agreement, Privacy Policy, and Cookie Policy",
+	"save": "Join now",
+	"otherAccounts": "Login With Other Accounts",
+	"description": "Do you need new solutions for digital marketing, Do you need different strategies to offer your products. Join now to our marketing platform for industrial machines and equipments and let your customers to find your equipments",
+	"alreadyHaveAccount": "Already have an account",
+	"login": "Login",
+	"userAgrement": "User Agreement",
+	"privacyPolicy": "Privacy Policy",
+	"maxChar": "can be maximum {{num}} characters",
+	"minChar": "can be minimum {{num}} characters",
+	"required": "required !",
+	"invalidEmail": "email is not valid",
+	"user": "User Account",
+	"seller": "Seller Account",
+	"manufacturer": "Manufacturer Account"
 }

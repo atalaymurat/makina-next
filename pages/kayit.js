@@ -4,8 +4,10 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import * as Yup from 'yup'
+import useTranslation from 'next-translate/useTranslation'
 
 const Kayit = (props) => {
+	const { t } = useTranslation()
 	const router = useRouter()
 
 	return (
@@ -21,41 +23,39 @@ const Kayit = (props) => {
 							</Link>
 						</div>
 						<p className="mx-6 mt-6 font-normal text-center text-gray-300 md:mt-0">
-							Digital pazarlama gereksinimleriniz ile uğraşmak için farklı bir çözüm mü arıyorsunuz
-							? Farkılı pazarlama enstrümanlarına mı ihtiyaç duyuyorsunuz ? Hesabınızı oluşturun, ve
-							müşterilerilerin size ulaşmasına olanak sağlayın.
+							{t('sign_up:description')}
 						</p>
 						<p className="flex flex-col items-center justify-center mt-10 text-center">
-							<span>Zaten hesabım var.</span>
+							<span>{t("sign_up:alreadyHaveAccount")}</span>
 							<Link href="/">
 								<a href="#" className="underline">
-									Giriş Yap
+		{t("sign_up:login")}
 								</a>
 							</Link>
 						</p>
 						<p className="mt-6 text-sm text-center text-gray-300">
 							<Link href="/">
-								<a className="underline">Kişisel verilerin korunması </a>
+								<a className="underline">{t("sign_up:userAgrement")} </a>
 							</Link>
-							ve{' '}
+		{" "}&{' '}
 							<Link href="/">
-								<a className="underline">Koşullar</a>
+								<a className="underline">{t("sign_up:privacyPolicy")}</a>
 							</Link>
 						</p>
 					</div>
 					<div className="p-5 bg-white md:flex-1">
-						<h3 className="my-4 text-2xl font-semibold text-gray-700">Yeni Üye Kayıt Formu</h3>
+						<h3 className="my-4 text-2xl font-semibold text-gray-700">{t("sign_up:title")}</h3>
 						<Formik
 							initialValues={{ firstName: '', lastName: '', email: '' }}
 							validationSchema={Yup.object({
 								firstName: Yup.string()
-									.max(15, 'En fazla 15 karakter !')
-									.min(2, 'En az 2 karakter olabilir !')
-									.required('Gerekli !'),
+									.max(15, t("sign_up:maxChar", { num: 15} ))
+									.min(2, t("sign_up:minChar", { num: 2} ) )
+									.required(t("sign_up:required")),
 								lastName: Yup.string()
-									.max(20, 'En fazla 20 karakter olabilir !')
-									.required('Gerekli !'),
-								email: Yup.string().email('Geçersiz email adresi !').required('Gerekli !'),
+									.max(20,  t("sign_up:maxChar", { num: 20 } ) )
+									.required(t("sign_up:required") ),
+								email: Yup.string().email(t("sign_up:invalidEmail") ).required(t("sign_up:required")),
 							})}
 							onSubmit={async (values) => {
 								const res = await axios.post('/api/auth/signup', values)
@@ -68,7 +68,7 @@ const Kayit = (props) => {
 							<Form className="max-w-xl mx-auto bg-transparent">
 								<div className="flex flex-col space-y-1">
 									<label htmlFor="firstName" className="block">
-										<span className="text-sm font-semibold text-gray-500">Ad</span>
+										<span className="text-sm font-semibold text-gray-500">{t("sign_up:name")}</span>
 									</label>
 									<Field
 										name="firstName"
@@ -82,7 +82,7 @@ const Kayit = (props) => {
 
 								<div className="flex flex-col space-y-1">
 									<label htmlFor="lastName" className="block">
-										<span className="text-sm font-semibold text-gray-500">Soyad</span>
+										<span className="text-sm font-semibold text-gray-500">{t("sign_up:surname")}</span>
 									</label>
 									<Field
 										name="lastName"
@@ -96,7 +96,7 @@ const Kayit = (props) => {
 
 								<div className="flex flex-col space-y-1">
 									<label htmlFor="email" className="block">
-										<span className="text-sm font-semibold text-gray-500">E-posta</span>
+										<span className="text-sm font-semibold text-gray-500">{t("sign_up:email")}</span>
 									</label>
 									<Field
 										name="email"
@@ -110,16 +110,16 @@ const Kayit = (props) => {
 
 								<div className="flex flex-col space-y-1">
 									<label htmlFor="accountType" className="block">
-										<span className="text-sm font-semibold text-gray-500">Hesap Tipi</span>
+										<span className="text-sm font-semibold text-gray-500">{t("sign_up:account")}</span>
 									</label>
 									<Field
 										name="accountType"
 										as="select"
 										className="px-4 py-2 border border-gray-300 rounded transition duration-300 focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
 									>
-										<option value="user">Üye Hesabı</option>
-										<option value="seller">Satıcı Hesabı</option>
-										<option value="manufacturer">İmalatcı Hesabı</option>
+										<option value="user">{t("sign_up:user")}</option>
+										<option value="seller">{t("sign_up:seller")}</option>
+										<option value="manufacturer">{t("sign_up:manufacturer")}</option>
 									</Field>
 									<span className="inline-block mb-2 font-light text-red-600">
 										<ErrorMessage name="accountType" />
@@ -127,13 +127,8 @@ const Kayit = (props) => {
 								</div>
 
 								<div className="flex items-center my-2 space-x-2">
-									<input
-										type="checkbox"
-										id="remember"
-										className="w-4 h-4 rounded transition duration-300 focus:ring-2 focus:ring-offset-0 focus:outline-none focus:ring-blue-200"
-									/>
-									<label htmlFor="remember" className="text-sm font-semibold text-gray-500">
-										Üyelik Sözleşmesini Okudum ve Kabul Ediyorum
+									<label htmlFor="remember" className="text-sm font-semibold text-justify text-gray-500">
+										{t("sign_up:acceptUserAgreement")}
 									</label>
 								</div>
 
@@ -142,7 +137,7 @@ const Kayit = (props) => {
 										type="submit"
 										className="w-full px-4 py-2 text-lg font-semibold text-white bg-green-600 shadow transition-colors duration-300 rounded-md hover:bg-green-500 focus:outline-none focus:ring-blue-200 focus:ring-4"
 									>
-										Kaydet
+		{t("sign_up:save")}
 									</button>
 								</div>
 							</Form>
@@ -151,7 +146,7 @@ const Kayit = (props) => {
 						<div className="flex flex-col space-y-5">
 							<span className="flex items-center justify-center space-x-2">
 								<span className="h-px bg-gray-400 w-14"></span>
-								<span className="font-normal text-gray-500">Diğer hesaplar ile</span>
+								<span className="font-normal text-gray-500">{t("sign_up:otherAccounts")}</span>
 								<span className="h-px bg-gray-400 w-14"></span>
 							</span>
 							<div className="flex flex-col space-y-4">

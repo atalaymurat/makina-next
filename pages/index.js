@@ -10,9 +10,9 @@ const Index = (props) => {
 
   return (
     <Layout>
-      <div className="flex flex-col items-start h-full pt-12 bg-gray-900">
-        <h1 className="max-w-5xl px-8 mx-auto text-5xl font-bold text-white md:text-7xl lg:text-8xl">
-          <span className="text-transparent bg-gradient-to-r bg-clip-text from-blue-500 to-green-500">
+      <div className="flex flex-col items-start w-full h-full pt-12 bg-gray-900">
+        <h1 className="w-full h-full max-w-5xl px-8 mx-auto text-5xl font-bold text-white md:text-7xl lg:text-6xl">
+          <span className="w-full h-full text-transparent bg-gradient-to-r bg-clip-text from-blue-500 to-red-500">
 		{ t("index:greeting")}
           </span>
           
