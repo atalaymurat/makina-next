@@ -1,18 +1,19 @@
 import Layout from '../components/Layout'
 import axios from 'axios'
 import { useRouter } from 'next/router'
+import useTranslation from 'next-translate/useTranslation'
 
 const Index = (props) => {
 	const Router = useRouter()
+	const { t } = useTranslation()
 
-	let textNext = Router.locale === 'tr' ? "Bir sonraki aşamaya geçiyoruz" : Router.locale === 'en-US' ? "We are preparing for Next stage" : ''
 
   return (
     <Layout>
       <div className="flex flex-col items-start h-full pt-12 bg-gray-900">
         <h1 className="max-w-5xl px-8 mx-auto text-5xl font-bold text-white md:text-7xl lg:text-8xl">
           <span className="text-transparent bg-gradient-to-r bg-clip-text from-blue-500 to-green-500">
-		{textNext}
+		{ t("index:greeting")}
           </span>
           
         </h1>

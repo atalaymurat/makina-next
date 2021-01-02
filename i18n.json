@@ -1,0 +1,8 @@
+{
+	"locales": ["tr", "en-US"],
+	"defaultLocale": "tr",
+	"pages": {
+		"*": ["menu"],
+		"/": ["index"]
+	}
+}

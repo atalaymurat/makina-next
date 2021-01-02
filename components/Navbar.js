@@ -4,11 +4,13 @@ import useUser from '../lib/useUser'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import UserDropDown from './UserDropDown'
+import useTranslation from 'next-translate/useTranslation'
 
 const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false)
 	const { user, mutateUser } = useUser()
 	const router = useRouter()
+	const { t } = useTranslation()
 
 	const handleLogout = async () => {
 		setIsOpen(false)
@@ -30,8 +32,7 @@ const Navbar = () => {
 	const checkActive = (link) => {
 		if (router.pathname == link) {
 			return true
-		}
-		else { 
+		} else {
 			return false
 		}
 	}
@@ -74,7 +75,12 @@ const Navbar = () => {
 				<div className="ml-auto">
 					<ul className="flex items-center">
 						{router.locales.map((lang) => (
-							<li className={`px-1 text-xs font-semibold uppercase ${router.locale == lang ? "text-white" : "text-gray-400"}`} key={lang}>
+							<li
+								className={`px-1 text-xs font-semibold uppercase ${
+									router.locale == lang ? 'text-white' : 'text-gray-400'
+								}`}
+								key={lang}
+							>
 								<Link href={router.asPath} locale={lang}>
 									<a>{lang} |</a>
 								</Link>
@@ -92,7 +98,7 @@ const Navbar = () => {
 						className="block px-4 py-1 mt-1 font-semibold text-gray-300 sm:px-2 sm:mt-0 sm:ml-2 hover:bg-gray-700 hover:text-white "
 						onClick={() => setIsOpen(false)}
 					>
-						Makina Sat
+						{t('menu:sellMachine')}
 					</a>
 				</Link>
 
@@ -101,7 +107,7 @@ const Navbar = () => {
 						className="block px-4 py-1 mt-1 font-semibold text-gray-300 sm:px-2 sm:mt-0 hover:bg-gray-700 hover:text-white "
 						onClick={() => setIsOpen(false)}
 					>
-						Makinalar
+						{t('menu:machines')}
 					</a>
 				</Link>
 
@@ -110,7 +116,7 @@ const Navbar = () => {
 						className="block px-4 py-1 mt-1 font-semibold text-gray-300 sm:px-2 sm:mt-0 hover:bg-gray-700 hover:text-white "
 						onClick={() => setIsOpen(false)}
 					>
-						Hizmetler
+						{t('menu:services')}
 					</a>
 				</Link>
 
@@ -118,7 +124,9 @@ const Navbar = () => {
 				{!user && (
 					<Link href="/">
 						<a
-							className={`block px-4 sm:px-2 py-1 mt-1 font-semibold text-gray-300 sm:mt-0 sm:mr-1 hover:bg-gray-700 hover:text-white sm:ml-auto ${checkActive("/") && "sm:border-b-2 sm:border-indigo-600"}`}
+							className={`block px-4 sm:px-2 py-1 mt-1 font-semibold text-gray-300 sm:mt-0 sm:mr-1 hover:bg-gray-700 hover:text-white sm:ml-auto ${
+								checkActive('/') && 'sm:border-b-2 sm:border-indigo-600'
+							}`}
 							onClick={() => setIsOpen(false)}
 						>
 							<div className="flex items-stretch">
@@ -134,7 +142,7 @@ const Navbar = () => {
 										clipRule="evenodd"
 									/>
 								</svg>
-								Giriş Yap
+						{t('menu:login')}
 							</div>
 						</a>
 					</Link>
@@ -160,7 +168,8 @@ const Navbar = () => {
 											clipRule="evenodd"
 										/>
 									</svg>
-									<span>ÜYE OL</span>
+									<span>
+						{t('menu:signUp')}</span>
 								</div>
 							</a>
 						</Link>
@@ -168,10 +177,12 @@ const Navbar = () => {
 						{/* WIDE SCREEN LINK SIGNUP */}
 						<Link href="/kayit" className="hidden sm:block">
 							<a
-								className={`hidden px-2 py-1 mr-2 font-semibold text-gray-800 bg-white rounded sm:block hover:bg-gray-700 hover:text-white ${checkActive("/kayit") && "border-b-2 border-indigo-600"}`}
+								className={`hidden px-2 py-1 mr-2 font-semibold text-gray-800 bg-white rounded sm:block hover:bg-gray-700 hover:text-white ${
+									checkActive('/kayit') && 'border-b-2 border-indigo-600'
+								}`}
 								onClick={() => setIsOpen(false)}
 							>
-								ÜYE OL
+						{t('menu:signUp')}
 							</a>
 						</Link>
 					</>
@@ -205,7 +216,7 @@ const Navbar = () => {
 									className="block px-4 py-1 text-gray-300 hover:bg-gray-700 hover:text-white"
 									onClick={() => setIsOpen(false)}
 								>
-									Hesabım
+						{t('menu:myAccount')}
 								</a>
 							</Link>
 							<Link href="/">
@@ -213,14 +224,15 @@ const Navbar = () => {
 									className="block px-4 py-1 text-gray-300 hover:bg-gray-700 hover:text-white"
 									onClick={() => setIsOpen(false)}
 								>
-									Destek
+						{t('menu:support')}
+									
 								</a>
 							</Link>
 							<a
 								className="block px-4 py-1 text-gray-300 hover:bg-gray-700 hover:text-white"
 								onClick={() => handleLogout()}
 							>
-								Çıkış
+						{t('menu:logout')}
 							</a>
 						</div>
 					</div>

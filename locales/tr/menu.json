@@ -1,0 +1,10 @@
+{
+	"sellMachine" : "Makina Sat",
+	"machines": "Makinalar",
+	"services": "Hizmetler",
+	"login": "Giriş Yap",
+	"signUp": "Üye Ol",
+	"myAcount": "Hesabım",
+	"support": "Destek",
+	"logout": "Çıkış"
+}
