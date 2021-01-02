@@ -7,14 +7,23 @@ import UserDropDown from './UserDropDown'
 
 const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false)
-	const { user } = useUser()
+	const { user, mutateUser } = useUser()
 	const router = useRouter()
 
 	const handleLogout = async () => {
 		setIsOpen(false)
 		if (user) {
-			await axios.post('/api/auth/logout')
-			router.push('/goodby')
+			try {
+				const res = await axios.post('/api/auth/logout')
+				// We are asking SWR to update its state
+				if (res.data.success) {
+					mutateUser()
+					router.push('/goodby')
+					return
+				}
+			} catch (err) {
+				console.error(err)
+			}
 		}
 	}
 
@@ -51,6 +60,18 @@ const Navbar = () => {
 					<Link href="/">
 						<a className="text-3xl logo">{process.env.NEXT_PUBLIC_SITE_NAME}</a>
 					</Link>
+				</div>
+				{/* LANGUAGE SWITCHER COMPONENT */}
+				<div className="ml-auto">
+					<ul className="flex items-center">
+						{router.locales.map((lang) => (
+							<li className="px-1 text-xs font-semibold text-white uppercase" key={lang}>
+								<Link href={router.asPath} locale={lang}>
+									<a>{lang} |</a>
+								</Link>
+							</li>
+						))}
+					</ul>
 				</div>
 			</div>
 
@@ -91,7 +112,21 @@ const Navbar = () => {
 							className="block px-4 py-1 mt-1 font-semibold text-gray-300 sm:mt-0 sm:mr-1 hover:bg-gray-700 hover:text-white sm:ml-auto"
 							onClick={() => setIsOpen(false)}
 						>
-							Giriş Yap
+							<div className="flex items-stretch">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									viewBox="0 0 20 20"
+									className="w-5 h-5 mr-1 fill-current sm:hidden to-gray-300"
+								>
+									<path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+									<path
+										fillRule="evenodd"
+										d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+										clipRule="evenodd"
+									/>
+								</svg>
+								Giriş Yap
+							</div>
 						</a>
 					</Link>
 				)}
@@ -104,7 +139,20 @@ const Navbar = () => {
 								className="block px-4 py-1 mt-1 font-semibold text-gray-300 sm:hidden hover:bg-gray-700 hover:text-white"
 								onClick={() => setIsOpen(false)}
 							>
-								ÜYE OL
+								<div className="flex items-stretch">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 20 20"
+										className="w-5 h-5 mr-1 text-gray-300 fill-current"
+									>
+										<path
+											fillRule="evenodd"
+											d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+											clipRule="evenodd"
+										/>
+									</svg>
+									<span>ÜYE OL</span>
+								</div>
 							</a>
 						</Link>
 
@@ -140,7 +188,7 @@ const Navbar = () => {
 									{user.firstName[0].toUpperCase()}
 								</span>
 							</div>
-							<span className="tracking-wide uppercase">{user.firstName}</span>
+							<span className="tracking-wide uppercase truncate">{user.firstName}</span>
 						</div>
 						<div className="border-t border-gray-600">
 							<Link href="/panel">
