@@ -27,6 +27,15 @@ const Navbar = () => {
 		}
 	}
 
+	const checkActive = (link) => {
+		if (router.pathname == link) {
+			return true
+		}
+		else { 
+			return false
+		}
+	}
+
 	return (
 		<header className="border-b-2 border-white bg-gradient-to-r from-gray-800 to-gray-900">
 			{/* FIRST ROW LOGO AND OTHER STUFF */}
@@ -65,7 +74,7 @@ const Navbar = () => {
 				<div className="ml-auto">
 					<ul className="flex items-center">
 						{router.locales.map((lang) => (
-							<li className="px-1 text-xs font-semibold text-white uppercase" key={lang}>
+							<li className={`px-1 text-xs font-semibold uppercase ${router.locale == lang ? "text-white" : "text-gray-400"}`} key={lang}>
 								<Link href={router.asPath} locale={lang}>
 									<a>{lang} |</a>
 								</Link>
@@ -76,7 +85,7 @@ const Navbar = () => {
 			</div>
 
 			{/*NAVBAR 2nd ROW LINKS */}
-			<nav className={isOpen ? 'block pb-4 sm:flex sm:justify-start' : 'hidden pb-4 px-2 sm:flex'}>
+			<nav className={isOpen ? 'block pb-4 sm:flex sm:justify-start' : 'hidden pb-2 px-2 sm:flex'}>
 				{/* NAV MENU LINKS */}
 				<Link href="/">
 					<a
@@ -109,7 +118,7 @@ const Navbar = () => {
 				{!user && (
 					<Link href="/">
 						<a
-							className="block px-4 py-1 mt-1 font-semibold text-gray-300 sm:mt-0 sm:mr-1 hover:bg-gray-700 hover:text-white sm:ml-auto"
+							className={`block px-4 sm:px-2 py-1 mt-1 font-semibold text-gray-300 sm:mt-0 sm:mr-1 hover:bg-gray-700 hover:text-white sm:ml-auto ${checkActive("/") && "sm:border-b-2 sm:border-indigo-600"}`}
 							onClick={() => setIsOpen(false)}
 						>
 							<div className="flex items-stretch">
@@ -159,7 +168,7 @@ const Navbar = () => {
 						{/* WIDE SCREEN LINK SIGNUP */}
 						<Link href="/kayit" className="hidden sm:block">
 							<a
-								className="hidden px-2 py-1 mr-2 font-semibold text-gray-800 bg-white rounded sm:block hover:bg-gray-700 hover:text-white"
+								className={`hidden px-2 py-1 mr-2 font-semibold text-gray-800 bg-white rounded sm:block hover:bg-gray-700 hover:text-white ${checkActive("/kayit") && "border-b-2 border-indigo-600"}`}
 								onClick={() => setIsOpen(false)}
 							>
 								ÜYE OL
