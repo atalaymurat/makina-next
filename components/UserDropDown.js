@@ -1,8 +1,10 @@
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
+import useTranslation from 'next-translate/useTranslation'
 
 const UserDropDown = ({ user, setIsOpen, isOpen, handleLogout }) => {
 	const [isDropOpen, setIsDropOpen] = useState(false)
+	const { t } = useTranslation()
 	const handleClick = () => {
 		setIsOpen(false)
 		setIsDropOpen(!isDropOpen)
@@ -28,7 +30,9 @@ const UserDropDown = ({ user, setIsOpen, isOpen, handleLogout }) => {
 				className="relative z-10 block w-8 h-8 text-white bg-indigo-700 border-2 rounded-full focus:outline-none focus:border-white"
 				onClick={() => handleClick()}
 			>
-				<span className="w-full h-full text-lg font-bold text-center align-baseline">{user.firstName[0].toUpperCase()} </span>
+				<span className="w-full h-full text-lg font-bold text-center align-baseline">
+					{user.firstName[0].toUpperCase()}{' '}
+				</span>
 			</button>
 			{isDropOpen && (
 				<button
@@ -44,20 +48,23 @@ const UserDropDown = ({ user, setIsOpen, isOpen, handleLogout }) => {
 							className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white"
 							onClick={() => setIsDropOpen(false)}
 						>
-							Hesabım
+							{t('menu:myAcount')}
 						</a>
 					</Link>
 					<Link href="/">
-						<a className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white" onClick={() => setIsDropOpen(false)}>
-							Destek
-						</a>
-					</Link>
 						<a
 							className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white"
-							onClick={() => handleLogout()}
+							onClick={() => setIsDropOpen(false)}
 						>
-							Çıkış
+							{t('menu:support')}
 						</a>
+					</Link>
+					<a
+						className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white"
+						onClick={() => handleLogout()}
+					>
+						{t('menu:logout')}
+					</a>
 				</div>
 			)}
 		</div>
