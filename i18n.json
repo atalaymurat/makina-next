@@ -5,6 +5,7 @@
 		"*": ["menu"],
 		"/": ["index"],
 		"/panel": ["panel"],
-		"/kayit": ["sign_up"]
+		"/kayit": ["sign_up"],
+		"/goodbye": ["goodbye"]
 	}
 }

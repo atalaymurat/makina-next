@@ -20,7 +20,7 @@ const Navbar = () => {
 				// We are asking SWR to update its state
 				if (res.data.success) {
 					mutateUser()
-					router.push('/goodby')
+					router.push('/goodbye')
 					return
 				}
 			} catch (err) {
@@ -82,7 +82,7 @@ const Navbar = () => {
 								key={lang}
 							>
 								<Link href={router.asPath} locale={lang}>
-									<a>{lang} |</a>
+									<a>{lang === "en-US" ? "en" : lang } |</a>
 								</Link>
 							</li>
 						))}

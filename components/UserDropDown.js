@@ -48,7 +48,7 @@ const UserDropDown = ({ user, setIsOpen, isOpen, handleLogout }) => {
 							className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white"
 							onClick={() => setIsDropOpen(false)}
 						>
-							{t('menu:myAcount')}
+							{t('menu:myAccount')}
 						</a>
 					</Link>
 					<Link href="/">

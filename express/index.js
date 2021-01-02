@@ -28,9 +28,9 @@ app
 		var db = mongoose.connection
 		db.once('open', function () {
 			console.log(`
---------------------------------
-MongoDb connection status [OK]')
---------------------------------
+	--------------------------------
+	MongoDb connection status [OK]')
+	--------------------------------
 			`)
 		})
 
@@ -54,9 +54,9 @@ MongoDb connection status [OK]')
 			if (err) throw err
 			console.log(`> Running on MODE: [${process.env.NODE_ENV}] Listening on PORT: [${PORT}]`)
 			console.log(`
- ------------------------------------
- envProduction values : ${process.env.SECRET && 'OK'}
- ------------------------------------
+ 	------------------------------------
+ 	envProduction values : ${process.env.SECRET && 'OK'}
+ 	------------------------------------
 				`)
 		})
 	})
