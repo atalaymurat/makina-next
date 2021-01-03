@@ -2,7 +2,7 @@
 	"locales": ["tr", "en"],
 	"defaultLocale": "tr",
 	"pages": {
-		"*": ["menu"],
+		"*": ["menu", "meta"],
 		"/": ["index"],
 		"/panel": ["panel"],
 		"/kayit": ["sign_up"],

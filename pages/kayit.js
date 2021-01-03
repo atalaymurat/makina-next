@@ -1,19 +1,19 @@
-import { useState } from 'react'
 import Layout from '../components/Layout'
-import { Formik, Field, Form, ErrorMessage } from 'formik'
+import { Formik, Form } from 'formik'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import * as Yup from 'yup'
 import useTranslation from 'next-translate/useTranslation'
+import { SelectInput, TextInput, PassInput } from '../lib/formikInputs'
+
 
 const Kayit = (props) => {
-	const [showPass, setShowPass] = useState(false)
 	const { t } = useTranslation()
 	const router = useRouter()
 
 	return (
-		<Layout title="Üye Kaydı" baseURL={props.base}>
+		<Layout title={t('sign_up:title')}>
 			<div className="flex items-center h-full p-4 bg-gray-100 lg:justify-center">
 				<div className="flex flex-col overflow-hidden bg-white shadow-lg rounded-md max md:flex-row md:flex-1 lg:max-w-screen-md">
 					<div className="p-4 py-6 text-white bg-gray-800 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
@@ -64,7 +64,9 @@ const Kayit = (props) => {
 								email: Yup.string()
 									.email(t('sign_up:invalidEmail'))
 									.required(t('sign_up:required')),
-								password: Yup.string(),
+								password: Yup.string()
+									.required(t('sign_up:required'))
+									.min(6, t('sign_up:minChar', { num: 6 })),
 							})}
 							onSubmit={async (values) => {
 								const res = await axios.post('/api/auth/signup', values)
@@ -75,99 +77,27 @@ const Kayit = (props) => {
 							}}
 						>
 							<Form className="max-w-xl mx-auto bg-transparent">
-								<div className="flex flex-col space-y-1">
-									<label htmlFor="firstName" className="block">
-										<span className="text-sm font-semibold text-gray-500">{t('sign_up:name')}</span>
-									</label>
-									<Field
-										name="firstName"
-										type="text"
-										className="px-4 py-2 border border-gray-300 rounded transition duration-300 focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
-									/>
-									<span className="inline-block mb-2 font-light text-red-600">
-										<ErrorMessage name="firstName" />
-									</span>
-								</div>
+								<TextInput name="firstName" type="text" id="firstName" label={t('sign_up:name')} />
+								<TextInput name="lastName" type="text" id="lastName" label={t('sign_up:surname')} />
+								<TextInput name="email" type="text" id="email" label={t('sign_up:email')} />
 
-								<div className="flex flex-col space-y-1">
-									<label htmlFor="lastName" className="block">
-										<span className="text-sm font-semibold text-gray-500">
-											{t('sign_up:surname')}
-										</span>
-									</label>
-									<Field
-										name="lastName"
-										type="text"
-										className="px-4 py-2 border border-gray-300 rounded transition duration-300 focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
-									/>
-									<span className="inline-block mb-2 font-light text-red-600">
-										<ErrorMessage name="lastName" />
-									</span>
-								</div>
+								<PassInput
+									name="password"
+									id="password"
+									label={t('sign_up:password')}
+									autoComplete="new-password"
+								/>
 
-								<div className="flex flex-col space-y-1">
-									<label htmlFor="email" className="block">
-										<span className="text-sm font-semibold text-gray-500">
-											{t('sign_up:email')}
-										</span>
-									</label>
-									<Field
-										name="email"
-										type="text"
-										className="px-4 py-2 border border-gray-300 rounded transition duration-300 focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
-									/>
-									<span className="inline-block mb-2 font-light text-red-600">
-										<ErrorMessage name="email" />
-									</span>
-								</div>
-
-								<div className="flex flex-col space-y-1">
-									<label htmlFor="password" className="block">
-										<span className="text-sm font-semibold text-gray-500">
-											{t('sign_up:password')}
-										</span>
-									</label>
-									<Field
-										id="password"
-										name="password"
-										type={showPass ? 'text' : 'password'}
-										autoComplete="new-password"
-										className="relative z-0 px-4 py-2 border border-gray-300 rounded transition duration-300 focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
-									/>
-									<div className="relative left-0 z-10 flex items-center m-1 -top-6">
-										<button
-											className="absolute px-1 mx-1 text-sm text-blue-800 lowercase bg-blue-200 border-2 border-gray-300 rounded right-2 focus:outline-none"
-											type="button"
-											tabIndex="-1"
-											onClick={() => setShowPass(!showPass)}
-										>
-											{showPass ? t('sign_up:hide') : t('sign_up:show')}
-										</button>
-									</div>
-									<span className="inline-block mb-2 font-light text-red-600">
-										<ErrorMessage name="password" />
-									</span>
-								</div>
-								<div className="flex flex-col space-y-1">
-									<label htmlFor="accountType" className="block">
-										<span className="text-sm font-semibold text-gray-500">
-											{t('sign_up:account')}
-										</span>
-									</label>
-
-									<Field
-										name="accountType"
-										as="select"
-										className="px-4 py-2 border border-gray-300 rounded transition duration-300 focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
-									>
-										<option value="user">{t('sign_up:user')}</option>
-										<option value="seller">{t('sign_up:seller')}</option>
-										<option value="manufacturer">{t('sign_up:manufacturer')}</option>
-									</Field>
-									<span className="inline-block mb-2 font-light text-red-600">
-										<ErrorMessage name="accountType" />
-									</span>
-								</div>
+								<SelectInput
+									name="accountType"
+									label={t('sign_up:account')}
+									id="accountType"
+									as="select"
+								>
+									<option value="user">{t('sign_up:user')}</option>
+									<option value="seller">{t('sign_up:seller')}</option>
+									<option value="manufacturer">{t('sign_up:manufacturer')}</option>
+								</SelectInput>
 
 								<div className="flex items-center my-2 space-x-2">
 									<label className="text-sm font-semibold text-justify text-gray-500">
@@ -178,7 +108,7 @@ const Kayit = (props) => {
 								<div className="py-2">
 									<button
 										type="submit"
-										className="w-full px-4 py-2 text-lg font-semibold text-white bg-gray-700 shadow transition-colors duration-300 rounded-md hover:bg-green-500 focus:outline-none focus:ring-blue-200 focus:ring-4"
+										className="w-full px-4 py-2 text-lg font-semibold text-white bg-gray-700 shadow transition-colors duration-300 rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-blue-200 focus:ring-4"
 									>
 										{t('sign_up:save')}
 									</button>
