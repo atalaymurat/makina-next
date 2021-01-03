@@ -19,5 +19,8 @@
 	"invalidEmail": "E-posta adresi geçersiz",
 	"user": "Üye Hesabı",
 	"seller": "Satıcı Hesabı",
-	"manufacturer": "Üretici Hesabı"
+	"manufacturer": "Üretici Hesabı",
+	"password": "Şifre",
+	"show": "göster",
+	"hide": "gizle"
 }

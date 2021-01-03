@@ -130,18 +130,13 @@ const Kayit = (props) => {
 									<Field
 										id="password"
 										name="password"
-										type={showPass ? 'text' : 'password'}
+										type={showPass ? "text" : "password"}
 										autoComplete="new-password"
-										className="relative z-0 px-4 py-2 border border-gray-300 rounded transition duration-300 focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
+										className="static z-0 px-4 py-2 border border-gray-300 rounded transition duration-300 focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
 									/>
-									<div className="relative left-0 z-10 flex items-center m-1 -top-6">
-										<button
-											className="absolute px-1 mx-1 text-sm text-blue-800 lowercase bg-blue-200 border-2 border-gray-300 rounded right-2 focus:outline-none"
-											type="button"
-											tabIndex="-1"
-											onClick={() => setShowPass(!showPass)}
-										>
-											{showPass ? t('sign_up:hide') : t('sign_up:show')}
+									<div className="relative left-0 z-0 px-4 text-right bg-red-300 -top-9">
+										<button className="absolute top-0 z-10 right-2 border-1" type="button" onClick={() => setShowPass(!showPass)}>
+											show
 										</button>
 									</div>
 									<span className="inline-block mb-2 font-light text-red-600">

@@ -19,5 +19,8 @@
 	"invalidEmail": "email is not valid",
 	"user": "User Account",
 	"seller": "Seller Account",
-	"manufacturer": "Manufacturer Account"
+	"manufacturer": "Manufacturer Account",
+	"password": "Password",
+	"show": "show",
+	"hide": "hide"
 }

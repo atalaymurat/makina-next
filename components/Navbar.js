@@ -66,7 +66,11 @@ const Navbar = () => {
 
 				{/*SITE LOGO */}
 				<div className="flex items-center ml-2">
-					<img src="/siteLogo.svg" alt="Site Logo" className="h-7 w-7" />
+					<Link href="/">
+						<a>
+							<img src="/siteLogo.svg" alt="Site Logo" className="h-7 w-7" />
+						</a>
+					</Link>
 					<Link href="/">
 						<a className="text-3xl logo">{process.env.NEXT_PUBLIC_SITE_NAME}</a>
 					</Link>
@@ -82,7 +86,7 @@ const Navbar = () => {
 								key={lang}
 							>
 								<Link href={router.asPath} locale={lang}>
-									<a>{lang === "en-US" ? "en" : lang } |</a>
+									<a>{lang === 'en-US' ? 'en' : lang} |</a>
 								</Link>
 							</li>
 						))}
@@ -142,7 +146,7 @@ const Navbar = () => {
 										clipRule="evenodd"
 									/>
 								</svg>
-						{t('menu:login')}
+								{t('menu:login')}
 							</div>
 						</a>
 					</Link>
@@ -168,8 +172,7 @@ const Navbar = () => {
 											clipRule="evenodd"
 										/>
 									</svg>
-									<span>
-						{t('menu:signUp')}</span>
+									<span>{t('menu:signUp')}</span>
 								</div>
 							</a>
 						</Link>
@@ -182,7 +185,7 @@ const Navbar = () => {
 								}`}
 								onClick={() => setIsOpen(false)}
 							>
-						{t('menu:signUp')}
+								{t('menu:signUp')}
 							</a>
 						</Link>
 					</>
@@ -216,7 +219,7 @@ const Navbar = () => {
 									className="block px-4 py-1 text-gray-300 hover:bg-gray-700 hover:text-white"
 									onClick={() => setIsOpen(false)}
 								>
-						{t('menu:myAccount')}
+									{t('menu:myAccount')}
 								</a>
 							</Link>
 							<Link href="/">
@@ -224,15 +227,14 @@ const Navbar = () => {
 									className="block px-4 py-1 text-gray-300 hover:bg-gray-700 hover:text-white"
 									onClick={() => setIsOpen(false)}
 								>
-						{t('menu:support')}
-									
+									{t('menu:support')}
 								</a>
 							</Link>
 							<a
 								className="block px-4 py-1 text-gray-300 hover:bg-gray-700 hover:text-white"
 								onClick={() => handleLogout()}
 							>
-						{t('menu:logout')}
+								{t('menu:logout')}
 							</a>
 						</div>
 					</div>
