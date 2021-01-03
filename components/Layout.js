@@ -1,7 +1,7 @@
 import Navbar from './Navbar'
 import Head from 'next/head'
 import useTranslation from 'next-translate/useTranslation'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 
 const Layout = (props) => {
 	const Router = useRouter()
@@ -29,8 +29,10 @@ const Layout = (props) => {
 					content={t('site_description', { site_name: process.env.NEXT_PUBLIC_SITE_NAME })}
 				/>
 
-				{ /* OPEN GRAPH */}
-				<meta property="og:type" content="website" />
+				{/* OPEN GRAPH */}
+				<meta property="og:site_name" content={process.env.NEXT_PUBLIC_SITE_NAME} />
+				<meta property="og:locale" content={Router.locale === "en" ? "en_us" : "tr_tr" } />
+				<meta property="og:type" content={'article'} />
 				<meta property="og:url" content={process.env.NEXT_PUBLIC_API_BASE_URL + path} />
 				<meta
 					property="og:title"
@@ -48,7 +50,7 @@ const Layout = (props) => {
 					content={process.env.NEXT_PUBLIC_API_BASE_URL + '/siteLogo.svg'}
 				/>
 
-				{ /* TWITTER */}
+				{/* TWITTER */}
 				<meta property="twitter:card" content="summary_large_image" />
 				<meta property="twitter:url" content={process.env.NEXT_PUBLIC_API_BASE_URL + path} />
 				<meta
@@ -66,7 +68,6 @@ const Layout = (props) => {
 					property="twitter:image"
 					content={process.env.NEXT_PUBLIC_API_BASE_URL + '/siteLogo.svg'}
 				/>
-
 			</Head>
 			<header>
 				<Navbar />
