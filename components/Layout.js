@@ -1,8 +1,11 @@
 import Navbar from './Navbar'
 import Head from 'next/head'
 import useTranslation from 'next-translate/useTranslation'
+import { useRouter } from 'next/router'
 
 const Layout = (props) => {
+	const Router = useRouter()
+	const path = Router.pathname
 	const { t } = useTranslation('meta')
 	const { title, noindex } = props
 	return (
@@ -28,7 +31,7 @@ const Layout = (props) => {
 
 				{ /* OPEN GRAPH */}
 				<meta property="og:type" content="website" />
-				<meta property="og:url" content={process.env.NEXT_PUBLIC_API_BASE_URL} />
+				<meta property="og:url" content={process.env.NEXT_PUBLIC_API_BASE_URL + path} />
 				<meta
 					property="og:title"
 					content={
@@ -47,7 +50,7 @@ const Layout = (props) => {
 
 				{ /* TWITTER */}
 				<meta property="twitter:card" content="summary_large_image" />
-				<meta property="twitter:url" content={process.env.NEXT_PUBLIC_API_BASE_URL} />
+				<meta property="twitter:url" content={process.env.NEXT_PUBLIC_API_BASE_URL + path} />
 				<meta
 					property="twitter:title"
 					content={
