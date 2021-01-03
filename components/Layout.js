@@ -33,7 +33,7 @@ const Layout = (props) => {
 				<meta property="og:site_name" content={process.env.NEXT_PUBLIC_SITE_NAME} />
 				<meta property="og:locale" content={Router.locale === "en" ? "en_us" : "tr_tr" } />
 				<meta property="og:type" content={'article'} />
-				<meta property="og:url" content={process.env.NEXT_PUBLIC_API_BASE_URL + path} />
+				<meta property="og:url" content={process.env.NEXT_PUBLIC_BASE_URL + path} />
 				<meta
 					property="og:title"
 					content={
@@ -52,7 +52,7 @@ const Layout = (props) => {
 
 				{/* TWITTER */}
 				<meta property="twitter:card" content="summary_large_image" />
-				<meta property="twitter:url" content={process.env.NEXT_PUBLIC_API_BASE_URL + path} />
+				<meta property="twitter:url" content={process.env.NEXT_PUBLIC_BASE_URL + path} />
 				<meta
 					property="twitter:title"
 					content={
