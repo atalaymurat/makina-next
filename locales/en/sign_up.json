@@ -22,5 +22,6 @@
 	"manufacturer": "Manufacturer Account",
 	"password": "Password",
 	"show": "show",
-	"hide": "hide"
+	"hide": "hide",
+	"notRobot": "Verify you are not robot by checking the box"
 }

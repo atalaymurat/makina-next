@@ -22,5 +22,6 @@
 	"manufacturer": "Üretici Hesabı",
 	"password": "Şifre",
 	"show": "göster",
-	"hide": "gizle"
+	"hide": "gizle",
+	"notRobot": "Robot olmadığınızı onaylayınız"
 }

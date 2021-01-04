@@ -59,12 +59,13 @@ const UserDropDown = ({ user, setIsOpen, isOpen, handleLogout }) => {
 							{t('menu:support')}
 						</a>
 					</Link>
-					<a
-						className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white"
+				
+					<button
+						className="block w-full px-4 py-2 text-left text-gray-800 hover:bg-indigo-500 hover:text-white"
 						onClick={() => handleLogout()}
 					>
 						{t('menu:logout')}
-					</a>
+					</button>
 				</div>
 			)}
 		</div>

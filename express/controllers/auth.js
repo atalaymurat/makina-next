@@ -1,4 +1,5 @@
 const User = require('../models/user')
+const Axios = require('axios')
 
 module.exports = {
   signUp: async (req, res) => {
@@ -9,6 +10,24 @@ module.exports = {
       const email = req.body.email
 			const firstName = req.body.firstName
 			const lastName = req.body.lastName
+			const password = req.body.password
+			const recaptcha = req.body.recaptcha
+
+			const gres = await Axios({
+				method: 'post',
+				headers: { "Content-type" : 'application/json'},
+				url: 'https://www.google.com/recaptcha/api/siteverify',
+				params: {
+					secret: process.env.RECAPTCHA_SECRET_V2,
+					response: recaptcha,
+				}
+			})
+
+			console.log("ReCaptcha Res:", gres.data)
+
+			if (!gres.data.success){
+				return res.status(403).json({success: false})
+			}
 
 			const newUser = new User({
 			name: {firstName, lastName },
