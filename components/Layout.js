@@ -15,7 +15,7 @@ const Layout = (props) => {
 					{(title && `${title} -- ${process.env.NEXT_PUBLIC_SITE_NAME}`) ||
 						t('site_title', { site_name: process.env.NEXT_PUBLIC_SITE_NAME })}
 				</title>
-				<link rel="canonical" href={process.env.NEXT_PUBLIC_BASE_URL + "/"} />
+				<link rel="canonical" href={process.env.NEXT_PUBLIC_BASE_URL + '/'} />
 				<meta charSet="utf-8" />
 				{noindex && <meta name="robots" content="noindex nofollow" />}
 				<meta
@@ -34,7 +34,12 @@ const Layout = (props) => {
 				<meta property="og:site_name" content={process.env.NEXT_PUBLIC_SITE_NAME} />
 				<meta property="og:locale" content={Router.locale === 'en' ? 'en_us' : 'tr_tr'} />
 				<meta property="og:type" content={'website'} />
-				<meta property="og:url" content={`${process.env.NEXT_PUBLIC_BASE_URL}${Router.locale === "en" ? "/en" : ""}${path}`} />
+				<meta
+					property="og:url"
+					content={`${process.env.NEXT_PUBLIC_BASE_URL}${
+						Router.locale === 'en' ? '/en' : ''
+					}${path}`}
+				/>
 				<meta
 					property="og:title"
 					content={
@@ -50,7 +55,6 @@ const Layout = (props) => {
 					property="og:image"
 					content={process.env.NEXT_PUBLIC_API_BASE_URL + '/siteLogo.svg'}
 				/>
-
 			</Head>
 			<header>
 				<Navbar />
