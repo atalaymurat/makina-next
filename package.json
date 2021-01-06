@@ -4,7 +4,6 @@
   "description": "js application",
   "main": "index.js",
   "dependencies": {
-    "@hcaptcha/react-hcaptcha": "^0.2.2",
     "@tailwindcss/forms": "^0.2.1",
     "autoprefixer": "^10.1.0",
     "axios": "^0.21.0",
@@ -20,6 +19,7 @@
     "postcss-preset-env": "^6.7.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-google-recaptcha": "^2.1.0",
     "swr": "^0.3.11",
     "tailwindcss": "^2.0.2",
     "yup": "^0.32.8"

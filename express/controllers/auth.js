@@ -18,16 +18,16 @@ module.exports = {
 				headers: { "Content-type" : 'application/json'},
 				url: 'https://www.google.com/recaptcha/api/siteverify',
 				params: {
-					secret: process.env.RECAPTCHA_SECRET_V2,
+					secret: process.env.RECAPTCHA_SECRET,
 					response: recaptcha,
 				}
 			})
 
 			console.log("ReCaptcha Res:", gres.data)
 
-			if (!gres.data.success){
+			if (!gres.data.success || gres.data.score < 0.5 ){
 				return res.status(403).json({success: false})
-			}
+      }
 
 			const newUser = new User({
 			name: {firstName, lastName },
@@ -47,7 +47,7 @@ module.exports = {
   },
 
   user: async (req, res) => {
-		// this controller only getting user info from cookie 
+		// this controller only getting user info from cookie
     try {
       const user = req.session.get('user')
       console.log('CTRL USER REQUESTED SESSION USER:', user)

@@ -1,3 +1,4 @@
+import { useState, useRef } from 'react'
 import Layout from '../components/Layout'
 import { Formik, Form } from 'formik'
 import Link from 'next/link'
@@ -7,12 +8,13 @@ import * as Yup from 'yup'
 import useTranslation from 'next-translate/useTranslation'
 import { SelectInput, TextInput, PassInput } from '../lib/formikInputs'
 import useUser from '../lib/useUser'
-import HCaptcha from '@hcaptcha/react-hcaptcha'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 const Kayit = (props) => {
   const { t } = useTranslation()
   const router = useRouter()
   const { mutateUser } = useUser()
+  const recaptchaRef = useRef()
 
   return (
     <Layout title={t('sign_up:title')}>
@@ -63,7 +65,7 @@ const Kayit = (props) => {
                 lastName: '',
                 email: '',
                 password: '',
-                hcaptcha: '',
+                recaptcha: '',
               }}
               validationSchema={Yup.object({
                 firstName: Yup.string()
@@ -81,6 +83,8 @@ const Kayit = (props) => {
                   .min(6, t('sign_up:minChar', { num: 6 })),
               })}
               onSubmit={async (values) => {
+                const token = await recaptchaRef.current.executeAsync()
+                values.recaptcha = token
                 const res = await axios.post('/api/auth/signup', values)
                 mutateUser()
                 if (res.data.success) {
@@ -88,69 +92,76 @@ const Kayit = (props) => {
                 }
               }}
             >
-              <Form className="max-w-xl mx-auto bg-transparent">
-                <TextInput
-                  name="firstName"
-                  type="text"
-                  id="firstName"
-                  label={t('sign_up:name')}
-                />
-                <TextInput
-                  name="lastName"
-                  type="text"
-                  id="lastName"
-                  label={t('sign_up:surname')}
-                />
-                <TextInput
-                  name="email"
-                  type="text"
-                  id="email"
-                  label={t('sign_up:email')}
-                />
+              {({ isSubmitting, setFieldValue }) => (
+                <Form className="max-w-xl mx-auto bg-transparent">
+                  <TextInput
+                    name="firstName"
+                    type="text"
+                    id="firstName"
+                    label={t('sign_up:name')}
+                  />
+                  <TextInput
+                    name="lastName"
+                    type="text"
+                    id="lastName"
+                    label={t('sign_up:surname')}
+                  />
+                  <TextInput
+                    name="email"
+                    type="text"
+                    id="email"
+                    label={t('sign_up:email')}
+                  />
 
-                <PassInput
-                  name="password"
-                  id="password"
-                  label={t('sign_up:password')}
-                  autoComplete="new-password"
-                />
+                  <PassInput
+                    name="password"
+                    id="password"
+                    label={t('sign_up:password')}
+                    autoComplete="new-password"
+                  />
 
-                <SelectInput
-                  name="accountType"
-                  label={t('sign_up:account')}
-                  id="accountType"
-                  as="select"
-                >
-                  <option value="user">{t('sign_up:user')}</option>
-                  <option value="seller">{t('sign_up:seller')}</option>
-                  <option value="manufacturer">
-                    {t('sign_up:manufacturer')}
-                  </option>
-                </SelectInput>
-
-                <HCaptcha
-									name="hcaptcha"
-                  sitekey="2c43e0d7-a5c9-4d26-b934-a9c4151e66f7"
-                  onVerify={(token, ekey) =>
-                    console.log("CAPTCHA VERIFY", token, ekey)
-                  }
-                />
-
-                <div className="flex items-center my-2 text-gray-500 space-x-2">
-                  <label className="text-sm font-semibold text-justify ">
-                    {t('sign_up:acceptUserAgreement')}
-                  </label>
-                </div>
-
-                <div className="py-2">
-                  <button
-                    type="submit"
-                    className="w-full px-4 py-2 text-lg font-semibold text-white bg-gray-700 shadow transition-colors duration-300 rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-blue-200 focus:ring-4"
+                  <SelectInput
+                    name="accountType"
+                    label={t('sign_up:account')}
+                    id="accountType"
+                    as="select"
                   >
-                    {t('sign_up:save')}
-                  </button>
-                </div>
-              </Form>
+                    <option value="user">{t('sign_up:user')}</option>
+                    <option value="seller">{t('sign_up:seller')}</option>
+                    <option value="manufacturer">
+                      {t('sign_up:manufacturer')}
+                    </option>
+                  </SelectInput>
+
+                  <div className="my-2">
+                    <ReCAPTCHA
+                      ref={recaptchaRef}
+                      sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY}
+                      size="invisible"
+                      hl={router.locale}
+                      onChange={(token) => {
+                        console.log("reCapthcha: ", token )
+                        setFieldValue("recaptcha", token)
+                      }}
+                    />
+                  </div>
+
+                  <div className="flex items-center my-2 text-gray-500 space-x-2">
+                    <label className="text-sm font-semibold text-justify ">
+                      {t('sign_up:acceptUserAgreement')}
+                    </label>
+                  </div>
+
+                  <div className="py-2">
+                    <button
+                      type="submit"
+                      className="w-full px-4 py-2 text-lg font-semibold text-white bg-gray-700 shadow transition-colors duration-300 rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-blue-200 focus:ring-4"
+                    >
+                      {t('sign_up:save')}
+                    </button>
+                  </div>
+                </Form>
+              )}
             </Formik>
 
             <div className="flex flex-col space-y-5">

@@ -54,6 +54,7 @@ const Layout = (props) => {
 				<meta
 					property="og:image"
 					content={process.env.NEXT_PUBLIC_API_BASE_URL + '/siteLogo.svg'}
+
 				/>
 			</Head>
 			<header>
