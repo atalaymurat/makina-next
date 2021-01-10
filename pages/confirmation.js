@@ -31,7 +31,6 @@ const Confirmation = () => {
   return (
     <Layout>
       <div className="bg-gray-800 text-gray-100 h-full flex flex-col items-start">
-        <h1 className="text-xl mx-auto">Confirmation # PAGE</h1>
         <div className="divide-y divide-indigo-500 mx-auto my-5 text-3xl w-4/5">
           <div className="py-4">
             {error ? (

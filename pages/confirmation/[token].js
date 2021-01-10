@@ -26,7 +26,6 @@ const ConfirmationLink = () => {
       }
     }
     submitToken()
-    alert('Use Effect')
   }, [token])
 
   if (confirm) {
