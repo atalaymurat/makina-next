@@ -1,0 +1,10 @@
+{
+  "enterCode": "Doğrulama kodunu buraya giriniz",
+  "sentMail": "Biraz önce size bir onaylama e-postası gönderdik",
+  "checkMail": "Lütfen e-posta hesabınızı kontrol ediniz",
+  "checkSpam": "Eğer e-posta gelmediyse, hesabınızın gereksiz klasörünü kontrol ediniz",
+  "confirmed": "E-posta adresiniz doğrulanmıştır. Teşekkürler",
+  "confirmation": "Doğrulama",
+  "confirming": "Hesabınız doğrulanıyor..."
+
+}

@@ -2,44 +2,54 @@ import withSession from '../lib/session'
 import Layout from '../components/Layout'
 import Axios from 'axios'
 import useTranslation from 'next-translate/useTranslation'
+import {formingDate}  from '../lib/helpers'
 
 const Panel = (props) => {
-	const {
-		name: { firstName, lastName },
-	} = props.user
-	const { t } = useTranslation()
-	return (
-		<Layout title="Panel">
-			<div className="flex flex-col w-full p-8">
-				<h1 className="mx-auto my-8">Panel#SHOW</h1>
-				<h2 className="text-4xl font-semibold">
-					{t('panel:welcome',  { firstName, lastName })}
-		</h2>
-			</div>
-		</Layout>
-	)
+  const {
+		accountType,
+    created_at,
+    locale,
+    name: { firstName, lastName },
+    local: { email },
+  } = props.user
+  const { t } = useTranslation()
+  return (
+    <Layout title="Panel">
+      <div className="flex flex-col w-full p-8">
+        <h1 className="mx-auto my-8">Panel#SHOW</h1>
+        <h2 className="text-4xl font-semibold">
+          {t('panel:welcome', { firstName, lastName })}
+        </h2>
+        <p className="text-gray-600">{email}</p>
+        <p className="text-gray-600">Account Type: {accountType}</p>
+        <p className="text-gray-600">Account Created At: {formingDate(created_at)}</p>
+        <p className="text-gray-600">Language: {locale}</p>
+      </div>
+
+    </Layout>
+  )
 }
 
 export const getServerSideProps = withSession(async ({ req, res }) => {
-	try {
-		const sessionUser = req.session.get('user')
-		if (!sessionUser) {
-			res.statusCode = 401 //unauthorized
-			res.redirect('/404')
-			return { props: {} }
-		}
-		const apiRes = await Axios.get(`/api/user/${sessionUser._id}`, {
-			headers: { cookie: req.headers.cookie },
-		})
-		const user = apiRes.data
-		console.log('PANEL', user)
+  try {
+    const sessionUser = req.session.get('user')
+    if (!sessionUser) {
+      res.statusCode = 401 //unauthorized
+      res.redirect('/404')
+      return { props: {} }
+    }
+    const apiRes = await Axios.get(`/api/user/${sessionUser._id}`, {
+      headers: { cookie: req.headers.cookie },
+    })
+    const user = apiRes.data
+    console.log('PANEL', user)
 
-		return {
-			props: { user },
-		}
-	} catch (err) {
-		console.error('Error: Panel.js')
-	}
+    return {
+      props: { user },
+    }
+  } catch (err) {
+    console.error('Error: Panel.js')
+  }
 })
 
 export default Panel

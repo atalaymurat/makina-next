@@ -14,10 +14,15 @@ const session = ironSession({
 
 // User Authentication Routes
 // Set User Session
-router.post('/signup', session, authController.signUp)
+// api/auth/[...]
 // Get User Data
 router.get('/user', session, authController.user)
 // End User Session
 router.post('/logout', session, authController.logOut)
+// Verify User Email
+router.post('/verify', session, authController.verify)
+
+//Unprotected Routes
+router.post('/signup', authController.signUp)
 
 module.exports = router

@@ -1,0 +1,10 @@
+{
+  "error": "hata",
+  "validate": "doğrula",
+  "required": "gerekli !",
+  "maxChar": "en fazla {{num}} karakter olabilir",
+  "minChar": "en az {{num}} karakter gerekli",
+  "show": "göster",
+	"hide": "gizle",
+  "save": "kaydet"
+}

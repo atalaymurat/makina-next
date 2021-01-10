@@ -1,0 +1,10 @@
+{
+  "error": "error",
+  "validate": "validate",
+  "required": "required !",
+  "maxChar": "can be maximum {{num}} characters",
+  "minChar": "can be minimum {{num}} characters",
+  "save": "save",
+  "show": "show",
+  "hide": "hide"
+}
