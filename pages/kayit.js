@@ -37,7 +37,7 @@ const Kayit = (props) => {
             <p className="flex flex-col items-center justify-center mt-10 text-center">
               <span>{t('sign_up:alreadyHaveAccount')}</span>
               <Link href="/giris">
-                <a href="#" className="underline">
+                <a href="#" className="py-2 px-4 border border-indigo-500 rounded mt-1 shadow  bg-gray-700 hover:bg-indigo-500 font-semibold focus:ring-0">
                   {t('sign_up:login')}
                 </a>
               </Link>
@@ -171,7 +171,7 @@ const Kayit = (props) => {
                       disabled={isSubmitting ? false : false}
                       className="w-full px-4 py-2 text-lg font-semibold text-white bg-gray-700 shadow transition-colors duration-300 rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-blue-200 focus:ring-4"
                     >
-                      {t('sign_up:save')}
+                      {t('sign_up:signUp')}
                     </button>
                   </div>
                   <Persist name="signup-form" />

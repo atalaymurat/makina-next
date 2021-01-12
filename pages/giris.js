@@ -34,10 +34,10 @@ const Giris = () => {
               {t('sign_up:description')}
             </p>
             <p className="flex flex-col items-center justify-center mt-10 text-center">
-              <span>{t('sign_up:alreadyHaveAccount')}</span>
-              <Link href="/giris">
-                <a href="#" className="underline">
-                  {t('sign_up:login')}
+              <span>{t('sign_up:signNewAccount')}</span>
+              <Link href="/kayit">
+                <a href="#" className="py-2 px-4 border border-indigo-500 rounded mt-1 shadow  bg-gray-700 hover:bg-indigo-500 font-semibold">
+                  {t('sign_up:signUp')}
                 </a>
               </Link>
             </p>
