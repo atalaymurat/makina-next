@@ -126,10 +126,10 @@ const Navbar = () => {
 
 				{/* LINK TO LOGIN */}
 				{!user && (
-					<Link href="/">
+					<Link href="/giris">
 						<a
 							className={`block px-4 sm:px-2 py-1 mt-1 font-semibold text-gray-300 sm:mt-0 sm:mr-1 hover:bg-gray-700 hover:text-white sm:ml-auto ${
-								checkActive('/') && 'sm:border-b-2 sm:border-indigo-600'
+								checkActive('/giris') && 'sm:border-b-2 sm:border-indigo-600'
 							}`}
 							onClick={() => setIsOpen(false)}
 						>
@@ -180,7 +180,7 @@ const Navbar = () => {
 						{/* WIDE SCREEN LINK SIGNUP */}
 						<Link href="/kayit" className="hidden sm:block">
 							<a
-								className={`hidden px-2 py-1 mr-2 font-semibold text-gray-800 bg-white rounded sm:block hover:bg-gray-700 hover:text-white ${
+								className={`hidden px-2 py-1 mr-2 ml-1 font-semibold text-gray-800 bg-white rounded sm:block hover:bg-gray-700 hover:text-white ${
 									checkActive('/kayit') && 'border-b-2 border-indigo-600'
 								}`}
 								onClick={() => setIsOpen(false)}

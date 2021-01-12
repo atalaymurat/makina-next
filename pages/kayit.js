@@ -36,7 +36,7 @@ const Kayit = (props) => {
             </p>
             <p className="flex flex-col items-center justify-center mt-10 text-center">
               <span>{t('sign_up:alreadyHaveAccount')}</span>
-              <Link href="/">
+              <Link href="/giris">
                 <a href="#" className="underline">
                   {t('sign_up:login')}
                 </a>

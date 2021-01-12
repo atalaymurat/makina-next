@@ -6,6 +6,7 @@
 		"/": ["index"],
 		"/panel": ["panel"],
 		"/kayit": ["sign_up", "forms"],
+		"/giris": ["sign_up", "forms"],
 		"/confirmation": ["forms", "confirmation"],
 		"/confirmation/[token]": ["confirmation", "forms"],
 		"/goodbye": ["goodbye"]

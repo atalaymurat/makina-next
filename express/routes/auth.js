@@ -21,6 +21,8 @@ router.get('/user', session, authController.user)
 router.post('/logout', session, authController.logOut)
 // Verify User Email
 router.post('/verify', session, authController.verify)
+// User Login
+router.post('/login', session, authController.login)
 
 //Unprotected Routes
 router.post('/signup', authController.signUp)

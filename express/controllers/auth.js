@@ -10,9 +10,7 @@ const mailer = require('../../lib/mailer')
 
 module.exports = {
   signUp: async (req, res) => {
-    console.log('controller signIn')
     try {
-      console.log('CTRL SIGNUP USER DATA POSTED:', req.body)
       // We will check user from db here
       const email = req.body.email
       const firstName = req.body.firstName
@@ -91,12 +89,51 @@ module.exports = {
       })
     }
   },
+  login: async (req, res) => {
+    try {
+      const email = req.body.email
+      const password = req.body.password
+
+      // Control if there is a user
+      const user = await User.findOne({ 'local.email': email })
+      if (!user)
+        return res.status(404).json({
+          success: false,
+          message: {
+            tr: 'Bilgileriniz eksik veya hatalı',
+            en: "That's not match. Email  or password",
+          },
+        })
+      // Control user password is matching
+      const passMatch = await user.isValidPassword(password)
+      console.log('PASSWORD MATCH', passMatch)
+      if (!passMatch)
+        return res.status(404).json({
+          success: false,
+          message: {
+            tr: 'Bilgileriniz Yanlış veya Eksik',
+            en: 'Sorry no match username or password',
+          },
+        })
+      // Logging in User
+      req.session.set('user', {
+        firstName: user.name.firstName,
+        lastName: user.name.lastName,
+        _id: user._id,
+      })
+      await req.session.save()
+
+      res.status(200).json({ success: true })
+    } catch (err) {
+      console.error('LOGIN ERR: ', err)
+      res.status(400).end()
+    }
+  },
 
   user: async (req, res) => {
     // this controller only getting user info from cookie
     try {
       const user = req.session.get('user')
-      console.log('CTRL USER REQUESTED SESSION USER:', user)
       if (user === undefined) {
         res.end()
         return
@@ -116,7 +153,6 @@ module.exports = {
   },
 
   logOut: (req, res) => {
-    console.log('Session Destroyed', req.session.get('user'))
     const user = req.session.get('user')
     if (user === undefined) {
       return res.json({ success: false, message: 'No User Session' }).end()
@@ -126,25 +162,30 @@ module.exports = {
   },
 
   verify: async (req, res, next) => {
-    console.log('VERIFY POSTED DATA:', req.body)
-    const { token } = req.body
-    const user = await User.findOne({ 'local.confirmStr': token })
-    console.log('USER FIND', user)
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        message: { tr: 'Kod Geçersiz', en: 'Code is not valid' },
-      })
-    }
-    user.local.email_verified = true
-    user.local.confirmStr = ''
-    await user.save()
+    try {
+      const { token } = req.body
+      const user = await User.findOne({ 'local.confirmStr': token })
+      if (!user) {
+        return res.status(404).json({
+          success: false,
+          message: {
+            tr: 'Kod geçersiz, veya süresi dolmuş olabilir.',
+            en: 'Code is not valid or can be expired.',
+          },
+        })
+      }
+      user.local.email_verified = true
+      user.local.confirmStr = ''
+      await user.save()
 
-    req.session.set('user', {
-      firstName: user.name.firstName,
-      _id: user._id,
-    })
-    await req.session.save()
-    return res.status(200).json({ success: true, ...user._doc })
+      req.session.set('user', {
+        firstName: user.name.firstName,
+        _id: user._id,
+      })
+      await req.session.save()
+      return res.status(200).json({ success: true })
+    } catch (err) {
+      console.error(err)
+    }
   },
 }
