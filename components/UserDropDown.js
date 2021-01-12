@@ -36,13 +36,13 @@ const UserDropDown = ({ user, setIsOpen, isOpen, handleLogout }) => {
 			</button>
 			{isDropOpen && (
 				<button
-					className="fixed inset-0 w-full h-full bg-black opacity-50 cursor-default"
+					className="fixed inset-0 w-full h-full bg-black opacity-50 cursor-default z-20"
 					tabIndex="-1"
 					onClick={() => setIsDropOpen(false)}
 				></button>
 			)}
 			{isDropOpen && (
-				<div className="absolute right-0 w-40 py-2 mt-2 bg-white rounded-lg shadow-xl">
+				<div className="absolute right-0 w-40 py-2 mt-2 bg-white rounded-lg shadow-xl z-20">
 					<Link href="/panel">
 						<a
 							className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white"
@@ -59,7 +59,7 @@ const UserDropDown = ({ user, setIsOpen, isOpen, handleLogout }) => {
 							{t('menu:support')}
 						</a>
 					</Link>
-				
+
 					<button
 						className="block w-full px-4 py-2 text-left text-gray-800 hover:bg-indigo-500 hover:text-white"
 						onClick={() => handleLogout()}

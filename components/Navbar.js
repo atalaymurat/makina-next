@@ -22,7 +22,7 @@ const Navbar = () => {
         // We are asking SWR to update its state
         if (res.data.success) {
           mutateUser()
-          router.push('/goodbye')
+          router.push('/logout')
           return
         }
       } catch (err) {
