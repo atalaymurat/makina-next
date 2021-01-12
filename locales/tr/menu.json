@@ -6,5 +6,10 @@
 	"signUp": "Üye Ol",
 	"myAccount": "Hesabım",
 	"support": "Destek",
-	"logout": "Çıkış"
+	"logout": "Çıkış",
+	"wood": "Ağaç",
+	"metal": "Metal",
+	"medical": "Medikal",
+	"automation": "Otomasyon",
+	"plastics": "Plastikler"
 }

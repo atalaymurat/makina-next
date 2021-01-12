@@ -1,10 +1,15 @@
 {
-	"sellMachine": "Sell Machine",
+	"sellMachine": "Sell Used Machine",
 	"machines": "All Machines",
 	"services": "Services",
 	"login": "Login",
 	"signUp": "Sign Up",
 	"myAccount": "My Account",
 	"support": "Support",
-	"logout": "Logout"
+	"logout": "Logout",
+	"wood": "Wood",
+	"metal": "Metal",
+	"medical": "Medical",
+	"automation": "Automation",
+	"plastics": "Plastics"
 }

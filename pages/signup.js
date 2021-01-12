@@ -11,7 +11,7 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import { Persist } from 'formik-persist'
 import Error from '../components/Error'
 
-const Kayit = (props) => {
+const Signup = (props) => {
   const { t } = useTranslation()
   const [error, setError] = useState(null)
   const router = useRouter()
@@ -36,7 +36,7 @@ const Kayit = (props) => {
             </p>
             <p className="flex flex-col items-center justify-center mt-10 text-center">
               <span>{t('sign_up:alreadyHaveAccount')}</span>
-              <Link href="/giris">
+              <Link href="/login">
                 <a href="#" className="py-2 px-4 border border-indigo-500 rounded mt-1 shadow  bg-gray-700 hover:bg-indigo-500 font-semibold focus:ring-0">
                   {t('sign_up:login')}
                 </a>
@@ -189,7 +189,7 @@ const Kayit = (props) => {
               </span>
               <div className="flex flex-col space-y-4">
                 <a
-                  href="#"
+                  href="javascript:void(0)"
                   className="flex items-center justify-center px-4 py-2 border border-yellow-400 space-x-2 transition-colors duration-300 rounded-md group hover:bg-yellow-400 focus:outline-none"
                 >
                   <span>
@@ -213,7 +213,7 @@ const Kayit = (props) => {
                     </svg>
                   </span>
                   <span className="text-sm font-medium text-yellow-400 group-hover:text-white">
-                    Goggle
+                    Google
                   </span>
                 </a>
               </div>
@@ -225,4 +225,4 @@ const Kayit = (props) => {
   )
 }
 
-export default Kayit
+export default Signup

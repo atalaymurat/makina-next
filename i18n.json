@@ -5,8 +5,8 @@
 		"*": ["menu", "meta"],
 		"/": ["index"],
 		"/panel": ["panel"],
-		"/kayit": ["sign_up", "forms"],
-		"/giris": ["sign_up", "forms"],
+		"/signup": ["sign_up", "forms"],
+		"/login": ["sign_up", "forms"],
 		"/confirmation": ["forms", "confirmation"],
 		"/confirmation/[token]": ["confirmation", "forms"],
 		"/goodbye": ["goodbye"]

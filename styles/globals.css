@@ -29,5 +29,5 @@ div.footer-content {
 }
 
 .logo {
-  @apply mx-1 text-gray-200;
+  @apply mx-1 text-gray-200 font-semibold;
 }

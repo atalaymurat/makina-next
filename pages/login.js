@@ -10,7 +10,7 @@ import Error from '../components/Error'
 import useUser from '../lib/useUser'
 import { useRouter } from 'next/router'
 
-const Giris = () => {
+const Login = () => {
   const { t } = useTranslation()
   const [ error, setError] = useState(null)
   const { mutateUser } = useUser()
@@ -35,7 +35,7 @@ const Giris = () => {
             </p>
             <p className="flex flex-col items-center justify-center mt-10 text-center">
               <span>{t('sign_up:signNewAccount')}</span>
-              <Link href="/kayit">
+              <Link href="/signup">
                 <a href="#" className="py-2 px-4 border border-indigo-500 rounded mt-1 shadow  bg-gray-700 hover:bg-indigo-500 font-semibold">
                   {t('sign_up:signUp')}
                 </a>
@@ -142,4 +142,4 @@ const Giris = () => {
   )
 }
 
-export default Giris
+export default Login
