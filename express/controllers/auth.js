@@ -69,7 +69,7 @@ module.exports = {
       const html = confirmHtml(confirmStr, email, name, locale)
 
       const subject =
-        locale === 'tr' ? 'EPOSTA DOĞRULAMA' : 'REGISTER EMAIL'
+        locale === 'tr' ? 'Üyelik Onayı' : 'Confirm Your Account'
 
       await mailer.sendEmail(
         process.env.APP_MAIL_EMAIL,
@@ -82,7 +82,7 @@ module.exports = {
       await mailer.sendEmail(
         process.env.APP_MAIL_EMAIL,
         process.env.APP_MAIL_EMAIL,
-        `NEW USER REGISTER - ${name}`,
+        `New User Register - ${name}`,
         html,
         text
       )
