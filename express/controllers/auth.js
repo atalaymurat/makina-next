@@ -229,8 +229,10 @@ module.exports = {
       // Zaman Kontrol E-posta update süresi
       const dateNow = new Date()
       const timeDiff = Math.abs(dateNow - user.updated_at) / 20000
+      const timeDiffCreate = Math.abs(dateNow - user.created_at) / 20000
       const timeTo = 20 - Math.floor(timeDiff)
-      if (timeDiff < 10) {
+      // At least ten min later then first create and update
+      if (timeDiff < 10 && timeDiffCreate < 10 ) {
         return res.status(406).json({
           success: false,
           message: {
