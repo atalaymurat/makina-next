@@ -71,7 +71,7 @@ const Login = () => {
                 email: Yup.string()
                   .email(t('sign_up:invalidEmail'))
                   .required(t('forms:required')),
-                password: Yup.string().required(t('froms:required')),
+                password: Yup.string().required(t('forms:required')),
               })}
               onSubmit={ async (values, { setSubmitting }) => {
                 try {

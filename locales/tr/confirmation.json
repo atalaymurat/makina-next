@@ -1,10 +1,15 @@
 {
   "enterCode": "Doğrulama kodunu buraya giriniz",
-  "sentMail": "Biraz önce size bir onaylama e-postası gönderdik",
-  "checkMail": "Lütfen e-posta hesabınızı kontrol ediniz",
-  "checkSpam": "Eğer e-posta göremediyseniz, e-posta hesabınızın gereksiz, spam klasörünü kontrol ediniz",
+  "sentMail": "Biraz önce size, bir onay e-postası gönderdik.",
+  "checkMail": "Lütfen e-posta hesabınızı kontrol ediniz.",
+  "checkSpam": "Eğer mesajımızı göremediyseniz, e-posta hesabınızın gereksiz, spam klasörünü kontrol ediniz.",
   "confirmed": "E-posta adresiniz doğrulanmıştır. Teşekkürler",
   "confirmation": "Doğrulama",
-  "confirming": "Hesabınız doğrulanıyor..."
+  "confirming": "Hesabınız doğrulanıyor...",
+  "reSentMail": "Yeni bir kod gönder",
+  "sentNewMail": "Size yeni bir doğrulama kodu göndereceğiz.",
+  "contactUs": "E-posta mesajımız ulaşmadıysa, lütfen bizimle iletişime geçiniz.",
+  "contact": "E-posta iletişim"
+
 
 }

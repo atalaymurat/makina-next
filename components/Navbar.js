@@ -10,9 +10,9 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const { user, mutateUser } = useUser()
   const router = useRouter()
-	const { t } = useTranslation()
+  const { t } = useTranslation()
 
-	const sectors = ["sellMachine","wood", "metal", "medical", "automation" ]
+  const sectors = ['sellMachine', 'wood', 'metal', 'medical', 'automation']
 
   const handleLogout = async () => {
     setIsOpen(false)
@@ -40,7 +40,7 @@ const Navbar = () => {
   }
 
   return (
-    <header className="border-b-2 border-white bg-gradient-to-r from-gray-800 to-gray-900">
+    <header className="border-b-2 border-white bg-gradient-to-l from-gray-800 to-gray-900">
       {/* FIRST ROW LOGO AND OTHER STUFF */}
       <div className="flex items-center justify-start px-4 py-2">
         {/* BURGER ICON */}
@@ -106,7 +106,7 @@ const Navbar = () => {
       >
         {/* NAV MENU LINKS */}
         {sectors.map((sec) => (
-          <Link href="/">
+          <Link href="/" key={sec}>
             <a
               className="block px-4 py-1 mt-1 font-semibold text-gray-300 sm:px-2 sm:mt-0 hover:text-white"
               onClick={() => setIsOpen(false)}
@@ -115,9 +115,6 @@ const Navbar = () => {
             </a>
           </Link>
         ))}
-
-
-
 
         {/* LINK TO LOGIN */}
         {!user && (
@@ -201,13 +198,15 @@ const Navbar = () => {
         {user && (
           <div className="block sm:hidden">
             <div className="flex items-center px-4 py-2 font-semibold text-gray-400">
-              <div className="w-8 h-8 mr-3 text-center text-white bg-indigo-700 border-2 rounded-full">
-                <span className="w-full h-full text-lg font-bold">
-                  {user.firstName[0].toUpperCase()}
-                </span>
+              <div className="w-8 h-8 mr-3 text-center text-white bg-red-900 border-2 rounded-full inline-flex items-center overflow-hidden align-middle justify-center font-bold">
+                  {user.firstName[0].toUpperCase() +
+                    user.lastName[0].toUpperCase()}
               </div>
-              <span className="tracking-wide uppercase truncate">
+              <span className="tracking-wide uppercase truncate mr-1">
                 {user.firstName}
+              </span>
+              <span className="tracking-wide uppercase truncate">
+                {user.lastName}
               </span>
             </div>
             <div className="border-t border-gray-600">

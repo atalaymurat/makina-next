@@ -37,7 +37,10 @@ const Signup = (props) => {
             <p className="flex flex-col items-center justify-center mt-10 text-center">
               <span>{t('sign_up:alreadyHaveAccount')}</span>
               <Link href="/login">
-                <a href="#" className="py-2 px-4 border border-indigo-500 rounded mt-1 shadow  bg-gray-700 hover:bg-indigo-500 font-semibold focus:ring-0">
+                <a
+                  href="#"
+                  className="py-2 px-4 border border-indigo-500 rounded mt-1 shadow  bg-gray-700 hover:bg-indigo-500 font-semibold focus:ring-0"
+                >
                   {t('sign_up:login')}
                 </a>
               </Link>
@@ -97,11 +100,8 @@ const Signup = (props) => {
                   const res = await axios.post('/api/auth/signup', values)
                   if (res.data.success) {
                     router.push('/confirmation')
-                    setSubmitting(false)
                   }
-
                 } catch (err) {
-                  setSubmitting(false)
                   setError(err.response.data.message)
                 }
               }}
@@ -174,7 +174,7 @@ const Signup = (props) => {
                       {t('sign_up:signUp')}
                     </button>
                   </div>
-                  <Persist name="signup-form" />
+                  <Persist name="signup-form" clearIfSubmitted />
                 </Form>
               )}
             </Formik>

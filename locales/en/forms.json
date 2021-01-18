@@ -6,5 +6,9 @@
   "minChar": "can be minimum {{num}} characters",
   "save": "save",
   "show": "show",
-  "hide": "hide"
+  "hide": "hide",
+  "email": "Email",
+  "invalidEmail": "email is not valid",
+  "sent": "sent",
+  "cancel": "cancel"
 }

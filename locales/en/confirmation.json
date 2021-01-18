@@ -5,5 +5,9 @@
   "checkSpam": "Incase no email at inbox folder, please check spam folder",
   "confirmed": "Conguratulations, your email verified",
   "confirmation": "Confirmation",
-  "confirming": "Your account is confirming..."
+  "confirming": "Your account is confirming...",
+  "reSentMail": "Sent a new verification code",
+  "sentNewMail": "Enter your email, we will sent you a new confirmation code",
+  "contactUs": "If somehow can not recieve the confirmation email, please contact with us",
+  "contact": "mail to us"
 }
