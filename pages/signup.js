@@ -10,6 +10,7 @@ import { SelectInput, TextInput, PassInput } from '../lib/formikInputs'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { Persist } from 'formik-persist'
 import Error from '../components/Error'
+import CircleSpin from '../components/CircleSpin'
 
 const Signup = (props) => {
   const { t } = useTranslation()
@@ -92,17 +93,19 @@ const Signup = (props) => {
               })}
               onSubmit={async (values, { setSubmitting }) => {
                 try {
-                  setSubmitting(true)
                   setError(null)
+                  setSubmitting(true)
                   const token = await recaptchaRef.current.executeAsync()
                   values.recaptcha = token
                   values.locale = router.locale
                   const res = await axios.post('/api/auth/signup', values)
+                  setSubmitting(false)
                   if (res.data.success) {
                     router.push('/confirmation')
                   }
                 } catch (err) {
                   setError(err.response.data.message)
+                  setSubmitting(false)
                 }
               }}
             >
@@ -168,9 +171,10 @@ const Signup = (props) => {
                   <div className="py-2">
                     <button
                       type="submit"
-                      disabled={isSubmitting ? false : false}
-                      className="w-full px-4 py-2 text-lg font-semibold text-white bg-gray-700 shadow transition-colors duration-300 rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-blue-200 focus:ring-4"
+                      disabled={isSubmitting ? true : false}
+                      className="w-full px-4 py-2 text-lg font-semibold text-white bg-gray-700 shadow transition-colors duration-300 rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-blue-200 focus:ring-4 inline-flex items-center justify-center"
                     >
+                      {isSubmitting && <CircleSpin />}
                       {t('sign_up:signUp')}
                     </button>
                   </div>
@@ -189,7 +193,7 @@ const Signup = (props) => {
               </span>
               <div className="flex flex-col space-y-4">
                 <a
-                  href="javascript:void(0)"
+                  href="#"
                   className="flex items-center justify-center px-4 py-2 border border-yellow-400 space-x-2 transition-colors duration-300 rounded-md group hover:bg-yellow-400 focus:outline-none"
                 >
                   <span>

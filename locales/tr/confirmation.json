@@ -9,7 +9,9 @@
   "reSentMail": "Yeni bir kod gönder",
   "sentNewMail": "Size yeni bir doğrulama kodu göndereceğiz.",
   "contactUs": "E-posta mesajımız ulaşmadıysa, lütfen bizimle iletişime geçiniz.",
-  "contact": "E-posta iletişim"
+  "contact": "E-posta iletişim",
+  "goPanel": "Profil Sayfama Git",
+  "goMain": "Ana Sayfaya Git"
 
 
 }

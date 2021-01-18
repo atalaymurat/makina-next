@@ -5,6 +5,8 @@ import Layout from '../../components/Layout'
 import Error from '../../components/Error'
 import Axios from 'axios'
 import useUser from '../../lib/useUser'
+import Link from 'next/link'
+import Redirecting from '../../components/Redirecting'
 
 const ConfirmationLink = () => {
   const [confirm, setConfirm] = useState(false)
@@ -12,7 +14,7 @@ const ConfirmationLink = () => {
   const router = useRouter()
   const { t } = useTranslation()
   const { token } = router.query
-  const { mutateUser } = useUser()
+  const { user, mutateUser } = useUser()
 
   useEffect(() => {
     const submitToken = async () => {
@@ -25,17 +27,38 @@ const ConfirmationLink = () => {
         setError(err.response.data.message)
       }
     }
-    submitToken()
+    //if there is no user we want to submit data and get the user
+    if (!user) submitToken()
   }, [token])
 
-  if (confirm) {
+  // Checking if there is a user its already confirmed
+  // we dont want to go confirmation again
+  useEffect(() => {
+    if (user && !confirm) {
+      router.push("/panel")
+    }
+  }, [user, confirm])
+
+  if (user && !confirm && !error) {
+    return <Redirecting />
+  }
+
+  if (confirm && user) {
     return (
       <Layout>
-        <div className="bg-gray-800 text-gray-300 h-full flex flex-col">
-          <div className="my-auto mx-auto">
+        <div className="bg-gradient-to-t from-black to-gray-700 text-gray-300 h-full flex flex-col">
+          <div className="my-auto text-center">
             <h1 className="text-5xl font-semibold">
               {t('confirmation:confirmed')}
             </h1>
+          </div>
+          <div className="w-full inline-flex items-center justify-center pb-20">
+            <button className="bg-indigo-700 focus:ring-0 font-semibold text-lg rounded px-4 py-2 hover:bg-white hover:text-indigo-700 mr-4">
+              <Link href="/panel">{t('confirmation:goPanel')}</Link>
+            </button>
+            <button className="border border-indigo-400 text-indigo-300 focus:ring-0 text-lg rounded px-4 py-2 hover:bg-white hover:text-indigo-700">
+              <Link href="/">{t('confirmation:goMain')}</Link>
+            </button>
           </div>
         </div>
       </Layout>

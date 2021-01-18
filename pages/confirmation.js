@@ -1,5 +1,5 @@
 import Layout from '../components/Layout'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { TextInput } from '../lib/formikInputs'
@@ -8,18 +8,32 @@ import Error from '../components/Error'
 import useTranslation from 'next-translate/useTranslation'
 import useUser from '../lib/useUser'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import Redirecting from '../components/Redirecting'
+import CircleSpin from '../components/CircleSpin'
 
 const Confirmation = () => {
   const [error, setError] = useState(null)
   const [showForm, setShowForm] = useState(false)
   const [confirm, setConfirm] = useState(false)
   const { t } = useTranslation()
-  const { mutateUser } = useUser()
+  const { user, mutateUser } = useUser()
+  const router = useRouter()
 
-  if (confirm) {
+  useEffect(() => {
+    if (user && !confirm) {
+      router.push('/panel')
+    }
+  }, [user, confirm])
+
+  if (user && !confirm) {
+    return <Redirecting />
+  }
+
+  if (confirm && user) {
     return (
       <Layout>
-        <div className="bg-gray-800 text-gray-100 h-full flex flex-col items-start">
+        <div className="bg-gradient-to-t from-black to-gray-700 text-gray-100 h-full flex flex-col items-start">
           <div className="my-auto mx-auto text-3xl w-4/5">
             <div className="flex items-center">
               <Link href="/">
@@ -40,6 +54,14 @@ const Confirmation = () => {
             <h2 className="mx-auto font-semibold text-3xl">
               {t('confirmation:confirmed')}
             </h2>
+          </div>
+          <div className="w-full inline-flex items-center justify-center pb-20">
+            <button className="bg-indigo-700 focus:ring-0 font-semibold text-lg rounded px-4 py-2 hover:bg-white hover:text-indigo-700 mr-4">
+              <Link href="/panel">{t('confirmation:goPanel')}</Link>
+            </button>
+            <button className="border border-indigo-400 text-indigo-300 focus:ring-0 text-lg rounded px-4 py-2 hover:bg-white hover:text-indigo-700">
+              <Link href="/">{t('confirmation:goMain')}</Link>
+            </button>
           </div>
         </div>
       </Layout>
@@ -86,7 +108,9 @@ const Confirmation = () => {
         </div>
         {!showForm && (
           <div className="py-4">
-            <h2 className="text-center text-lg">{t('confirmation:enterCode')}</h2>
+            <h2 className="text-center text-lg">
+              {t('confirmation:enterCode')}
+            </h2>
             <Formik
               key="confirm-form"
               initialValues={{ token: '' }}
@@ -120,29 +144,9 @@ const Confirmation = () => {
                     <button
                       className="mt-2 inline-flex items-center border-2 justify-center shadow rounded px-6 py-4 text-sm font-bold border-gray-200 hover:bg-indigo-500 w-full focus:outline-none"
                       type="submit"
+                      disabled={isSubmitting ? true : false}
                     >
-                      {isSubmitting && (
-                        <svg
-                          class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                        >
-                          <circle
-                            class="opacity-25"
-                            cx="12"
-                            cy="12"
-                            r="10"
-                            stroke="currentColor"
-                            stroke-width="4"
-                          ></circle>
-                          <path
-                            class="opacity-75"
-                            fill="currentColor"
-                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                          ></path>
-                        </svg>
-                      )}
+                      {isSubmitting && <CircleSpin />}
                       {t('forms:validate').toUpperCase()}
                     </button>
                   </div>
@@ -191,29 +195,9 @@ const Confirmation = () => {
                 <button
                   className="mt-4 inline-flex items-center border-2 justify-center shadow rounded px-6 py-4 text-sm font-bold border-gray-200 hover:bg-indigo-500 w-full focus:outline-none"
                   type="submit"
+                  disabled={isSubmitting ? true : false}
                 >
-                  {isSubmitting && (
-                    <svg
-                      class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle
-                        class="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        stroke-width="4"
-                      ></circle>
-                      <path
-                        class="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      ></path>
-                    </svg>
-                  )}
+                  {isSubmitting && <CircleSpin />}
                   {t('forms:sent').toUpperCase()}
                 </button>
                 <button
@@ -222,7 +206,7 @@ const Confirmation = () => {
                   onClick={() => {
                     setShowForm(false)
                     setError(null)
-                  } }
+                  }}
                 >
                   {t('forms:cancel').toUpperCase()}
                 </button>

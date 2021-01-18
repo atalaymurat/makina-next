@@ -68,14 +68,24 @@ module.exports = {
       const text = confirmText(confirmStr, email, name, locale)
       const html = confirmHtml(confirmStr, email, name, locale)
 
+      const subject =
+        locale === 'tr' ? 'EPOSTA DOĞRULAMA' : 'REGISTER EMAIL'
+
       await mailer.sendEmail(
         process.env.APP_MAIL_EMAIL,
         email,
-        'REGISTER',
+        subject,
         html,
         text
       )
-
+      // sent a mail to site admin
+      await mailer.sendEmail(
+        process.env.APP_MAIL_EMAIL,
+        process.env.APP_MAIL_EMAIL,
+        `NEW USER REGISTER - ${name}`,
+        html,
+        text
+      )
       await newUser.save()
 
       res.status(200).json({ success: true })
@@ -240,7 +250,8 @@ module.exports = {
 
       const text = confirmText(confirmStr, email, name, locale)
       const html = confirmHtml(confirmStr, email, name, locale)
-      const subject = user.locale === 'tr' ? 'EPOSTA DOĞRULAMA' : 'REGISTER EMAIL'
+      const subject =
+        user.locale === 'tr' ? 'EPOSTA DOĞRULAMA' : 'REGISTER EMAIL'
 
       await mailer.sendEmail(
         process.env.APP_MAIL_EMAIL,
@@ -260,7 +271,15 @@ module.exports = {
       })
     } catch (err) {
       console.error(err)
-      res.status(400).json({success: false , message: { tr:"Girmiş olduğunuz bilgileri kontrol ediniz, bir hata oluştu" , en: "Please check your inputs, An error accured"}})
+      res
+        .status(400)
+        .json({
+          success: false,
+          message: {
+            tr: 'Girmiş olduğunuz bilgileri kontrol ediniz, bir hata oluştu',
+            en: 'Please check your inputs, An error accured',
+          },
+        })
     }
   },
 }

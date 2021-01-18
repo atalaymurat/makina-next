@@ -9,5 +9,7 @@
   "reSentMail": "Sent a new verification code",
   "sentNewMail": "Enter your email, we will sent you a new confirmation code",
   "contactUs": "If somehow can not recieve the confirmation email, please contact with us",
-  "contact": "mail to us"
+  "contact": "mail to us",
+  "goPanel":"Go to my panel",
+  "goMain": "Go to Home Page"
 }

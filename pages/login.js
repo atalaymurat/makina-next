@@ -9,10 +9,11 @@ import Axios from 'axios'
 import Error from '../components/Error'
 import useUser from '../lib/useUser'
 import { useRouter } from 'next/router'
+import CircleSpin from '../components/CircleSpin'
 
 const Login = () => {
   const { t } = useTranslation()
-  const [ error, setError] = useState(null)
+  const [error, setError] = useState(null)
   const { mutateUser } = useUser()
   const router = useRouter()
   return (
@@ -36,7 +37,10 @@ const Login = () => {
             <p className="flex flex-col items-center justify-center mt-10 text-center">
               <span>{t('sign_up:signNewAccount')}</span>
               <Link href="/signup">
-                <a href="#" className="py-2 px-4 border border-indigo-500 rounded mt-1 shadow  bg-gray-700 hover:bg-indigo-500 font-semibold">
+                <a
+                  href="#"
+                  className="py-2 px-4 border border-indigo-500 rounded mt-1 shadow  bg-gray-700 hover:bg-indigo-500 font-semibold"
+                >
                   {t('sign_up:signUp')}
                 </a>
               </Link>
@@ -73,13 +77,13 @@ const Login = () => {
                   .required(t('forms:required')),
                 password: Yup.string().required(t('forms:required')),
               })}
-              onSubmit={ async (values, { setSubmitting }) => {
+              onSubmit={async (values, { setSubmitting }) => {
                 try {
                   setSubmitting(true)
                   const res = await Axios.post('/api/auth/login', values)
                   if (res.data.success) {
                     mutateUser()
-                    router.push("/panel")
+                    router.push('/panel')
                     return
                   }
                 } catch (err) {
@@ -107,28 +111,7 @@ const Login = () => {
                       disabled={isSubmitting ? true : false}
                       className="inline-flex items-center justify-center w-full px-4 py-2 text-lg font-semibold text-white bg-gray-700 shadow transition-colors duration-300 rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-blue-200 focus:ring-4"
                     >
-                      {isSubmitting && (
-                        <svg
-                          class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                        >
-                          <circle
-                            class="opacity-25"
-                            cx="12"
-                            cy="12"
-                            r="10"
-                            stroke="currentColor"
-                            stroke-width="4"
-                          ></circle>
-                          <path
-                            class="opacity-75"
-                            fill="currentColor"
-                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                          ></path>
-                        </svg>
-                      )}
+                      {isSubmitting && <CircleSpin />}
                       {t('sign_up:login')}
                     </button>
                   </div>

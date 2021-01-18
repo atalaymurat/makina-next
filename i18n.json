@@ -2,7 +2,7 @@
 	"locales": ["tr", "en"],
 	"defaultLocale": "tr",
 	"pages": {
-		"*": ["menu", "meta"],
+		"*": ["menu", "meta", "general"],
 		"/": ["index"],
 		"/panel": ["panel"],
 		"/signup": ["sign_up", "forms"],
