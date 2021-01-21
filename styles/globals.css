@@ -20,7 +20,7 @@ div#__next {
 
 div.main-content {
   /* flex: 1 0 100%; */
-  @apply flex-grow bg-gradient-to-t from-black to-gray-700
+  @apply flex-grow bg-gradient-to-t from-black to-gray-700 text-gray-300
 }
 
 div.footer-content {

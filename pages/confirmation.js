@@ -35,7 +35,7 @@ const Confirmation = () => {
   if (confirm && user) {
     return (
       <Layout>
-        <div className="text-gray-100 flex flex-col items-start">
+        <div className="flex flex-col items-start">
           <div className="my-auto mx-auto text-3xl w-4/5">
             <div className="flex items-center">
               <Link href="/">
@@ -74,7 +74,7 @@ const Confirmation = () => {
   return (
     <Layout>
 
-    <div className="text-gray-100 h-full flex flex-col items-start">
+    <div className="h-full flex flex-col items-start">
       <div className="mx-auto my-5 text-3xl w-4/5">
         <div className="flex items-center mb-2">
           <Link href="/">
@@ -182,10 +182,10 @@ const Confirmation = () => {
           >
             {({ isSubmitting }) => (
               <Form className="max-w-md w-full mx-auto" key="01">
-                <h2 className="font-semibold text-gray-300">
+                <h2 className="font-semibold">
                   {t('confirmation:sentNewMail')}
                 </h2>
-                <h2 className="font-semibold text-xl text-gray-300">
+                <h2 className="font-semibold text-xl">
                   {t('confirmation:checkSpam')}
                 </h2>
                 <span className="text-gray-800 text-lg">

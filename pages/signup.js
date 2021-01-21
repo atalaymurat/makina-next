@@ -32,7 +32,7 @@ const Signup = (props) => {
                 </a>
               </Link>
             </div>
-            <p className="w-full mt-6 font-normal text-gray-300 md:mt-0">
+            <p className="w-full mt-6 font-normal md:mt-0">
               {t('sign_up:description')}
             </p>
             <p className="flex flex-col items-center justify-center mt-10 text-center">
@@ -46,7 +46,7 @@ const Signup = (props) => {
                 </a>
               </Link>
             </p>
-            <p className="mt-6 text-sm text-center text-gray-300">
+            <p className="mt-6 text-sm text-center">
               <Link href="/">
                 <a className="underline">{t('sign_up:userAgrement')} </a>
               </Link>{' '}
