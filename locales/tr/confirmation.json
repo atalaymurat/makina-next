@@ -2,7 +2,7 @@
   "enterCode": "Doğrulama kodunu buraya giriniz",
   "sentMail": "Biraz önce size, bir onay e-postası gönderdik.",
   "checkMail": "Lütfen e-posta hesabınızı kontrol ediniz.",
-  "checkSpam": "Eğer mesajımızı göremediyseniz, e-posta hesabınızın gereksiz, spam klasörünü kontrol ediniz.",
+  "checkSpam": "Eğer mesajımızı göremezseniz, e-posta hesabınızın gereksiz, spam klasörünü kontrol ediniz.",
   "confirmed": "E-posta adresiniz doğrulanmıştır. Teşekkürler",
   "confirmation": "Doğrulama",
   "confirming": "Hesabınız doğrulanıyor...",

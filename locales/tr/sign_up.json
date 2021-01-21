@@ -20,5 +20,9 @@
 	"seller": "Satıcı Hesabı",
 	"manufacturer": "Üretici Hesabı",
 	"password": "Şifre",
-	"notRobot": "Robot olmadığınızı onaylayınız"
+	"notRobot": "Robot olmadığınızı onaylayınız",
+	"forgetPass": "Şifremi unuttum",
+	"resetPass": "Şifre Sıfırlama",
+	"reset": "Sıfırla",
+	"cancel": "İptal"
 }

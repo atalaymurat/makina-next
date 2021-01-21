@@ -15,12 +15,12 @@ body {
 div#__next {
   /* display: flex; */
   /* flex-direction: column; */
-  @apply flex flex-col overflow-y-scroll;
+  @apply flex flex-col min-h-screen;
 }
 
 div.main-content {
   /* flex: 1 0 100%; */
-  @apply flex-1;
+  @apply flex-grow;
 }
 
 div.footer-content {

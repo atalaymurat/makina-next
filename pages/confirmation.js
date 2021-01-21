@@ -26,14 +26,16 @@ const Confirmation = () => {
     }
   }, [user, confirm])
 
+  // Already Confirmed User Account Redirect to Panel
   if (user && !confirm) {
     return <Redirecting />
   }
 
+  // Confirmed New User Welcome Screen
   if (confirm && user) {
     return (
       <Layout>
-        <div className="bg-gradient-to-t from-black to-gray-700 text-gray-100 h-full flex flex-col items-start">
+        <div className="bg-gradient-to-t h-full from-black to-gray-700 text-gray-100 flex flex-col items-start">
           <div className="my-auto mx-auto text-3xl w-4/5">
             <div className="flex items-center">
               <Link href="/">
@@ -56,10 +58,10 @@ const Confirmation = () => {
             </h2>
           </div>
           <div className="w-full inline-flex items-center justify-center pb-20">
-            <button className="bg-indigo-700 focus:ring-0 font-semibold text-lg rounded px-4 py-2 hover:bg-white hover:text-indigo-700 mr-4">
+            <button className="bg-indigo-700 focus:outline-none focus:ring focus:border-blue-400 font-semibold text-lg rounded px-4 py-2 hover:bg-white hover:text-indigo-700 mr-4">
               <Link href="/panel">{t('confirmation:goPanel')}</Link>
             </button>
-            <button className="border border-indigo-400 text-indigo-300 focus:ring-0 text-lg rounded px-4 py-2 hover:bg-white hover:text-indigo-700">
+            <button className="border border-indigo-400 text-indigo-300 focus:outline-none focus:ring focus:border-blue-400 text-lg rounded px-4 py-2 hover:bg-white hover:text-indigo-700">
               <Link href="/">{t('confirmation:goMain')}</Link>
             </button>
           </div>
@@ -68,7 +70,10 @@ const Confirmation = () => {
     )
   }
 
+  // Verification Screen
   return (
+    <Layout>
+
     <div className="bg-gradient-to-t from-black to-gray-700 text-gray-100 h-full flex flex-col items-start">
       <div className="mx-auto my-5 text-3xl w-4/5">
         <div className="flex items-center mb-2">
@@ -105,7 +110,6 @@ const Confirmation = () => {
               </>
             )
           )}
-        </div>
         {!showForm && (
           <div className="py-4">
             <h2 className="text-center text-lg">
@@ -136,13 +140,13 @@ const Confirmation = () => {
               }}
             >
               {({ isSubmitting }) => (
-                <Form className="max-w-md w-6/12 mx-auto mt-2" key="02">
+                <Form className="max-w-md w-8/12 mx-auto mt-2" key="02">
                   <span className="text-gray-800 w-full text-lg">
                     <TextInput name="token" type="text" id="token" />
                   </span>
                   <div className="py-2 w-full">
                     <button
-                      className="mt-2 inline-flex items-center border-2 justify-center shadow rounded px-6 py-4 text-sm font-bold border-gray-200 hover:bg-indigo-500 w-full focus:outline-none"
+                      className="mt-2 inline-flex items-center border-2 justify-center shadow rounded px-6 py-4 text-sm font-bold border-gray-200 hover:bg-indigo-500 w-full focus:outline-none focus:ring focus:border-blue-400"
                       type="submit"
                       disabled={isSubmitting ? true : false}
                     >
@@ -156,7 +160,7 @@ const Confirmation = () => {
           </div>
         )}
       </div>
-      <div className="flex flex-col items-center max-w-md w-6/12 mx-auto">
+      <div className="mx-auto text-3xl flex items-center justify-center">
         {showForm ? (
           <Formik
             key="resent-form"
@@ -177,11 +181,11 @@ const Confirmation = () => {
             }}
           >
             {({ isSubmitting }) => (
-              <Form className="max-w-md w-full mx-auto mt-2" key="01">
+              <Form className="max-w-md w-full mx-auto" key="01">
                 <h2 className="font-semibold text-gray-300">
                   {t('confirmation:sentNewMail')}
                 </h2>
-                <h2 className="font-semibold text-gray-300">
+                <h2 className="font-semibold text-xl text-gray-300">
                   {t('confirmation:checkSpam')}
                 </h2>
                 <span className="text-gray-800 text-lg">
@@ -193,7 +197,7 @@ const Confirmation = () => {
                   />
                 </span>
                 <button
-                  className="mt-4 inline-flex items-center border-2 justify-center shadow rounded px-6 py-4 text-sm font-bold border-gray-200 hover:bg-indigo-500 w-full focus:outline-none"
+                  className="mt-4 inline-flex items-center border-2 justify-center shadow rounded px-6 py-4 text-sm font-bold border-gray-200 hover:bg-indigo-500 w-full focus:outline-none focus:ring focus:border-blue-400"
                   type="submit"
                   disabled={isSubmitting ? true : false}
                 >
@@ -201,7 +205,7 @@ const Confirmation = () => {
                   {t('forms:sent').toUpperCase()}
                 </button>
                 <button
-                  className="mt-2 inline-flex items-center border-2 justify-center shadow rounded px-6 py-4 text-sm font-bold border-gray-200 hover:bg-indigo-500 w-full focus:outline-none"
+                  className="mt-2 inline-flex items-center border-2 justify-center shadow rounded px-6 py-4 text-sm font-bold border-gray-200 hover:bg-indigo-500 w-full focus:outline-none focus:ring focus:border-blue-400"
                   type="button"
                   onClick={() => {
                     setShowForm(false)
@@ -216,7 +220,7 @@ const Confirmation = () => {
         ) : (
           <button
             type="button"
-            className="mt-4 inline-flex items-center border-2 justify-center shadow rounded px-6 py-4 text-sm font-bold border-gray-200 hover:bg-indigo-500 w-full focus:outline-none"
+            className="max-w-md w-10/12 inline-flex items-center border-2 justify-center shadow rounded px-6 py-4 text-sm font-bold border-gray-200 hover:bg-indigo-500 focus:outline-none focus:ring focus:border-blue-400"
             onClick={() => {
               setShowForm(true)
               setError(null)
@@ -225,8 +229,10 @@ const Confirmation = () => {
             {t('confirmation:reSentMail')}
           </button>
         )}
+        </div>
       </div>
     </div>
+    </Layout>
   )
 }
 export default Confirmation

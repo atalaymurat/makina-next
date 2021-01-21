@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Layout from '../components/Layout'
 import Link from 'next/link'
 import useTranslation from 'next-translate/useTranslation'
@@ -11,11 +11,17 @@ import useUser from '../lib/useUser'
 import { useRouter } from 'next/router'
 import CircleSpin from '../components/CircleSpin'
 
-const Login = () => {
+const Login = (props) => {
+  const [forget, setForget] = useState(false)
   const { t } = useTranslation()
   const [error, setError] = useState(null)
   const { mutateUser } = useUser()
   const router = useRouter()
+
+  useEffect( () => {
+    setForget(false)
+  }, [props])
+
   return (
     <Layout>
       <div className="flex items-center h-full p-4 bg-gray-100 lg:justify-center">
@@ -63,61 +69,129 @@ const Login = () => {
           {/* RIGHT FORM SIDE*/}
           <div className="p-5 bg-white md:flex-1">
             <Error error={error} />
-            <h3 className="my-4 text-2xl font-semibold text-gray-700">
-              {t('sign_up:loginTitle')}
-            </h3>
-            <Formik
-              initialValues={{
-                email: '',
-                password: '',
-              }}
-              validationSchema={Yup.object({
-                email: Yup.string()
-                  .email(t('sign_up:invalidEmail'))
-                  .required(t('forms:required')),
-                password: Yup.string().required(t('forms:required')),
-              })}
-              onSubmit={async (values, { setSubmitting }) => {
-                try {
-                  setSubmitting(true)
-                  const res = await Axios.post('/api/auth/login', values)
-                  if (res.data.success) {
-                    mutateUser()
-                    router.push('/panel')
-                    return
+
+            {/* FORM FOR FORGET PASSWORD */}
+            {forget ? (
+              <Formik
+                key="forget-pass"
+                initialValues={{ email: '' }}
+                validationSchema={Yup.object({
+                  email: Yup.string()
+                    .email(t('sign_up:invalidEmail'))
+                    .required(t('forms:required')),
+                })}
+                onSubmit={async (values, { setSubmitting }) => {
+                  try {
+                    setSubmitting(true)
+                    const res = await Axios.post('/api/auth/forget', values)
+                  } catch (err) {
+                    setError(err.response.data.message)
                   }
-                } catch (err) {
-                  setError(err.response.data.message)
-                }
-              }}
-            >
-              {({ isSubmitting }) => (
-                <Form className="max-w-xl mx-auto bg-transparent">
-                  <TextInput
-                    name="email"
-                    type="text"
-                    id="email"
-                    label={t('sign_up:email')}
-                  />
-                  <PassInput
-                    name="password"
-                    id="password"
-                    label={t('sign_up:password')}
-                    autoComplete="new-password"
-                  />
-                  <div className="py-2 mt-2">
-                    <button
-                      type="submit"
-                      disabled={isSubmitting ? true : false}
-                      className="inline-flex items-center justify-center w-full px-4 py-2 text-lg font-semibold text-white bg-gray-700 shadow transition-colors duration-300 rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-blue-200 focus:ring-4"
-                    >
-                      {isSubmitting && <CircleSpin />}
-                      {t('sign_up:login')}
-                    </button>
-                  </div>
-                </Form>
-              )}
-            </Formik>
+                }}
+              >
+                {({ isSubmitting }) => (
+                  <>
+                    <h3 className="my-4 text-2xl font-semibold text-gray-700">
+                      {t('sign_up:resetPass')}
+                    </h3>
+                    <Form className="max-w-xl mx-auto bg-transparent">
+                      <TextInput
+                        name="email"
+                        type="text"
+                        id="email"
+                        label={t('sign_up:email')}
+                      />
+                      <div className="py-2 mt-2">
+                        <button
+                          type="submit"
+                          disabled={isSubmitting ? true : false}
+                          className="inline-flex items-center justify-center w-full px-4 py-2 text-lg font-semibold text-white bg-gray-700 shadow transition-colors duration-300 rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-blue-200 focus:ring-4"
+                        >
+                          {isSubmitting && <CircleSpin />}
+                          {t('sign_up:reset')}
+                        </button>
+                      </div>
+                      <div className="mt-2">
+                        <button
+                          type="submit"
+                          className="inline-flex items-center justify-center w-full px-4 py-2 text-lg font-semibold border border-red-700 text-red-700 shadow transition-colors duration-300 rounded-md hover:bg-red-700 hover:text-white focus:outline-none focus:ring-blue-200 focus:ring-4"
+                          onClick={() => setForget(false)}
+                        >
+                          {t('sign_up:cancel')}
+                        </button>
+                      </div>
+                    </Form>
+                  </>
+                )}
+              </Formik>
+            ) : (
+              <Formik
+                key="login-form"
+                initialValues={{
+                  email: '',
+                  password: '',
+                }}
+                validationSchema={Yup.object({
+                  email: Yup.string()
+                    .email(t('sign_up:invalidEmail'))
+                    .required(t('forms:required')),
+                  password: Yup.string().required(t('forms:required')),
+                })}
+                onSubmit={async (values, { setSubmitting }) => {
+                  try {
+                    setSubmitting(true)
+                    const res = await Axios.post('/api/auth/login', values)
+                    if (res.data.success) {
+                      mutateUser()
+                      router.push('/panel')
+                      return
+                    }
+                  } catch (err) {
+                    setError(err.response.data.message)
+                  }
+                }}
+              >
+                {({ isSubmitting }) => (
+                  <>
+                    <h3 className="my-4 text-2xl font-semibold text-gray-700">
+                      {t('sign_up:loginTitle')}
+                    </h3>
+                    <Form className="max-w-xl mx-auto bg-transparent">
+                      <TextInput
+                        name="email"
+                        type="text"
+                        id="email"
+                        label={t('sign_up:email')}
+                      />
+                      <PassInput
+                        name="password"
+                        id="password"
+                        label={t('sign_up:password')}
+                        autoComplete="new-password"
+                      />
+                      <div className="block py-1">
+                        <span
+                          className="float-right mt-1 mb-2 text-sm text-gray-700 hover:text-gray-400 cursor-pointer hover:underline"
+                          onClick={() => setForget(true)}
+                        >
+                          {t("sign_up:forgetPass")}
+                        </span>
+                      </div>
+                      <div className="py-2 mt-2">
+                        <button
+                          type="submit"
+                          disabled={isSubmitting ? true : false}
+                          className="inline-flex items-center justify-center w-full px-4 py-2 text-lg font-semibold text-white bg-gray-700 shadow transition-colors duration-300 rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-blue-200 focus:ring-4"
+                        >
+                          {isSubmitting && <CircleSpin />}
+                          {t('sign_up:login')}
+                        </button>
+                      </div>
+                    </Form>
+                  </>
+                )}
+              </Formik>
+            )}
           </div>
         </div>
       </div>

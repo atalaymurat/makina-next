@@ -1,12 +1,13 @@
 const User = require('../models/user')
 const Axios = require('axios')
-const bcrypt = require('bcryptjs')
 const {
   generateStr,
   confirmText,
   confirmHtml,
 } = require('../../lib/confirmMail')
+const { mailResetHtml, mailResetText } = require('../../lib/mailPassReset')
 const mailer = require('../../lib/mailer')
+const JWT = require('jsonwebtoken')
 
 module.exports = {
   signUp: async (req, res) => {
@@ -68,8 +69,7 @@ module.exports = {
       const text = confirmText(confirmStr, email, name, locale)
       const html = confirmHtml(confirmStr, email, name, locale)
 
-      const subject =
-        locale === 'tr' ? 'Üyelik Onayı' : 'Confirm Your Account'
+      const subject = locale === 'tr' ? 'Üyelik Onayı' : 'Confirm Your Account'
 
       await mailer.sendEmail(
         process.env.APP_MAIL_EMAIL,
@@ -232,7 +232,7 @@ module.exports = {
       const timeDiffCreate = Math.abs(dateNow - user.created_at) / 20000
       const timeTo = 20 - Math.floor(timeDiff)
       // At least ten min later then first create and update
-      if (timeDiff < 10 && timeDiffCreate < 10 ) {
+      if (timeDiff < 10 && timeDiffCreate < 10) {
         return res.status(406).json({
           success: false,
           message: {
@@ -273,15 +273,76 @@ module.exports = {
       })
     } catch (err) {
       console.error(err)
-      res
-        .status(400)
-        .json({
-          success: false,
-          message: {
-            tr: 'Girmiş olduğunuz bilgileri kontrol ediniz, bir hata oluştu',
-            en: 'Please check your inputs, An error accured',
-          },
-        })
+      res.status(400).json({
+        success: false,
+        message: {
+          tr: 'Girmiş olduğunuz bilgileri kontrol ediniz, bir hata oluştu',
+          en: 'Please check your inputs, An error accured',
+        },
+      })
+    }
+  },
+  forget: async (req, res, next) => {
+    try {
+      console.log(req.body)
+      const email = req.body.email
+      const user = await User.findOne({ 'local.email': email })
+      if (!user) {
+        return res
+          .status(404)
+          .json({
+            success: false,
+            message: {
+              en: 'No user email match',
+              tr: 'Kullanıcı kaydı bulunamadı',
+            },
+          })
+      }
+      if (!user.local.email_verified) {
+        return res
+          .status(404)
+          .json({
+            success: false,
+            message: {
+              en: 'Email must be verified before pass reset.',
+              tr: 'E-posta doğrulanmadan, sıfırlama yapılamıyor',
+            },
+          })
+      }
+      const token = JWT.sign(
+        {
+          iss: 'makinatr',
+          sub: user._id,
+          iat: new Date().getTime(),
+          exp: Math.floor(Date.now() / 1000) + 30 * 60,
+        },
+        process.env.JWT_SECRET
+      )
+      user.local.resetPassToken = token
+
+      const firstName = user.name.firstName
+      const lastName = user.name.lastName
+      const userName = `${firstName} ${lastName}`
+      const locale = user.locale
+      const subject = user.locale === 'tr' ? "Şifre Sıfırlama" : "Password Reset"
+
+      const text = mailResetText(token, email, userName, locale)
+      const html = mailResetHtml(token, email, userName, locale)
+
+      await mailer.sendEmail(
+        process.env.APP_MAIL_EMAIL,
+        email,
+        subject,
+        html,
+        text
+      )
+
+      await user.save()
+      res.status(200).json({ success: true, message: {tr: `${email} e-postanıza  sıfırlama linki gönderilmiştir.`, en: `Your reset link was sent to ${email}`}})
+      console.log('USER', user)
+
+    } catch (err) {
+      console.error(err)
     }
   },
 }

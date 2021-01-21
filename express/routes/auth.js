@@ -27,5 +27,6 @@ router.post('/login', session, authController.login)
 //Unprotected Routes
 router.post('/signup', authController.signUp)
 router.post('/resent', authController.reSentEmail )
+router.post('/forget', authController.forget )
 
 module.exports = router

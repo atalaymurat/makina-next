@@ -22,5 +22,9 @@
 	"password": "Password",
 	"show": "show",
 	"hide": "hide",
-	"notRobot": "Verify you are not robot by checking the box"
+	"notRobot": "Verify you are not robot by checking the box",
+	"forgetPass": "Forget password",
+	"resetPass": "Reset Password",
+	"reset": "Reset",
+	"cancel": "Cancel"
 }
