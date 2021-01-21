@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation'
 function Redirecting() {
   const { t } = useTranslation()
   return (
-    <div className="bg-gradient-to-t from-black to-gray-700 text-gray-100 h-full flex flex-col items-center justify-center">
+    <div className="text-gray-100 h-full flex flex-col items-center justify-center">
       <div className="flex items-center">
         <svg
           class="animate-spin -ml-1 mr-3 h-6 w-6 text-white"

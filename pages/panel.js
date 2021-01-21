@@ -15,15 +15,15 @@ const Panel = (props) => {
   const { t } = useTranslation()
   return (
     <Layout title="Panel">
-      <div className="flex flex-col w-full p-8">
+      <div className="flex flex-col w-full p-8 text-gray-300">
         <h1 className="mx-auto my-8">Panel#SHOW</h1>
         <h2 className="text-4xl font-semibold">
           {t('panel:welcome', { firstName, lastName })}
         </h2>
-        <p className="text-gray-600">{email}</p>
-        <p className="text-gray-600">Account Type: {accountType}</p>
-        <p className="text-gray-600">Account Created At: {formingDate(created_at)}</p>
-        <p className="text-gray-600">Language: {locale}</p>
+        <p>{email}</p>
+        <p>Account Type: {accountType}</p>
+        <p>Account Created At: {formingDate(created_at)}</p>
+        <p>Language: {locale}</p>
       </div>
 
     </Layout>

@@ -35,7 +35,7 @@ const Confirmation = () => {
   if (confirm && user) {
     return (
       <Layout>
-        <div className="bg-gradient-to-t h-full from-black to-gray-700 text-gray-100 flex flex-col items-start">
+        <div className="text-gray-100 flex flex-col items-start">
           <div className="my-auto mx-auto text-3xl w-4/5">
             <div className="flex items-center">
               <Link href="/">
@@ -74,7 +74,7 @@ const Confirmation = () => {
   return (
     <Layout>
 
-    <div className="bg-gradient-to-t from-black to-gray-700 text-gray-100 h-full flex flex-col items-start">
+    <div className="text-gray-100 h-full flex flex-col items-start">
       <div className="mx-auto my-5 text-3xl w-4/5">
         <div className="flex items-center mb-2">
           <Link href="/">

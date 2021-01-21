@@ -40,7 +40,7 @@ const Navbar = () => {
   }
 
   return (
-    <header className="border-b-2 border-white bg-gradient-to-l from-gray-800 to-gray-900">
+    <header className="border-b-2 border-white bg-gray-700">
       {/* FIRST ROW LOGO AND OTHER STUFF */}
       <div className="flex items-center justify-start px-4 py-2">
         {/* BURGER ICON */}
