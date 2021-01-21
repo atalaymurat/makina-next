@@ -26,5 +26,6 @@
 	"forgetPass": "Forget password",
 	"resetPass": "Reset Password",
 	"reset": "Reset",
-	"cancel": "Cancel"
+	"cancel": "Cancel",
+	"back": "Back"
 }

@@ -1,0 +1,8 @@
+{
+  "save": "kaydet",
+  "title": "Yeni şifrenizi belirleyin",
+  "password": "yeni şifre",
+  "passConfirm": "yeni şifreyi tekrar giriniz",
+  "match": "şifreler aynı olmalı",
+  "login": "giriş yap"
+}

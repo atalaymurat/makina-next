@@ -6,6 +6,10 @@ const {
   confirmHtml,
 } = require('../../lib/confirmMail')
 const { mailResetHtml, mailResetText } = require('../../lib/mailPassReset')
+const {
+  mailPassChangeHtml,
+  mailPassChangeText,
+} = require('../../lib/mailPassChange')
 const mailer = require('../../lib/mailer')
 const JWT = require('jsonwebtoken')
 
@@ -288,27 +292,35 @@ module.exports = {
       const email = req.body.email
       const user = await User.findOne({ 'local.email': email })
       if (!user) {
-        return res
-          .status(404)
-          .json({
-            success: false,
-            message: {
-              en: 'No user email match',
-              tr: 'Kullanıcı kaydı bulunamadı',
-            },
-          })
+        return res.status(404).json({
+          success: false,
+          message: {
+            en: 'No user email match',
+            tr: 'Kullanıcı kaydı bulunamadı',
+          },
+        })
       }
       if (!user.local.email_verified) {
-        return res
-          .status(404)
-          .json({
-            success: false,
-            message: {
-              en: 'Email must be verified before pass reset.',
-              tr: 'E-posta doğrulanmadan, sıfırlama yapılamıyor',
-            },
-          })
+        return res.status(404).json({
+          success: false,
+          message: {
+            en: 'Email must be verified before pass reset.',
+            tr: 'E-posta doğrulanmadan, sıfırlama yapılamıyor',
+          },
+        })
       }
+      // If Already reset Token End
+      // if (user.local.resetPassToken) {
+      //  return res.status(403).json({
+      //    success: false,
+      //    message: {
+      //      en: 'You already reset your password. Please check your email',
+      //      tr:
+      //        'Şifre sıfırlama işleminiz devam ediyor. Lütfen e-postanızı kontrol ediniz.',
+      //    },
+      //  })
+      // }
+
       const token = JWT.sign(
         {
           iss: 'makinatr',
@@ -324,7 +336,8 @@ module.exports = {
       const lastName = user.name.lastName
       const userName = `${firstName} ${lastName}`
       const locale = user.locale
-      const subject = user.locale === 'tr' ? "Şifre Sıfırlama" : "Password Reset"
+      const subject =
+        user.locale === 'tr' ? 'Şifre Sıfırlama' : 'Password Reset'
 
       const text = mailResetText(token, email, userName, locale)
       const html = mailResetHtml(token, email, userName, locale)
@@ -338,11 +351,96 @@ module.exports = {
       )
 
       await user.save()
-      res.status(200).json({ success: true, message: {tr: `${email} e-postanıza  sıfırlama linki gönderilmiştir.`, en: `Your reset link was sent to ${email}`}})
+      res.status(200).json({
+        success: true,
+        message: {
+          tr: `${email} e-postanıza  sıfırlama linki gönderilmiştir.`,
+          en: `Your reset link was sent to ${email}`,
+        },
+      })
       console.log('USER', user)
-
     } catch (err) {
       console.error(err)
+    }
+  },
+  reset: async (req, res, next) => {
+    try {
+      console.log(req.body)
+      const password = req.body.password
+      const token = req.body.token
+
+      const decode = JWT.verify(token, process.env.JWT_SECRET)
+      const user = await User.findById(decode.sub)
+      if (!user) {
+        return res.status(404).json({
+          success: false,
+          message: {
+            en: 'No matching User',
+            tr: 'Üzgünüz kullanıcı kaydı bulunamadı',
+          },
+        })
+      }
+      const match = token === user.local.resetPassToken
+      if (!match) {
+        return res.status(404).json({
+          success: false,
+          message: {
+            en: 'Invalid Identity. try to request a new pass reset',
+            tr: 'Kimlik geçersiz. Yeniden şifre sıfırlama isteyiniz.',
+          },
+        })
+      }
+
+      // Sent Email to User
+      const locale = user.locale
+      const userName = `${user.name.firstName} ${user.name.lastName}`
+      const email = user.local.email
+      const text = mailPassChangeText( userName, locale )
+      const html = mailPassChangeHtml( userName, locale )
+
+      const subject = locale === 'tr' ? 'Şifre Değiştirme' : 'Your Password Updated'
+
+      await mailer.sendEmail(
+        process.env.APP_MAIL_EMAIL,
+        email,
+        subject,
+        html,
+        text
+      )
+
+      user.local.password = password
+      user.local.resetPassToken = ''
+      await user.save()
+
+      res.status(200).json({
+        success: true,
+        message: {
+          tr: 'Şifreniz değiştirilmiştir. Lütfen giriş yapınız',
+          en: 'Your password updated, Please login',
+        },
+      })
+    } catch (err) {
+      console.error(JSON.stringify(err))
+      if (err.name === 'JsonWebTokenError')
+        return res.status(500).json({
+          success: false,
+          message: {
+            tr: 'Hatalı veya Geçersiz link Kullandınız.',
+            en: 'Reset link is not valid or wrong',
+          },
+        })
+      if (err.name === 'TokenExpiredError') {
+        // find user and delete token
+        return res()
+          .status(500)
+          .json({
+            success: false,
+            message: {
+              tr: 'Sıfırlama linkinizin süresi dolmuş.',
+              en: 'Reset link expired',
+            },
+          })
+      }
     }
   },
 }

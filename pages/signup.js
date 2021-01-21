@@ -9,12 +9,12 @@ import useTranslation from 'next-translate/useTranslation'
 import { SelectInput, TextInput, PassInput } from '../lib/formikInputs'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { Persist } from 'formik-persist'
-import Error from '../components/Error'
+import Message from '../components/Message'
 import CircleSpin from '../components/CircleSpin'
 
 const Signup = (props) => {
   const { t } = useTranslation()
-  const [error, setError] = useState(null)
+  const [message, setMessage] = useState(null)
   const router = useRouter()
   const recaptchaRef = useRef()
 
@@ -61,7 +61,7 @@ const Signup = (props) => {
             </p>
           </div>
           <div className="p-5 bg-white md:flex-1">
-            {error && <Error error={error} />}
+            {message && <Message data={message} />}
 
             <h3 className="my-4 text-2xl font-semibold text-gray-700">
               {t('sign_up:title')}
@@ -93,7 +93,7 @@ const Signup = (props) => {
               })}
               onSubmit={async (values, { setSubmitting }) => {
                 try {
-                  setError(null)
+                  setMessage(null)
                   setSubmitting(true)
                   const token = await recaptchaRef.current.executeAsync()
                   values.recaptcha = token
@@ -104,7 +104,7 @@ const Signup = (props) => {
                     router.push('/confirmation')
                   }
                 } catch (err) {
-                  setError(err.response.data.message)
+                  setMessage(err.response.data)
                   setSubmitting(false)
                 }
               }}

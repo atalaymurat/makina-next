@@ -6,7 +6,7 @@ import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { TextInput, PassInput } from '../lib/formikInputs'
 import Axios from 'axios'
-import Error from '../components/Error'
+import Message from '../components/Message'
 import useUser from '../lib/useUser'
 import { useRouter } from 'next/router'
 import CircleSpin from '../components/CircleSpin'
@@ -14,18 +14,20 @@ import CircleSpin from '../components/CircleSpin'
 const Login = (props) => {
   const [forget, setForget] = useState(false)
   const { t } = useTranslation()
-  const [error, setError] = useState(null)
+  const [message, setMessage] = useState(null)
+  const [resetSuccess, setResetSuccess] = useState(false)
   const { mutateUser } = useUser()
   const router = useRouter()
 
-  useEffect( () => {
+  useEffect(() => {
     setForget(false)
+    setMessage(null)
   }, [props])
 
   return (
     <Layout>
       <div className="flex items-center p-4 lg:justify-center">
-        <div className="flex flex-col overflow-hidden bg-white shadow-lg rounded-md max md:flex-row md:flex-1 lg:max-w-screen-md">
+        <div className="flex mt-12 flex-col overflow-hidden bg-white shadow-lg rounded-md max md:flex-row md:flex-1 lg:max-w-screen-md">
           {/* LEFT SIDE ITEMS */}
           <div className="p-4 py-6 text-white bg-gray-800 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
             <div className="my-3 text-4xl font-bold tracking-wider text-center">
@@ -37,7 +39,7 @@ const Login = (props) => {
                 </a>
               </Link>
             </div>
-            <p className="w-full mt-6 font-normal text-gray-300 md:mt-0">
+            <p className="w-full mt-6 font-normal md:mt-0">
               {t('sign_up:description')}
             </p>
             <p className="flex flex-col items-center justify-center mt-10 text-center">
@@ -51,7 +53,7 @@ const Login = (props) => {
                 </a>
               </Link>
             </p>
-            <p className="mt-6 text-sm text-center text-gray-300">
+            <p className="mt-6 text-sm text-center">
               <Link href="/">
                 <a className="underline">{t('sign_up:userAgrement')} </a>
               </Link>{' '}
@@ -68,7 +70,7 @@ const Login = (props) => {
 
           {/* RIGHT FORM SIDE*/}
           <div className="p-5 bg-white md:flex-1">
-            <Error error={error} />
+            <Message data={message} />
 
             {/* FORM FOR FORGET PASSWORD */}
             {forget ? (
@@ -82,10 +84,16 @@ const Login = (props) => {
                 })}
                 onSubmit={async (values, { setSubmitting }) => {
                   try {
+                    setMessage(null)
                     setSubmitting(true)
                     const res = await Axios.post('/api/auth/forget', values)
+                    if (res.data.success) {
+                      setMessage(res.data)
+                      setResetSuccess(true)
+                      return
+                    }
                   } catch (err) {
-                    setError(err.response.data.message)
+                    setMessage(err.response.data)
                   }
                 }}
               >
@@ -101,23 +109,29 @@ const Login = (props) => {
                         id="email"
                         label={t('sign_up:email')}
                       />
-                      <div className="py-2 mt-2">
+
+                      <div className="pt-2 mt-2">
+
                         <button
                           type="submit"
-                          disabled={isSubmitting ? true : false}
-                          className="inline-flex items-center justify-center w-full px-4 py-2 text-lg font-semibold text-white bg-gray-700 shadow transition-colors duration-300 rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-blue-200 focus:ring-4"
+                          disabled={resetSuccess || isSubmitting ? true : false}
+                          className={`inline-flex items-center justify-center w-full px-4 py-2 text-lg font-semibold text-white shadow transition-colors duration-300 rounded-md focus:outline-none focus:ring-blue-200 focus:ring-4 ${resetSuccess || isSubmitting ? "bg-gray-500 hover:bg-gray-500" : "bg-gray-700 hover:bg-indigo-500"}`}
                         >
                           {isSubmitting && <CircleSpin />}
                           {t('sign_up:reset')}
                         </button>
                       </div>
-                      <div className="mt-2">
+
+                      <div className="pt-2 mt-2">
                         <button
-                          type="submit"
+                          type="button"
                           className="inline-flex items-center justify-center w-full px-4 py-2 text-lg font-semibold border border-red-700 text-red-700 shadow transition-colors duration-300 rounded-md hover:bg-red-700 hover:text-white focus:outline-none focus:ring-blue-200 focus:ring-4"
-                          onClick={() => setForget(false)}
+                          onClick={() => {
+                            setForget(false)
+                            setMessage(null)
+                          }}
                         >
-                          {t('sign_up:cancel')}
+                          {t('sign_up:back')}
                         </button>
                       </div>
                     </Form>
@@ -147,7 +161,7 @@ const Login = (props) => {
                       return
                     }
                   } catch (err) {
-                    setError(err.response.data.message)
+                    setMessage(err.response.data)
                   }
                 }}
               >
@@ -172,9 +186,12 @@ const Login = (props) => {
                       <div className="block py-1">
                         <span
                           className="float-right mt-1 mb-2 text-sm text-gray-700 hover:text-gray-400 cursor-pointer hover:underline"
-                          onClick={() => setForget(true)}
+                          onClick={() => {
+                            setForget(true)
+                            setMessage(null)
+                          }}
                         >
-                          {t("sign_up:forgetPass")}
+                          {t('sign_up:forgetPass')}
                         </span>
                       </div>
                       <div className="py-2 mt-2">

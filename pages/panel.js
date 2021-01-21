@@ -15,7 +15,7 @@ const Panel = (props) => {
   const { t } = useTranslation()
   return (
     <Layout title="Panel">
-      <div className="flex flex-col w-full p-8 text-gray-300">
+      <div className="flex flex-col w-full p-8">
         <h1 className="mx-auto my-8">Panel#SHOW</h1>
         <h2 className="text-4xl font-semibold">
           {t('panel:welcome', { firstName, lastName })}

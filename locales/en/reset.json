@@ -1,0 +1,8 @@
+{
+  "save": "save",
+  "title": "Reset our password",
+  "password": "new password",
+  "passConfirm": "confirm new password",
+  "match": "passwords are not same",
+  "login": "login"
+}

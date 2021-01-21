@@ -28,5 +28,6 @@ router.post('/login', session, authController.login)
 router.post('/signup', authController.signUp)
 router.post('/resent', authController.reSentEmail )
 router.post('/forget', authController.forget )
+router.post('/reset', authController.reset )
 
 module.exports = router

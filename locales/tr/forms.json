@@ -10,5 +10,6 @@
   "email": "E-posta",
   "sent": "Gönder",
   "invalidEmail": "E-posta adresi geçersiz",
-  "cancel": "İptal"
+  "cancel": "İptal",
+  "success": "başarılı"
 }

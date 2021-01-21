@@ -4,7 +4,7 @@ import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { TextInput } from '../lib/formikInputs'
 import Axios from 'axios'
-import Error from '../components/Error'
+import Message from '../components/Message'
 import useTranslation from 'next-translate/useTranslation'
 import useUser from '../lib/useUser'
 import Link from 'next/link'
@@ -13,7 +13,7 @@ import Redirecting from '../components/Redirecting'
 import CircleSpin from '../components/CircleSpin'
 
 const Confirmation = () => {
-  const [error, setError] = useState(null)
+  const [message, setMessage] = useState(null)
   const [showForm, setShowForm] = useState(false)
   const [confirm, setConfirm] = useState(false)
   const { t } = useTranslation()
@@ -87,8 +87,8 @@ const Confirmation = () => {
           </Link>
         </div>
         <div className="py-4">
-          {error ? (
-            <Error error={error} />
+          {message ? (
+            <Message data={message} />
           ) : (
             !showForm && (
               <>
@@ -125,17 +125,18 @@ const Confirmation = () => {
               })}
               onSubmit={async (values, { setSubmitting }) => {
                 try {
-                  setError(null)
+                  setMessage(null)
                   setSubmitting(true)
                   const res = await Axios.post('/api/auth/verify', values)
                   if (res.data.success) {
                     setConfirm(true)
                     mutateUser()
                     setSubmitting(false)
+
                   }
                 } catch (err) {
                   setSubmitting(false)
-                  setError(err.response.data.message)
+                  setMessage(err.response.data)
                 }
               }}
             >
@@ -172,11 +173,11 @@ const Confirmation = () => {
             })}
             onSubmit={async (values, { setSubmitting }) => {
               try {
-                setError(null)
+                setMessage(null)
                 setSubmitting(true)
                 const res = await Axios.post('/api/auth/resent', values)
               } catch (err) {
-                setError(err.response.data.message)
+                setMessage(err.response.data)
               }
             }}
           >
@@ -209,7 +210,7 @@ const Confirmation = () => {
                   type="button"
                   onClick={() => {
                     setShowForm(false)
-                    setError(null)
+                    setMessage(null)
                   }}
                 >
                   {t('forms:cancel').toUpperCase()}
@@ -223,7 +224,7 @@ const Confirmation = () => {
             className="max-w-md w-10/12 inline-flex items-center border-2 justify-center shadow rounded px-6 py-4 text-sm font-bold border-gray-200 hover:bg-indigo-500 focus:outline-none focus:ring focus:border-blue-400"
             onClick={() => {
               setShowForm(true)
-              setError(null)
+              setMessage(null)
             }}
           >
             {t('confirmation:reSentMail')}
