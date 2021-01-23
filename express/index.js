@@ -1,4 +1,5 @@
 const express = require('express')
+var passport = require('passport')
 const next = require('next')
 var bodyParser = require('body-parser')
 

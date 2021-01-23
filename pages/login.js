@@ -54,13 +54,15 @@ const Login = (props) => {
               </Link>
             </p>
             <p className="mt-6 text-sm text-center">
+              &bull;{' '}
               <Link href="/">
                 <a className="underline">{t('sign_up:userAgrement')} </a>
               </Link>{' '}
               &bull;{' '}
               <Link href="/">
                 <a className="underline">{t('sign_up:privacyPolicy')}</a>
-              </Link>{' '}
+              </Link>
+              <br />
               &bull;{' '}
               <Link href="/">
                 <a className="underline">{t('sign_up:cookies')}</a>
@@ -111,11 +113,14 @@ const Login = (props) => {
                       />
 
                       <div className="pt-2 mt-2">
-
                         <button
                           type="submit"
                           disabled={resetSuccess || isSubmitting ? true : false}
-                          className={`inline-flex items-center justify-center w-full px-4 py-2 text-lg font-semibold text-white shadow transition-colors duration-300 rounded-md focus:outline-none focus:ring-blue-200 focus:ring-4 ${resetSuccess || isSubmitting ? "bg-gray-500 hover:bg-gray-500" : "bg-gray-700 hover:bg-indigo-500"}`}
+                          className={`inline-flex items-center justify-center w-full px-4 py-2 text-lg font-semibold text-white shadow transition-colors duration-300 rounded-md focus:outline-none focus:ring-blue-200 focus:ring-4 ${
+                            resetSuccess || isSubmitting
+                              ? 'bg-gray-500 hover:bg-gray-500'
+                              : 'bg-gray-700 hover:bg-indigo-500'
+                          }`}
                         >
                           {isSubmitting && <CircleSpin />}
                           {t('sign_up:reset')}

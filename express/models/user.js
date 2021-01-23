@@ -12,8 +12,8 @@ const userSchema = new Schema(
     },
     locale: {
       type: String,
-      enum: ["tr", "en"],
-      default: "tr"
+      enum: ['tr', 'en'],
+      default: 'tr',
     },
     isAuthenticated: {
       type: Boolean,
@@ -29,6 +29,11 @@ const userSchema = new Schema(
     isAdmin: {
       type: Boolean,
       default: false,
+    },
+    methods: {
+      type: [String],
+      enum: ['local', 'google', 'facebook'],
+      default: 'local',
     },
     local: {
       email: {
@@ -47,6 +52,28 @@ const userSchema = new Schema(
       },
       confirmStr: String,
       resetPassToken: String,
+    },
+    facebook: {
+      id: {
+        type: String,
+      },
+      email: {
+        type: String,
+        lowercase: true,
+      },
+      picture: String,
+    },
+    google: {
+      id: {
+        type: String,
+      },
+      email: {
+        type: String,
+        lowercase: true,
+      },
+      picture: {
+        type: String,
+      },
     },
   },
   {

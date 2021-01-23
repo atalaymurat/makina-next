@@ -94,7 +94,16 @@ module.exports = {
 
       res.status(200).json({ success: true })
     } catch (err) {
-      console.error('Server Error:', err)
+      console.error('Server Error:', JSON.stringify(err))
+      if (err.code === 'EENVELOPE') {
+        return res.status(550).json({
+          success: false,
+          message: {
+            tr: `E-posta alıcı hatası. Lütfen girmiş olduğunuz e-posta adresini kontrol ediniz`,
+            en: `Recipient email address rejected. Please check email address input`,
+          },
+        })
+      }
       res.status(400).json({
         success: false,
         message: {
@@ -161,6 +170,7 @@ module.exports = {
         _id: user._id,
         firstName: user.firstName,
         lastName: user.lastName,
+        picture: user.picture,
         email: user.email,
       })
     } catch (err) {
@@ -395,10 +405,11 @@ module.exports = {
       const locale = user.locale
       const userName = `${user.name.firstName} ${user.name.lastName}`
       const email = user.local.email
-      const text = mailPassChangeText( userName, locale )
-      const html = mailPassChangeHtml( userName, locale )
+      const text = mailPassChangeText(userName, locale)
+      const html = mailPassChangeHtml(userName, locale)
 
-      const subject = locale === 'tr' ? 'Şifre Değiştirme' : 'Your Password Updated'
+      const subject =
+        locale === 'tr' ? 'Şifre Değiştirme' : 'Your Password Updated'
 
       await mailer.sendEmail(
         process.env.APP_MAIL_EMAIL,
@@ -442,5 +453,18 @@ module.exports = {
           })
       }
     }
+  },
+  fbAuth: async (req, res, next) => {
+    console.log("USER", req.user)
+    const user = req.user
+    console.log("SESION", JSON.stringify(req.session))
+    req.session.set('user', {
+      firstName: user.name.firstName,
+      lastName: user.name.lastName,
+      picture: user.facebook.picture,
+      _id: user._id,
+    })
+    await req.session.save()
+    res.redirect("/")
   },
 }

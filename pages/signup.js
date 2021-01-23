@@ -12,11 +12,14 @@ import { Persist } from 'formik-persist'
 import Message from '../components/Message'
 import CircleSpin from '../components/CircleSpin'
 
+
 const Signup = (props) => {
   const { t } = useTranslation()
   const [message, setMessage] = useState(null)
   const router = useRouter()
   const recaptchaRef = useRef()
+
+
 
   return (
     <Layout title={t('sign_up:title')}>
@@ -32,7 +35,7 @@ const Signup = (props) => {
                 </a>
               </Link>
             </div>
-            <p className="w-full mt-6 font-normal md:mt-0">
+            <p className="w-full overflow-hidden mt-6 font-normal md:mt-0">
               {t('sign_up:description')}
             </p>
             <p className="flex flex-col items-center justify-center mt-10 text-center">
@@ -47,13 +50,15 @@ const Signup = (props) => {
               </Link>
             </p>
             <p className="mt-6 text-sm text-center">
+              &bull;{' '}
               <Link href="/">
                 <a className="underline">{t('sign_up:userAgrement')} </a>
               </Link>{' '}
               &bull;{' '}
               <Link href="/">
                 <a className="underline">{t('sign_up:privacyPolicy')}</a>
-              </Link>{' '}
+              </Link>
+              <br />
               &bull;{' '}
               <Link href="/">
                 <a className="underline">{t('sign_up:cookies')}</a>
@@ -193,7 +198,21 @@ const Signup = (props) => {
               </span>
               <div className="flex flex-col space-y-4">
                 <a
-                  href="#"
+                  href="/api/auth/fb"
+                  className="flex items-center justify-center px-4 py-2 border border-blue-600 space-x-2 transition-colors duration-300 rounded-md group hover:bg-blue-500 focus:outline-none"
+                >
+                  <span>
+                    <svg className="w-6 h-6" viewBox="0 0 50 50">
+                    <path d="M40,0H10C4.486,0,0,4.486,0,10v30c0,5.514,4.486,10,10,10h30c5.514,0,10-4.486,10-10V10C50,4.486,45.514,0,40,0z M39,17h-3 c-2.145,0-3,0.504-3,2v3h6l-1,6h-5v20h-7V28h-3v-6h3v-3c0-4.677,1.581-8,7-8c2.902,0,6,1,6,1V17z"
+                    fill="#4267B2"></path>
+                    </svg>
+                  </span>
+                  <span className="text-sm font-medium text-blue-600 group-hover:text-white">
+                    Facebook
+                  </span>
+                </a>
+                <a
+                  href="/api/auth/fb"
                   className="flex items-center justify-center px-4 py-2 border border-yellow-400 space-x-2 transition-colors duration-300 rounded-md group hover:bg-yellow-400 focus:outline-none"
                 >
                   <span>
@@ -222,6 +241,7 @@ const Signup = (props) => {
                 </a>
               </div>
             </div>
+
           </div>
         </div>
       </div>

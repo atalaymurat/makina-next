@@ -176,6 +176,9 @@ const Confirmation = () => {
                 setMessage(null)
                 setSubmitting(true)
                 const res = await Axios.post('/api/auth/resent', values)
+                if (res.data.success){
+                  setMessage(res.data)
+                }
               } catch (err) {
                 setMessage(err.response.data)
               }

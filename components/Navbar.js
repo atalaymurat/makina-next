@@ -5,6 +5,7 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import UserDropDown from './UserDropDown'
 import useTranslation from 'next-translate/useTranslation'
+import UserAvatar from './UserAvatar'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -198,11 +199,8 @@ const Navbar = () => {
         {user && (
           <div className="block sm:hidden">
             <div className="flex items-center px-4 py-2 font-semibold text-gray-400">
-              <div className="w-8 h-8 mr-3 text-center text-white bg-red-900 border-2 rounded-full inline-flex items-center overflow-hidden align-middle justify-center font-bold">
-                  {user.firstName[0].toUpperCase() +
-                    user.lastName[0].toUpperCase()}
-              </div>
-              <span className="tracking-wide uppercase truncate mr-1">
+              <UserAvatar user={user} />
+              <span className="tracking-wide uppercase truncate mx-1">
                 {user.firstName}
               </span>
               <span className="tracking-wide uppercase truncate">
