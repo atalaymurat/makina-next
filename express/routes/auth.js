@@ -14,7 +14,7 @@ passport.use(
       clientSecret: process.env.FACEBOOK_APP_SECRET,
       profileFields: ['id', 'photos', 'email', 'first_name', 'last_name'],
       enableProof: true,
-      callbackURL: `${process.env.API_BASE_URL}/api/auth/fb/cb`,
+      callbackURL: `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/fb/cb`,
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
