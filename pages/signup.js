@@ -212,7 +212,7 @@ const Signup = (props) => {
                   </span>
                 </a>
                 <a
-                  href="/api/auth/fb"
+                  href="/api/auth/in"
                   className="flex items-center justify-center px-4 py-2 border border-yellow-400 space-x-2 transition-colors duration-300 rounded-md group hover:bg-yellow-400 focus:outline-none"
                 >
                   <span>

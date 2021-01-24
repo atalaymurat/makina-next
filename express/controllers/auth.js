@@ -467,4 +467,16 @@ module.exports = {
     await req.session.save()
     res.redirect("/")
   },
+  inAuth: async (req, res, next) => {
+    console.log("USER CONTROLLER LINKEDIN", req.user)
+    const user = req.user
+    req.session.set('user', {
+      firstName: user.name.firstName,
+      lastName: user.name.lastName,
+      picture: user.linkedin.picture,
+      _id: user.id,
+    })
+    await req.session.save()
+    res.redirect("/")
+  }
 }

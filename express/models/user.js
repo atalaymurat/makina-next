@@ -32,7 +32,7 @@ const userSchema = new Schema(
     },
     methods: {
       type: [String],
-      enum: ['local', 'google', 'facebook'],
+      enum: ['local', 'google', 'facebook', 'linkedin'],
       default: 'local',
     },
     local: {
@@ -54,6 +54,16 @@ const userSchema = new Schema(
       resetPassToken: String,
     },
     facebook: {
+      id: {
+        type: String,
+      },
+      email: {
+        type: String,
+        lowercase: true,
+      },
+      picture: String,
+    },
+    linkedin: {
       id: {
         type: String,
       },
