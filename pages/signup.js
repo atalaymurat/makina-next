@@ -12,14 +12,11 @@ import { Persist } from 'formik-persist'
 import Message from '../components/Message'
 import CircleSpin from '../components/CircleSpin'
 
-
 const Signup = (props) => {
   const { t } = useTranslation()
   const [message, setMessage] = useState(null)
   const router = useRouter()
   const recaptchaRef = useRef()
-
-
 
   return (
     <Layout title={t('sign_up:title')}>
@@ -199,49 +196,36 @@ const Signup = (props) => {
               <div className="flex flex-col space-y-4">
                 <a
                   href="/api/auth/fb"
-                  className="flex items-center justify-center px-4 py-2 border border-blue-600 space-x-2 transition-colors duration-300 rounded-md group hover:bg-blue-500 focus:outline-none"
+                  className="flex items-center justify-center px-4 py-2 border border-blue-700 space-x-2 transition-colors duration-300 rounded-md group hover:bg-blue-700 focus:outline-none"
                 >
                   <span>
                     <svg className="w-6 h-6" viewBox="0 0 50 50">
-                    <path d="M40,0H10C4.486,0,0,4.486,0,10v30c0,5.514,4.486,10,10,10h30c5.514,0,10-4.486,10-10V10C50,4.486,45.514,0,40,0z M39,17h-3 c-2.145,0-3,0.504-3,2v3h6l-1,6h-5v20h-7V28h-3v-6h3v-3c0-4.677,1.581-8,7-8c2.902,0,6,1,6,1V17z"
-                    fill="#4267B2"></path>
+                      <path
+                        d="M40,0H10C4.486,0,0,4.486,0,10v30c0,5.514,4.486,10,10,10h30c5.514,0,10-4.486,10-10V10C50,4.486,45.514,0,40,0z M39,17h-3 c-2.145,0-3,0.504-3,2v3h6l-1,6h-5v20h-7V28h-3v-6h3v-3c0-4.677,1.581-8,7-8c2.902,0,6,1,6,1V17z"
+                        fill="#4267B2"
+                      ></path>
                     </svg>
                   </span>
-                  <span className="text-sm font-medium text-blue-600 group-hover:text-white">
+                  <span className="text-sm font-medium text-blue-700 group-hover:text-white">
                     Facebook
                   </span>
                 </a>
                 <a
                   href="/api/auth/in"
-                  className="flex items-center justify-center px-4 py-2 border border-yellow-400 space-x-2 transition-colors duration-300 rounded-md group hover:bg-yellow-400 focus:outline-none"
+                  className="flex items-center justify-center px-4 py-2 border border-blue-500 space-x-2 transition-colors duration-300 rounded-md group hover:bg-blue-500 focus:outline-none"
                 >
                   <span>
-                    <svg className="w-6 h-6" viewBox="0 0 40 40">
-                      <path
-                        d="M36.3425 16.7358H35V16.6667H20V23.3333H29.4192C28.045 27.2142 24.3525 30 20 30C14.4775 30 10 25.5225 10 20C10 14.4775 14.4775 9.99999 20 9.99999C22.5492 9.99999 24.8683 10.9617 26.6342 12.5325L31.3483 7.81833C28.3717 5.04416 24.39 3.33333 20 3.33333C10.7958 3.33333 3.33335 10.7958 3.33335 20C3.33335 29.2042 10.7958 36.6667 20 36.6667C29.2042 36.6667 36.6667 29.2042 36.6667 20C36.6667 18.8825 36.5517 17.7917 36.3425 16.7358Z"
-                        fill="#FFC107"
-                      />
-                      <path
-                        d="M5.25497 12.2425L10.7308 16.2583C12.2125 12.59 15.8008 9.99999 20 9.99999C22.5491 9.99999 24.8683 10.9617 26.6341 12.5325L31.3483 7.81833C28.3716 5.04416 24.39 3.33333 20 3.33333C13.5983 3.33333 8.04663 6.94749 5.25497 12.2425Z"
-                        fill="#FF3D00"
-                      />
-                      <path
-                        d="M20 36.6667C24.305 36.6667 28.2167 35.0192 31.1742 32.34L26.0159 27.975C24.3425 29.2425 22.2625 30 20 30C15.665 30 11.9842 27.2359 10.5975 23.3784L5.16254 27.5659C7.92087 32.9634 13.5225 36.6667 20 36.6667Z"
-                        fill="#4CAF50"
-                      />
-                      <path
-                        d="M36.3425 16.7358H35V16.6667H20V23.3333H29.4192C28.7592 25.1975 27.56 26.805 26.0133 27.9758C26.0142 27.975 26.015 27.975 26.0158 27.9742L31.1742 32.3392C30.8092 32.6708 36.6667 28.3333 36.6667 20C36.6667 18.8825 36.5517 17.7917 36.3425 16.7358Z"
-                        fill="#1976D2"
-                      />
+                    <svg className="w-6 h-6  rounded-md bg-white" viewBox="0 0 24 24">
+                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                      fill="#0a66c2" />
                     </svg>
                   </span>
-                  <span className="text-sm font-medium text-yellow-400 group-hover:text-white">
-                    Google
+                  <span className="text-sm font-medium text-blue-500 group-hover:text-white">
+                    LinkedIn
                   </span>
                 </a>
               </div>
             </div>
-
           </div>
         </div>
       </div>
