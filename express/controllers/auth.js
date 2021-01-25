@@ -242,20 +242,34 @@ module.exports = {
       // this response will go back useSWR hook user
       const user = await User.findOne({ _id: cookieUser._id })
 
-      const providerPhoto = (provider, user) => {
-        if (provider === 'facebook') return user.facebook.picture
-        if (provider === 'linkedin') return user.linkedin.picture
-        if (provider === 'local') return user.photos.length ? user.photos[0].value : null
-        return null
+      switch (cookieUser.provider) {
+        case 'facebook':
+          return res.status(200).json({
+            success: true,
+            _id: user._id,
+            firstName: user.facebook.name.givenName,
+            lastName: user.facebook.name.familyName,
+            photo: user.facebook.picture,
+          })
+        case 'linkedin':
+          return res.status(200).json({
+            success: true,
+            _id: user._id,
+            firstName: user.linkedin.name.givenName,
+            lastName: user.linkedin.name.familyName,
+            photo: user.linkedin.picture,
+          })
+        case 'local':
+          return res.status(200).json({
+            success: true,
+            _id: user._id,
+            firstName: user.name.firstName,
+            lastName: user.name.lastName,
+            photo: user.photos.length ? user.photos[0].value : null,
+          })
+        default:
+          return res.status(404).res.end()
       }
-
-      res.status(200).json({
-        success: true,
-        _id: user._id,
-        firstName: user.name.firstName,
-        lastName: user.name.lastName,
-        photo: providerPhoto(cookieUser.provider, user),
-      })
     } catch (err) {
       console.error('Server Error on Auth Control User...', err)
     }

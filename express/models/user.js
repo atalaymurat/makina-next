@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs')
 
 const userSchema = new Schema(
   {
-    name: { firstName: String, lastName: String },
+    name: { firstName: String, middleName: String,  lastName: String },
     accountType: {
       type: String,
       enum: ['user', 'seller', 'manufacturer'],
@@ -57,6 +57,7 @@ const userSchema = new Schema(
       id: {
         type: String,
       },
+      name: { givenName: String, middleName: String ,familyName: String },
       email: {
         type: String,
         lowercase: true,
@@ -67,6 +68,7 @@ const userSchema = new Schema(
       id: {
         type: String,
       },
+      name: { givenName: String, middleName: String ,familyName: String },
       email: {
         type: String,
         lowercase: true,
@@ -77,6 +79,7 @@ const userSchema = new Schema(
       id: {
         type: String,
       },
+      name: { givenName: String, middleName: String ,familyName: String },
       email: {
         type: String,
         lowercase: true,

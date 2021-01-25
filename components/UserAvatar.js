@@ -1,7 +1,6 @@
 import React from 'react'
 
 function UserAvatar({ user }) {
-  console.log("USER AVATAR", user )
   if (user && user.photo) {
 
     return (

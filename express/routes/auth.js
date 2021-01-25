@@ -32,6 +32,7 @@ passport.use(
           user.methods.push('facebook')
           user.facebook = {
             id: profile.id,
+            name: { givenName: profile.name.givenName, familyName: profile.name.familyName },
             email: profile.emails[0].value,
             picture: profile.photos[0].value,
           }
@@ -49,6 +50,7 @@ passport.use(
           linkedinUser.methods.push(profile.provider)
           linkedinUser.facebook = {
             id: profile.id,
+            name: { givenName: profile.name.givenName, familyName: profile.name.familyName },
             email,
             picture: profile.photos[0].value,
           }
@@ -58,12 +60,9 @@ passport.use(
 
         const newUser = new User({
           methods: ['facebook'],
-          name: {
-            firstName: profile.name.givenName || '',
-            lastName: profile.name.familyName || '',
-          },
           facebook: {
             id: profile.id,
+            name: { givenName: profile.name.givenName, familyName: profile.name.familyName },
             email: profile.emails[0].value,
             picture: profile.photos[0].value,
           },
@@ -103,6 +102,7 @@ passport.use(
             user.methods.push(profile.provider)
             user.linkedin = {
               id: profile.id,
+              name: { givenName: profile.name.givenName, familyName: profile.name.familyName },
               email,
               picture: profile.photos[0].value,
             }
@@ -122,6 +122,7 @@ passport.use(
             fbUser.linkedin = {
               id: profile.id,
               email,
+              name: { givenName: profile.name.givenName, familyName: profile.name.familyName },
               picture: profile.photos[0].value,
             }
             await fbUser.save()
@@ -130,12 +131,9 @@ passport.use(
           //NO ACCOUNT FIND CREATE A NEW ONE
           const newUser = new User({
             methods: [profile.provider],
-            name: {
-              firstName: profile.name.givenName || '',
-              lastName: profile.name.familyName || '',
-            },
             linkedin: {
               id: profile.id,
+              name: { givenName: profile.name.givenName, familyName: profile.name.familyName },
               email,
               picture: profile.photos[0].value,
             },
