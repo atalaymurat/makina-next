@@ -189,6 +189,18 @@ module.exports = {
             en: "That's not match. Email  or password",
           },
         })
+      // IF EMAIL NOT VERİFİED WE DONT LET TO LOGIN
+      if (!user.local.email_verified) {
+        return res.status(404).json({
+          success: false,
+          message: {
+            tr:
+              'Hesabınız oluşturulmuş fakat e-posta doğrulanmamıştır. Lütfen doğrulama yapınız',
+            en:
+              'Your account has created but not verified, please verify your account',
+          },
+        })
+      }
       // Control user password is matching
       const passMatch = await user.isValidPassword(password)
       console.log('PASSWORD MATCH', passMatch)
@@ -205,6 +217,9 @@ module.exports = {
         _id: user._id,
       })
       await req.session.save()
+      // Save Login Dates
+      user.login_data.push(new Date())
+      await user.save()
 
       res.status(200).json({ success: true })
     } catch (err) {
@@ -224,8 +239,7 @@ module.exports = {
       // Find user from db
       // Respond with real user object
       // this response will go back useSWR hook user
-      const user = await User.findOne({'_id' : cookieUser._id })
-
+      const user = await User.findOne({ _id: cookieUser._id })
 
       res.status(200).json({
         success: true,
@@ -268,7 +282,7 @@ module.exports = {
       req.session.set('user', {
         firstName: user.name.firstName,
         lastName: user.name.lastName,
-        photo: user.photos[0].value ? user.photos[0].value: null ,
+        photo: user.photos[0].value ? user.photos[0].value : null,
         _id: user._id,
       })
       await req.session.save()
@@ -521,9 +535,6 @@ module.exports = {
     const user = req.user
     console.log('SESION', JSON.stringify(req.session))
     req.session.set('user', {
-      firstName: user.name.firstName,
-      lastName: user.name.lastName,
-      picture: user.facebook.picture,
       _id: user._id,
     })
     await req.session.save()
@@ -533,9 +544,6 @@ module.exports = {
     console.log('USER CONTROLLER LINKEDIN', req.user)
     const user = req.user
     req.session.set('user', {
-      firstName: user.name.firstName,
-      lastName: user.name.lastName,
-      picture: user.linkedin.picture,
       _id: user.id,
     })
     await req.session.save()

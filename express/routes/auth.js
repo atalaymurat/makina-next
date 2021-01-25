@@ -35,6 +35,11 @@ passport.use(
             email: profile.emails[0].value,
             picture: profile.photos[0].value,
           }
+          // EGER USER LOCAL HESABI VERIFY EDEMEDIYSE
+          if (!user.local.email_verified) {
+            user.local.confirmStr = ''
+            user.local.email_verified = true
+          }
           user.photos.push({ value: profile.photos[0].value })
           await user.save()
           return done(null, user)
@@ -104,6 +109,12 @@ passport.use(
               email,
               picture: profile.photos[0].value,
             }
+            // EGER USER LOCAL HESABI VERIFY EDEMEDIYSE
+            if (!user.local.email_verified) {
+              user.local.confirmStr = ''
+              user.local.email_verified = true
+            }
+
             user.photos.push({ value: profile.photos[0].value })
             await user.save()
             return done(null, user)
