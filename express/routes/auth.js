@@ -40,7 +40,6 @@ passport.use(
             user.local.confirmStr = ''
             user.local.email_verified = true
           }
-          user.photos.push({ value: profile.photos[0].value })
           await user.save()
           return done(null, user)
         }
@@ -53,7 +52,6 @@ passport.use(
             email,
             picture: profile.photos[0].value,
           }
-          linkedinUser.photos.push({ value: profile.photos[0].value })
           await linkedinUser.save()
           return done(null, linkedinUser)
         }
@@ -64,7 +62,6 @@ passport.use(
             firstName: profile.name.givenName || '',
             lastName: profile.name.familyName || '',
           },
-          photos: { value: profile.photos[0].value },
           facebook: {
             id: profile.id,
             email: profile.emails[0].value,
@@ -115,7 +112,6 @@ passport.use(
               user.local.email_verified = true
             }
 
-            user.photos.push({ value: profile.photos[0].value })
             await user.save()
             return done(null, user)
           }
@@ -128,7 +124,6 @@ passport.use(
               email,
               picture: profile.photos[0].value,
             }
-            fbUser.photos.push({ value: profile.photos[0].value })
             await fbUser.save()
             return done(null, fbUser)
           }
@@ -139,7 +134,6 @@ passport.use(
               firstName: profile.name.givenName || '',
               lastName: profile.name.familyName || '',
             },
-            photos: { value: profile.photos[0].value },
             linkedin: {
               id: profile.id,
               email,

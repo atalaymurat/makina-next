@@ -215,6 +215,7 @@ module.exports = {
       // Logging in User
       req.session.set('user', {
         _id: user._id,
+        provider: 'local',
       })
       await req.session.save()
       // Save Login Dates
@@ -230,23 +231,30 @@ module.exports = {
 
   user: async (req, res) => {
     // this controller only getting user info from cookie
+    // cookie can assign only [ login , fbAuth, inAuth ]
     try {
       const cookieUser = req.session.get('user')
       if (cookieUser === undefined) {
-        res.end()
-        return
+        return res.end()
       }
       // Find user from db
       // Respond with real user object
       // this response will go back useSWR hook user
       const user = await User.findOne({ _id: cookieUser._id })
 
+      const providerPhoto = (provider, user) => {
+        if (provider === 'facebook') return user.facebook.picture
+        if (provider === 'linkedin') return user.linkedin.picture
+        if (provider === 'local') return user.photos.length ? user.photos[0].value : null
+        return null
+      }
+
       res.status(200).json({
         success: true,
         _id: user._id,
         firstName: user.name.firstName,
         lastName: user.name.lastName,
-        photo: user.photos ? user.photos[0].value : null,
+        photo: providerPhoto(cookieUser.provider, user),
       })
     } catch (err) {
       console.error('Server Error on Auth Control User...', err)
@@ -536,6 +544,7 @@ module.exports = {
     console.log('SESION', JSON.stringify(req.session))
     req.session.set('user', {
       _id: user._id,
+      provider: 'facebook',
     })
     await req.session.save()
     res.redirect('/')
@@ -545,6 +554,7 @@ module.exports = {
     const user = req.user
     req.session.set('user', {
       _id: user.id,
+      provider: 'linkedin',
     })
     await req.session.save()
     res.redirect('/')
