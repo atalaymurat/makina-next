@@ -10,6 +10,7 @@ import Message from '../components/Message'
 import useUser from '../lib/useUser'
 import { useRouter } from 'next/router'
 import CircleSpin from '../components/CircleSpin'
+import SocialLogin from '../components/SocialLogin'
 
 const Login = (props) => {
   const [forget, setForget] = useState(false)
@@ -210,6 +211,17 @@ const Login = (props) => {
                         </button>
                       </div>
                     </Form>
+                    <div className="flex flex-col space-y-4">
+                      <span className="flex items-center justify-center space-x-2">
+                        <span className="h-px bg-gray-400 w-14"></span>
+                        <span className="font-normal text-gray-500">
+                          {t('sign_up:otherAccounts')}
+                        </span>
+                        <span className="h-px bg-gray-400 w-14"></span>
+                      </span>
+
+                      <SocialLogin />
+                    </div>
                   </>
                 )}
               </Formik>

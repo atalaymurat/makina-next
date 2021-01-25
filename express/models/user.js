@@ -85,6 +85,7 @@ const userSchema = new Schema(
         type: String,
       },
     },
+    photos: [{ value: String }]
   },
   {
     timestamps: {

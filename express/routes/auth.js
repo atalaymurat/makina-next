@@ -35,6 +35,7 @@ passport.use(
             email: profile.emails[0].value,
             picture: profile.photos[0].value,
           }
+          user.photos.push({ value: profile.photos[0].value })
           await user.save()
           return done(null, user)
         }
@@ -47,6 +48,7 @@ passport.use(
             email,
             picture: profile.photos[0].value,
           }
+          linkedinUser.photos.push({ value: profile.photos[0].value })
           await linkedinUser.save()
           return done(null, linkedinUser)
         }
@@ -57,6 +59,7 @@ passport.use(
             firstName: profile.name.givenName || '',
             lastName: profile.name.familyName || '',
           },
+          photos: { value: profile.photos[0].value },
           facebook: {
             id: profile.id,
             email: profile.emails[0].value,
@@ -101,6 +104,7 @@ passport.use(
               email,
               picture: profile.photos[0].value,
             }
+            user.photos.push({ value: profile.photos[0].value })
             await user.save()
             return done(null, user)
           }
@@ -113,6 +117,7 @@ passport.use(
               email,
               picture: profile.photos[0].value,
             }
+            fbUser.photos.push({ value: profile.photos[0].value })
             await fbUser.save()
             return done(null, fbUser)
           }
@@ -123,6 +128,7 @@ passport.use(
               firstName: profile.name.givenName || '',
               lastName: profile.name.familyName || '',
             },
+            photos: { value: profile.photos[0].value },
             linkedin: {
               id: profile.id,
               email,
@@ -163,7 +169,7 @@ router.post('/verify', session, authController.verify)
 router.post('/login', session, authController.login)
 
 //Unprotected Routes
-router.post('/signup', authController.signUp)
+router.post('/signup', session, authController.signUp)
 router.post('/resent', authController.reSentEmail)
 router.post('/forget', authController.forget)
 router.post('/reset', authController.reset)

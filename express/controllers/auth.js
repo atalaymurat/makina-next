@@ -52,13 +52,74 @@ module.exports = {
           success: false,
           message: {
             tr:
-              'Bu Email adresi ile zaten üyeliğiniz bulunmakta, giriş yapmayı deneyiniz veya Şifrenizi unuttuysanız yeni bir şifre isteyebilirsiniz',
+              'Bu Eposta adresi ile üyeliğiniz bulunmakta, giriş yapmayı deneyiniz veya Şifrenizi unuttuysanız yeni bir şifre isteyebilirsiniz',
             en:
               'Already have an account with this email, try to login or request new password',
           },
         })
       }
 
+      // CATCHING REGISTERED LINKEDIN ACCOUNTS
+      const liUser = await User.findOne({ 'linkedin.email': email })
+      console.log('LI USER', liUser)
+      if (liUser) {
+        liUser.methods.push('local')
+        liUser.name = { firstName, lastName }
+        liUser.local = {
+          email,
+          email_verified: true,
+          password,
+          passChanged: new Date(),
+        }
+
+        await mailer.sendEmail(
+          process.env.APP_MAIL_EMAIL,
+          process.env.APP_MAIL_EMAIL,
+          `User LinkedIn account register local - ${name}`,
+          `<p>User ${name} (${email}) linked from linkedIn account</p>`,
+          'User register local with linkedIn account'
+        )
+        // Logging in User
+        req.session.set('user', {
+          _id: liUser._id,
+        })
+        await req.session.save()
+        await liUser.save()
+
+        return res.status(200).json({ success: true, login: true })
+      }
+
+      // CATCHING REGISTERED FB ACCOUNTS
+      const fbUser = await User.findOne({ 'facebook.email': email })
+      console.log('FB USER', fbUser)
+      if (fbUser) {
+        fbUser.methods.push('local')
+        fbUser.name = { firstName, lastName }
+        fbUser.local = {
+          email,
+          email_verified: true,
+          password,
+          passChanged: new Date(),
+        }
+
+        await mailer.sendEmail(
+          process.env.APP_MAIL_EMAIL,
+          process.env.APP_MAIL_EMAIL,
+          `User Fb account register local - ${name}`,
+          `<p>User ${name} (${email}) linked from fb account</p>`,
+          'User register local with fb account'
+        )
+        // Logging in User
+        req.session.set('user', {
+          _id: fbUser._id,
+        })
+        await req.session.save()
+        await fbUser.save()
+
+        return res.status(200).json({ success: true, login: true })
+      }
+
+      // CREATING NEW USER
       const confirmStr = generateStr()
       const passChanged = new Date()
 
@@ -94,7 +155,7 @@ module.exports = {
 
       res.status(200).json({ success: true })
     } catch (err) {
-      console.error('Server Error:', JSON.stringify(err))
+      console.error('Server Error:', err)
       if (err.code === 'EENVELOPE') {
         return res.status(550).json({
           success: false,
@@ -141,8 +202,6 @@ module.exports = {
         })
       // Logging in User
       req.session.set('user', {
-        firstName: user.name.firstName,
-        lastName: user.name.lastName,
         _id: user._id,
       })
       await req.session.save()
@@ -157,24 +216,26 @@ module.exports = {
   user: async (req, res) => {
     // this controller only getting user info from cookie
     try {
-      const user = req.session.get('user')
-      if (user === undefined) {
+      const cookieUser = req.session.get('user')
+      if (cookieUser === undefined) {
         res.end()
         return
       }
       // Find user from db
-      // Respond with user object
+      // Respond with real user object
+      // this response will go back useSWR hook user
+      const user = await User.findOne({'_id' : cookieUser._id })
+
 
       res.status(200).json({
         success: true,
         _id: user._id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        picture: user.picture,
-        email: user.email,
+        firstName: user.name.firstName,
+        lastName: user.name.lastName,
+        photo: user.photos ? user.photos[0].value : null,
       })
     } catch (err) {
-      console.error('Server Error on Auth Control User...')
+      console.error('Server Error on Auth Control User...', err)
     }
   },
 
@@ -207,6 +268,7 @@ module.exports = {
       req.session.set('user', {
         firstName: user.name.firstName,
         lastName: user.name.lastName,
+        photo: user.photos[0].value ? user.photos[0].value: null ,
         _id: user._id,
       })
       await req.session.save()
@@ -455,9 +517,9 @@ module.exports = {
     }
   },
   fbAuth: async (req, res, next) => {
-    console.log("USER", req.user)
+    console.log('USER', req.user)
     const user = req.user
-    console.log("SESION", JSON.stringify(req.session))
+    console.log('SESION', JSON.stringify(req.session))
     req.session.set('user', {
       firstName: user.name.firstName,
       lastName: user.name.lastName,
@@ -465,10 +527,10 @@ module.exports = {
       _id: user._id,
     })
     await req.session.save()
-    res.redirect("/")
+    res.redirect('/')
   },
   inAuth: async (req, res, next) => {
-    console.log("USER CONTROLLER LINKEDIN", req.user)
+    console.log('USER CONTROLLER LINKEDIN', req.user)
     const user = req.user
     req.session.set('user', {
       firstName: user.name.firstName,
@@ -477,6 +539,6 @@ module.exports = {
       _id: user.id,
     })
     await req.session.save()
-    res.redirect("/")
-  }
+    res.redirect('/')
+  },
 }
