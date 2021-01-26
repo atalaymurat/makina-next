@@ -4,6 +4,7 @@ import Axios from 'axios'
 import useTranslation from 'next-translate/useTranslation'
 import { formingDate } from '../lib/helpers'
 import Profile from '../components/panel/Profile'
+import ConnectedAccounts from '../components/panel/ConnectedAccounts'
 
 const Panel = (props) => {
   const {
@@ -16,9 +17,10 @@ const Panel = (props) => {
   const { t } = useTranslation()
   return (
     <Layout title="Panel">
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col container mx-auto">
         <h1 className="mx-auto my-8">Panel#SHOW</h1>
         <Profile user={props.user} />
+        <ConnectedAccounts user={props.user}/>
       </div>
     </Layout>
   )

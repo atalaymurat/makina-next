@@ -3,7 +3,7 @@ import { formingDateShort } from '../../lib/helpers'
 
 const Profile = ({ user }) => {
   return (
-    <div className="border border-gray-400 flex mx-auto rounded px-4 py-2">
+    <div className="my-1 w-full max-w-lg border border-gray-400 flex mx-auto rounded px-4 py-2">
       <div className="relative w-44 h-36">
         {user.photo ? (
           <img
@@ -32,16 +32,13 @@ const Profile = ({ user }) => {
         <div className="flex flex-row my-2 items-center justify-between">
           <div>
             <div className="border flex flex-col mx-auto border-purple-800 rounded">
-              <div
-                className="text-center font-bold px-2 w-14 bg-purple-700 text-xs"
-                >
+              <div className="text-center font-bold px-2 w-14 bg-purple-700 text-xs">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                   className="w-4 h-4 mx-auto"
-
                 >
                   <path
                     strokeLinecap="round"
@@ -108,8 +105,10 @@ const Profile = ({ user }) => {
 
         {/* USER TYPE */}
         <div className="text-xs inline-flex justify-between">
-          <div className="p-1 rounded border border-gray-700 text-gray-400">{user.accountType}</div>
-          <button className="border border-gray-400 shadow font-semibold rounded p-1 hover:bg-gray-800">
+          <div className="p-1 text-center mr-1 w-1/2 rounded border border-gray-700 text-gray-400">
+            {user.accountType}
+          </div>
+          <button className="w-1/2 ml-1 border border-gray-400 shadow font-semibold rounded p-1 hover:bg-gray-800">
             Upgrade
           </button>
         </div>

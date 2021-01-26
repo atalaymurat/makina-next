@@ -302,9 +302,6 @@ module.exports = {
       await user.save()
 
       req.session.set('user', {
-        firstName: user.name.firstName,
-        lastName: user.name.lastName,
-        photo: user.photos[0].value ? user.photos[0].value : null,
         _id: user._id,
       })
       await req.session.save()
