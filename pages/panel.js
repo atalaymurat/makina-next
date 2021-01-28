@@ -5,6 +5,7 @@ import useTranslation from 'next-translate/useTranslation'
 import { formingDate } from '../lib/helpers'
 import Profile from '../components/panel/Profile'
 import ConnectedAccounts from '../components/panel/ConnectedAccounts'
+import UserData from '../components/panel/UserData'
 
 const Panel = (props) => {
   const {
@@ -20,7 +21,8 @@ const Panel = (props) => {
       <div className="flex flex-col container mx-auto">
         <h1 className="mx-auto my-8">Panel#SHOW</h1>
         <Profile user={props.user} />
-        <ConnectedAccounts user={props.user}/>
+        <ConnectedAccounts user={props.user} />
+        <UserData user={props.user} />
       </div>
     </Layout>
   )
