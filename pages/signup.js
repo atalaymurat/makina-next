@@ -104,10 +104,13 @@ const Signup = (props) => {
                   const res = await axios.post('/api/auth/signup', values)
                   setSubmitting(false)
                   if (res.data.success && res.data.login ){
+                    alert(res.data.login)
                     router.push('/panel')
+                    return
                   }
-                  if (res.data.success) {
+                  if (res.data.success && !res.data.login) {
                     router.push('/confirmation')
+                    return
                   }
                 } catch (err) {
                   setMessage(err.response.data)

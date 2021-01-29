@@ -22,6 +22,12 @@ const getUserPhoto = ( provider, user) => {
   if (provider === 'linkedin') return user.linkedin.picture
   if (provider === 'local') return user.photos[0]
 }
+const getUserEmail = ( provider, user) => {
+  if (provider === 'facebook') return user.facebook.email
+  if (provider === 'linkedin') return user.linkedin.email
+  if (provider === 'local') return user.local.email
+}
+
 
 const Profile = ({ user }) => {
   return (
@@ -61,7 +67,7 @@ const Profile = ({ user }) => {
           {getNameByProvider(user.provider, user)} {getMiddleNameByProvider(user.provider, user)} {getLastNameByProvider(user.provider, user)}
           <span className="text-xs float-right">by {user.provider}</span>
         </div>
-        <div className="text-sm">{user.email}</div>
+        <div className="text-sm">{getUserEmail(user.provider, user)}</div>
         <div className="text-xs font-normal text-gray-500 mb-2">
           since {formingDateShort(user.created_at)}
         </div>

@@ -18,7 +18,6 @@ const Panel = (props) => {
   }
 
   if (user) {
-
   return (
     <Layout title="Panel">
       {modal && (
@@ -40,7 +39,7 @@ const Panel = (props) => {
   } else {
     return (
       <Layout>
-        <div>No user</div>
+        <div>No user....</div>
       </Layout>
     )
   }
@@ -56,19 +55,18 @@ export const getServerSideProps = withSession(async ({ req, res }) => {
     }
 
 
-    const apiRes = await Axios.get(`/api/user/${sessionUser._id}`, {
+    const apiRes = await Axios.get(`/api/auth/user`, {
       headers: { cookie: req.headers.cookie },
     })
+    console.log("PANEL API RES :: ", apiRes.data)
 
     const user = apiRes.data
-    if (!user) {
-      return res.redirect('/404')
-    }
     return {
       props: { user },
     }
   } catch (err) {
     console.error('Error: Panel.js', err)
+    res.redirect('/404')
   }
 })
 

@@ -233,7 +233,7 @@ module.exports = {
 
   user: async (req, res) => {
     // this controller only getting user info from cookie
-    // cookie can assign only [ login , fbAuth, inAuth ]
+    // cookie can assign only [ login , fbAuth, inAuth, verify, signUp if have an social account before ]
     try {
       const cookieUser = req.session.get('user')
       if (cookieUser === undefined) {
@@ -243,29 +243,15 @@ module.exports = {
       // Respond with real user object
       // this response will go back useSWR hook user
       const user = await User.findOne({ _id: cookieUser._id })
-
-      switch (cookieUser.provider) {
-        case 'facebook':
-          return res.status(200).json({
-            ...user._doc,
-            success: true,
-            provider: 'facebook',
-          })
-        case 'linkedin':
-          return res.status(200).json({
-            ...user._doc,
-            success: true,
-            provider: 'linkedin',
-          })
-        case 'local':
-          return res.status(200).json({
-            ...user._doc,
-            success: true,
-            provider: 'local',
-          })
-        default:
-          return res.status(404).json({ success: false })
+      if (!user) {
+        return res.status(404).json({ success: false })
       }
+
+      return res.status(200).json({
+        ...user._doc,
+        success: true,
+        provider: cookieUser.provider,
+      })
     } catch (err) {
       console.error('Server Error on Auth Control User...', err)
     }
