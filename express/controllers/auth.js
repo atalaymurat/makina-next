@@ -82,6 +82,7 @@ module.exports = {
         // Logging in User
         req.session.set('user', {
           _id: liUser._id,
+          provider: 'local',
         })
         await req.session.save()
         await liUser.save()
@@ -112,6 +113,7 @@ module.exports = {
         // Logging in User
         req.session.set('user', {
           _id: fbUser._id,
+          provider: 'local', // we will login without confirmation
         })
         await req.session.save()
         await fbUser.save()
@@ -262,7 +264,7 @@ module.exports = {
             provider: 'local',
           })
         default:
-          return res.status(404).res.end()
+          return res.status(404).json({ success: false })
       }
     } catch (err) {
       console.error('Server Error on Auth Control User...', err)
@@ -297,6 +299,7 @@ module.exports = {
 
       req.session.set('user', {
         _id: user._id,
+        provider: 'local',
       })
       await req.session.save()
       return res.status(200).json({ success: true })

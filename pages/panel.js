@@ -16,6 +16,9 @@ const Panel = (props) => {
   const togleModal = (val) => {
     setModal(val)
   }
+
+  if (user) {
+
   return (
     <Layout title="Panel">
       {modal && (
@@ -34,12 +37,18 @@ const Panel = (props) => {
       </div>
     </Layout>
   )
+  } else {
+    return (
+      <Layout>
+        <div>No user</div>
+      </Layout>
+    )
+  }
 }
 
 export const getServerSideProps = withSession(async ({ req, res }) => {
   try {
     const sessionUser = req.session.get('user')
-    console.log("SESSION USER IS:::::", sessionUser)
     if (!sessionUser) {
       res.statusCode = 401 //unauthorized
       res.redirect('/404')
@@ -50,10 +59,6 @@ export const getServerSideProps = withSession(async ({ req, res }) => {
     const apiRes = await Axios.get(`/api/user/${sessionUser._id}`, {
       headers: { cookie: req.headers.cookie },
     })
-    console.log("API RES USER", apiRes)
-
-
-
 
     const user = apiRes.data
     if (!user) {
@@ -63,7 +68,7 @@ export const getServerSideProps = withSession(async ({ req, res }) => {
       props: { user },
     }
   } catch (err) {
-    console.error('Error: Panel.js')
+    console.error('Error: Panel.js', err)
   }
 })
 
