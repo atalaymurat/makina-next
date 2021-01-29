@@ -13,6 +13,10 @@ const session = ironSession({
 })
 
 // Get User Data
-router.get('/:id', session, userController.show)
+// /api/user/[:id]
+router
+  .get('/:id', session, userController.show)
+  .post('/:id', userController.update  )
+
 
 module.exports = router

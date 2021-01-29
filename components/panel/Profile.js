@@ -2,6 +2,22 @@ import React from 'react'
 import { formingDateShort } from '../../lib/helpers'
 import BadgeBlock from './BadgeBlock'
 
+const getNameByProvider = (provider, user) => {
+  if (provider === "facebook")  return user.facebook.name.givenName
+  if ( provider === 'linkedin') return user.linkedin.name.givenName
+  if (provider === 'local') return user.name.firstName
+}
+const getMiddleNameByProvider = (provider, user) => {
+  if (provider === "facebook")  return null
+  if ( provider === 'linkedin') return null
+  if (provider === 'local') return user.name.middleName
+}
+const getLastNameByProvider = (provider, user) => {
+  if (provider === "facebook")  return user.facebook.name.familyName
+  if ( provider === 'linkedin') return user.linkedin.name.familyName
+  if (provider === 'local') return user.name.lastName
+}
+
 const Profile = ({ user }) => {
   return (
     <div className="my-1 w-full max-w-lg border border-gray-400 flex mx-auto rounded px-4 py-2">
@@ -36,10 +52,12 @@ const Profile = ({ user }) => {
       </div>
       <div className="w-full px-4 flex flex-col">
         <div className="text-xl font-semibold">
-          {user.name.firstName} {user.name.lastName}
+
+          {getNameByProvider(user.provider, user)} {getMiddleNameByProvider(user.provider, user)} {getLastNameByProvider(user.provider, user)}
+          <span className="text-xs float-right">by {user.provider}</span>
         </div>
         <div className="text-sm">{user.email}</div>
-        <div className="text-xs text-gray-500 mb-2">
+        <div className="text-xs font-normal text-gray-500 mb-2">
           since {formingDateShort(user.created_at)}
         </div>
 

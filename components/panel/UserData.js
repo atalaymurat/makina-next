@@ -11,7 +11,7 @@ const UserData = ({ user, togleModal }) => {
         >
           <div className="w-4/12 px-2 py-4 font-semibold text-sm">NAME</div>
           <div className="w-6/12 px-2 py-4 text-gray-400">
-            {user.name.firstName} {user.name.lastName}
+            {user.name.firstName}{user.name.middleName && ` ${user.name.middleName}`} {user.name.lastName}
           </div>
           <div className="w-2/12 px-1 py-4 text-center">
             <svg
