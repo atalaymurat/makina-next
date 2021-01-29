@@ -245,27 +245,21 @@ module.exports = {
       switch (cookieUser.provider) {
         case 'facebook':
           return res.status(200).json({
+            ...user._doc,
             success: true,
-            _id: user._id,
-            firstName: user.facebook.name.givenName,
-            lastName: user.facebook.name.familyName,
-            photo: user.facebook.picture,
+            provider: 'facebook',
           })
         case 'linkedin':
           return res.status(200).json({
+            ...user._doc,
             success: true,
-            _id: user._id,
-            firstName: user.linkedin.name.givenName,
-            lastName: user.linkedin.name.familyName,
-            photo: user.linkedin.picture,
+            provider: 'linkedin',
           })
         case 'local':
           return res.status(200).json({
+            ...user._doc,
             success: true,
-            _id: user._id,
-            firstName: user.name.firstName,
-            lastName: user.name.lastName,
-            photo: user.photos.length ? user.photos[0].value : null,
+            provider: 'local',
           })
         default:
           return res.status(404).res.end()

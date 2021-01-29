@@ -1,24 +1,33 @@
 import React from 'react'
 
 function UserAvatar({ user }) {
-  if (user && user.photo) {
+  const userPhoto =
+    (user.provider === 'local' && user.photos[0]) ||
+    (user.provider === 'facebook' && user.facebook.picture) ||
+    (user.provider === 'linkedin' && user.linkedin.picture)
 
+    const userName =
+    (user.provider === 'local' && user.name.firstName) ||
+    (user.provider === 'facebook' && user.facebook.name.givenName) ||
+    (user.provider === 'linkedin' && user.linkedin.name.givenName)
+
+    const userLastName =
+    (user.provider === 'local' && user.name.lastName) ||
+    (user.provider === 'facebook' && user.facebook.name.familyName) ||
+    (user.provider === 'linkedin' && user.linkedin.name.familyName)
+
+  if ( user && userPhoto) {
     return (
       <div className="relative z-10 w-8 h-8 text-white bg-indigo-900 border-2 rounded-full focus:outline-none focus:border-white font-semibold inline-flex items-center text-xs justify-center align-middle overflow-hidden">
-        <img
-          src={user.photo}
-          alt="IMG"
-          width={28}
-          height={28}
-        />
+        <img src={userPhoto} alt="IMG" width={28} height={28} />
       </div>
     )
   }
 
-  if (user && !user.photo) {
+  if (user && !userPhoto ) {
     return (
       <div className="relative z-10 w-8 h-8 text-white bg-indigo-900 border-2 rounded-full focus:outline-none focus:border-white font-semibold inline-flex items-center text-xs justify-center align-middle">
-        {user.firstName[0].toUpperCase() + user.lastName[0].toUpperCase()}
+        {userName[0].toUpperCase() + userLastName[0].toUpperCase()}
       </div>
     )
   } else {

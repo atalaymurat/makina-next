@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 
 const ConnectedAccounts = ({ user }) => {
-  if (user.linkedin.id || user.facebook.id) {
+  if ((user && user.linkedin.id) || (user && user.facebook.id)) {
     return (
       <div className="my-1 w-full max-w-lg border border-gray-400 mx-auto rounded px-4 pt-2 pb-4">
         <h1 className="block text-xl mb-2 font-semibold border-b border-gray-600">
@@ -14,7 +14,9 @@ const ConnectedAccounts = ({ user }) => {
             <div className="px-4 flex-grow">
               <div className="block text-md font-semibold">makinaTr</div>
               <div className="block text-sm">
-                {user.name.firstName}{user.name.middleName && ` ${user.name.middleName}`}{' '}{user.name.lastName}
+                {user.name.firstName}
+                {user.name.middleName && ` ${user.name.middleName}`}{' '}
+                {user.name.lastName}
               </div>
             </div>
             <div className="w-2/12 font-bold">
@@ -22,7 +24,7 @@ const ConnectedAccounts = ({ user }) => {
             </div>
           </div>
         )}
-        {user.linkedin.id && (
+        {user && user.linkedin.id && (
           <div className="flex flex-row justify-between items-center border-b py-2 px-1 border-gray-700">
             <svg className="w-12 h-12" viewBox="0 0 24 24">
               <path
@@ -41,7 +43,7 @@ const ConnectedAccounts = ({ user }) => {
             </div>
           </div>
         )}
-        {user.facebook.id && (
+        {user && user.facebook.id && (
           <div className="flex flex-row justify-between items-center border-b py-2 px-1 border-gray-700">
             <svg className="w-12 h-12" viewBox="0 0 50 50">
               <path

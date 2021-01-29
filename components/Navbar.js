@@ -15,6 +15,7 @@ const Navbar = () => {
 
   const sectors = ['sellMachine', 'wood', 'metal', 'medical', 'automation']
 
+
   const handleLogout = async () => {
     setIsOpen(false)
     if (user) {
@@ -200,12 +201,7 @@ const Navbar = () => {
           <div className="block sm:hidden">
             <div className="flex items-center px-4 py-2 font-semibold text-gray-400">
               <UserAvatar user={user} />
-              <span className="tracking-wide uppercase truncate mx-1">
-                {user.firstName}
-              </span>
-              <span className="tracking-wide uppercase truncate">
-                {user.lastName}
-              </span>
+
             </div>
             <div className="border-t border-gray-600">
               <Link href="/panel">

@@ -7,24 +7,23 @@ module.exports = {
       console.log("CONTROLLER SHOW FROM USER ASKED:::::::::::")
       // This controller sending User Data to /panel.js //
       const sessionUser = req.session.get('user')
+      console.log("SSESSION USER ++++" , sessionUser)
 
+      // Burda eger cookie user silinmisse ve cookie duruyorsa hataya geçiyor
       const id = req.params.id
       if (!sessionUser) {
         return res.end()
       }
-      const providerEmail = (provider) => userDb[provider]['email']
 
-      const userDb = await User.findById(id)
+      const userDb = await User.findById(sessionUser._id)
       // We sent User to Panel Page as Providers firstName LastName
+      if (!userDb) {
+        return res.status(404).end()
+      }
       const user = {
         ...userDb._doc,
         // Overwrighting user objects name virtual
         provider: sessionUser.provider,
-        photo:
-          (sessionUser.provider === 'facebook' && userDb.facebook.picture) ||
-          (sessionUser.provider === 'linkedin' && userDb.linkedin.picture) ||
-          (sessionUser.provider === 'local' && userDb.photos[0]),
-        email: providerEmail(sessionUser.provider),
       }
       console.log('USER SENT FROM SERVER', user)
 

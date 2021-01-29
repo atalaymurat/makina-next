@@ -17,15 +17,20 @@ const getLastNameByProvider = (provider, user) => {
   if ( provider === 'linkedin') return user.linkedin.name.familyName
   if (provider === 'local') return user.name.lastName
 }
+const getUserPhoto = ( provider, user) => {
+  if (provider === 'facebook') return user.facebook.picture
+  if (provider === 'linkedin') return user.linkedin.picture
+  if (provider === 'local') return user.photos[0]
+}
 
 const Profile = ({ user }) => {
   return (
     <div className="my-1 w-full max-w-lg border border-gray-400 flex mx-auto rounded px-4 py-2">
       <div className="relative w-44 h-36">
-        {user.photo ? (
+        { getUserPhoto(user.provider, user) ? (
           <img
             className="object-cover w-full h-full rounded-xl"
-            src={user.photo}
+            src={getUserPhoto(user.provider, user)}
             alt="user"
           />
         ) : (

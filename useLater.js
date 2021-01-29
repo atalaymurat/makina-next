@@ -27,3 +27,9 @@
     Google
   </span>
 </a>
+
+
+// Request server side with creadentials
+const apiRes = await Axios.get(`/api/user/${sessionUser._id}`, {
+  headers: { cookie: req.headers.cookie },
+})
