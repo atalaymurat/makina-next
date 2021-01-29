@@ -4,6 +4,7 @@
   "description": "js application",
   "main": "index.js",
   "dependencies": {
+    "@jinsung.lim/tailwindcss-filters": "^0.1.1",
     "@tailwindcss/forms": "^0.2.1",
     "autoprefixer": "^10.1.0",
     "axios": "^0.21.0",

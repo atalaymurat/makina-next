@@ -41,7 +41,7 @@ const Navbar = () => {
   }
 
   return (
-    <header className="border-b-2 border-white bg-gray-700">
+    <header className="sticky z-20 top-0 border-b-2 border-white bg-gray-700">
       {/* FIRST ROW LOGO AND OTHER STUFF */}
       <div className="flex items-center justify-start px-4 py-2">
         {/* BURGER ICON */}

@@ -30,9 +30,9 @@ const Profile = ({ user }) => {
               </svg>
           </div>
         )}
-        <button className="bg-gray-800 py-1 bg-opacity-60 text-center absolute bottom-0 inset-x-0 rounded-b-xl cursor-pointer text-sm hover:bg-opacity-80">
+        <a className="bg-gray-800 w-full py-1 bg-opacity-60 text-center absolute bottom-0 inset-x-0 rounded-b-xl cursor-pointer text-sm hover:bg-opacity-80">
           edit
-        </button>
+        </a>
       </div>
       <div className="w-full px-4 flex flex-col">
         <div className="text-xl font-semibold">
