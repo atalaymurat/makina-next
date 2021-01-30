@@ -4,7 +4,6 @@ import { PhoneInputField } from '../../lib/formikInputs'
 import CircleSpin from '../CircleSpin'
 import useTranslation from 'next-translate/useTranslation'
 import Axios from 'axios'
-import 'yup-phone'
 
 const PhoneForm = ({ user, mutate, togleModal }) => {
   const { t } = useTranslation()
@@ -17,11 +16,11 @@ const PhoneForm = ({ user, mutate, togleModal }) => {
         }}
         validationSchema={Yup.object({
           mobile: Yup.string()
-            .phone('TR', true, t('forms:notValidPhone'))
-            .required(t('forms:required')),
+            .min(13, t('forms:notValidPhone'))
+            .max(13, t('forms:notValidPhone')),
           company: Yup.string()
-            .phone('TR', true, t('forms:notValidPhone'))
-            .required(t('forms:required')),
+            .min(13, t('forms:notValidPhone'))
+            .max(13, t('forms:notValidPhone')),
         })}
         onSubmit={async (values, { setSubmitting }) => {
           try {
