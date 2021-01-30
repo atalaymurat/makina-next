@@ -18,4 +18,6 @@ router
   .get('/:id', session, userController.show)
   .post('/:id', session, userController.update)
 
+router.post('/:id/password', session, userController.changePass )
+
 module.exports = router

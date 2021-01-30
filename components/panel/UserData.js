@@ -81,7 +81,12 @@ const UserData = ({ user, togleModal, setForm }) => {
           </a>
 
           {user.methods.length && user.methods.includes('local') && (
-            <a className="flex items-center border-b border-gray-600 hover:bg-gray-800 hover:text-white cursor-pointer">
+            <a className="flex items-center border-b border-gray-600 hover:bg-gray-800 hover:text-white cursor-pointer"
+              onClick={() => {
+                togleModal(true)
+                setForm("password")
+              }}
+            >
               <div className="w-4/12 px-2 py-4 font-semibold text-sm">
                 PASSWORD
               </div>

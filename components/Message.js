@@ -2,7 +2,7 @@ import useTranslation from 'next-translate/useTranslation'
 import { useRouter } from 'next/router'
 
 
-const Message = ({ data }) => {
+const Message = ({ data, className }) => {
   const router = useRouter()
   const { t } = useTranslation("forms")
   if (data && !data.success) {

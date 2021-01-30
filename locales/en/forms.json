@@ -15,5 +15,7 @@
   "name": "Name",
   "surname": "Surname",
   "middlename": "Middle Name",
-  "notValidPhone": "not valid phone"
+  "notValidPhone": "not valid phone",
+  "currentPassword": "Current Password",
+  "newPassword": "New Password"
 }

@@ -15,5 +15,7 @@
   "name": "Ad",
   "surname": "Soyad",
   "middlename": "Diğer Ad",
-  "notValidPhone": "Geçerli bir telefon gereklidir"
+  "notValidPhone": "Geçerli bir telefon gereklidir",
+  "currentPassword": "Mevcut Şifre",
+  "newPassword": "Yeni Şifre"
 }
