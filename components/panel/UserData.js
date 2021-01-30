@@ -1,6 +1,6 @@
 import { formingDateShort } from '../../lib/helpers'
 
-const UserData = ({ user, togleModal }) => {
+const UserData = ({ user, togleModal, setForm }) => {
   if (user && user.methods.includes('local')) {
     return (
       <div className="my-1 w-full max-w-lg border border-gray-400 mx-auto rounded px-4 pt-2 pb-4">
@@ -8,7 +8,10 @@ const UserData = ({ user, togleModal }) => {
         <div className="border border-gray-600 flex flex-col">
           <a
             className="flex items-center border-b border-gray-600  hover:bg-gray-800 hover:text-white cursor-pointer"
-            onClick={() => togleModal(true)}
+            onClick={() => {
+              togleModal(true)
+              setForm('name')
+            }}
           >
             <div className="w-4/12 px-2 py-4 font-semibold text-sm">NAME</div>
             <div className="w-6/12 px-2 py-4 text-gray-400">
@@ -27,7 +30,12 @@ const UserData = ({ user, togleModal }) => {
             </div>
           </a>
 
-          <a className="flex items-center border-b border-gray-600 hover:bg-gray-800 hover:text-white cursor-pointer">
+          <a className="flex items-center border-b border-gray-600 hover:bg-gray-800 hover:text-white cursor-pointer"
+            onClick={ () => {
+              togleModal(true)
+              setForm("phone")
+            }}
+          >
             <div className="w-4/12 px-2 py-4 font-semibold text-sm">
               GSM TEL
             </div>
@@ -47,7 +55,12 @@ const UserData = ({ user, togleModal }) => {
             </div>
           </a>
 
-          <a className="flex items-center border-b border-gray-600 hover:bg-gray-800 hover:text-white cursor-pointer">
+          <a className="flex items-center border-b border-gray-600 hover:bg-gray-800 hover:text-white cursor-pointer"
+            onClick={() => {
+              togleModal(true)
+              setForm("phone")
+            }}
+          >
             <div className="w-4/12 px-2 py-4 font-semibold text-sm">
               COMPANY TEL
             </div>

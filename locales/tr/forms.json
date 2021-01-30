@@ -11,5 +11,9 @@
   "sent": "Gönder",
   "invalidEmail": "E-posta adresi geçersiz",
   "cancel": "İptal",
-  "success": "başarılı"
+  "success": "başarılı",
+  "name": "Ad",
+  "surname": "Soyad",
+  "middlename": "Diğer Ad",
+  "notValidPhone": "Geçerli bir telefon gereklidir"
 }

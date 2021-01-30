@@ -16,7 +16,6 @@ const session = ironSession({
 // /api/user/[:id]
 router
   .get('/:id', session, userController.show)
-  .post('/:id', userController.update  )
-
+  .post('/:id', session, userController.update)
 
 module.exports = router

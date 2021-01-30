@@ -1,4 +1,5 @@
 const User = require('../models/user')
+const _ = require('lodash')
 
 module.exports = {
   show: async (req, res) => {
@@ -35,8 +36,12 @@ module.exports = {
   update: async (req, res) => {
     try {
       console.log("CONTROLELR UPDATE CALLED")
-      const data = req.body
-      const _id = req.params.id
+      const sessionUser = req.session.get('user')
+      if (!sessionUser) return res.status(403).end()
+      const data = _.pick(req.body, ["name", "phone.mobile", "phone.company" ])
+      console.log("DATA REQ BODY PICKED ::::", data)
+
+      const _id = sessionUser._id === req.params.id ? sessionUser._id : undefined
       const user = await User.findOneAndUpdate({ _id }, data, { new: true })
       if (!user ) {
         return res.status(404).json({ success: false, message: { tr: "Kullanıcı Kaydı Bulunmuyor", en: "No user record"}})
@@ -44,7 +49,7 @@ module.exports = {
       console.log('user From Controller User :', user)
 
 
-      res.status(200).json({ success: true , message: {tr: "Bilgiler Güncellendi", en: "Informatıon updated successfully"}})
+      res.status(200).json({ success: true , message: {tr: "Bilgiler Güncellendi", en: "Information updated successfully"}})
 
 
 

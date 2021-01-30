@@ -1,33 +1,31 @@
 import * as Yup from 'yup'
 import { Formik, Form } from 'formik'
-import { TextInput } from '../../lib/formikInputs'
+import { PhoneInputField } from '../../lib/formikInputs'
 import CircleSpin from '../CircleSpin'
 import useTranslation from 'next-translate/useTranslation'
 import Axios from 'axios'
+import 'yup-phone'
 
-const NameForm = ({ user, mutate, togleModal }) => {
+const PhoneForm = ({ user, mutate, togleModal }) => {
   const { t } = useTranslation()
   return (
     <div>
       <Formik
         initialValues={{
-          firstName: user.name.firstName || '',
-          middleName: user.name.middleName || '',
-          lastName: user.name.lastName || '',
+          mobile: user.phone.mobile || '',
+          company: user.phone.company || '',
         }}
         validationSchema={Yup.object({
-          firstName: Yup.string()
-            .max(15, t('forms:maxChar', { num: 15 }))
-            .min(2, t('forms:minChar', { num: 2 }))
+          mobile: Yup.string()
+            .phone('TR', true, t('forms:notValidPhone'))
             .required(t('forms:required')),
-          lastName: Yup.string()
-            .max(20, t('forms:maxChar', { num: 20 }))
+          company: Yup.string()
+            .phone('TR', true, t('forms:notValidPhone'))
             .required(t('forms:required')),
-          middleName: Yup.string().max(20, t('forms:maxChar', { num: 20 })),
         })}
         onSubmit={async (values, { setSubmitting }) => {
           try {
-            const data = { name: { ...values } }
+            const data = { phone: { ...values } }
             const res = await Axios.post(`/api/user/${user._id}`, data)
             if (res.data.success) {
               mutate()
@@ -39,25 +37,23 @@ const NameForm = ({ user, mutate, togleModal }) => {
           }
         }}
       >
-        {({ isSubmitting, setFieldValue }) => (
-          <Form>
-            <TextInput
-              name="firstName"
-              type="text"
-              id="firstName"
-              label={t('forms:name')}
+        {({ isSubmitting, setFieldValue, handleBlur }) => (
+          <Form className="space-y-3">
+            <PhoneInputField
+              label="GSM TEL"
+              id="mobile"
+              name="mobile"
+              handleBlur={handleBlur}
+              onChange={(e) => setFieldValue('mobile', e)}
+              setFieldValue={setFieldValue}
             />
-            <TextInput
-              name="middleName"
-              type="text"
-              id="middleName"
-              label={t('forms:middlename')}
-            />
-            <TextInput
-              name="lastName"
-              type="text"
-              id="lastName"
-              label={t('forms:surname')}
+            <PhoneInputField
+              label="COMPANY TEL"
+              id="company"
+              name="company"
+              handleBlur={handleBlur}
+              onChange={(e) => setFieldValue('company', e)}
+              setFieldValue={setFieldValue}
             />
             <div className="py-2 mt-2">
               <button
@@ -76,4 +72,4 @@ const NameForm = ({ user, mutate, togleModal }) => {
   )
 }
 
-export default NameForm
+export default PhoneForm

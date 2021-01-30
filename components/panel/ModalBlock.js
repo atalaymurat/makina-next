@@ -1,6 +1,8 @@
 import NameForm from './NameForm'
+import PhoneForm from './PhoneForm'
 
-const ModalBlock = ({ modal, togleModal, user, mutate }) => {
+
+const ModalBlock = ({ modal, togleModal, user, mutate, setForm, form }) => {
   return (
     <div>
       <div
@@ -26,7 +28,13 @@ const ModalBlock = ({ modal, togleModal, user, mutate }) => {
           </a>
         </div>
         <div className="px-4 py-4">
-          <NameForm user={user} mutate={mutate} togleModal={togleModal}/>
+          { form === "name" &&
+          <NameForm user={user} mutate={mutate} togleModal={togleModal} setForm={setForm}/>
+          }
+          {form === "phone" &&
+          <PhoneForm user={user} mutate={mutate} togleModal={togleModal} setForm={setForm}/>
+          }
+
         </div>
       </div>
     </div>

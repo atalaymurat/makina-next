@@ -29,9 +29,11 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-google-recaptcha": "^2.1.0",
+    "react-phone-number-input": "^3.1.10",
     "swr": "^0.3.11",
     "tailwindcss": "^2.0.2",
-    "yup": "^0.32.8"
+    "yup": "^0.32.8",
+    "yup-phone": "^1.2.19"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

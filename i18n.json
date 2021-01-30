@@ -4,7 +4,7 @@
 	"pages": {
 		"*": ["menu", "meta", "general"],
 		"/": ["index"],
-		"/panel": ["panel"],
+		"/panel": ["panel", "forms"],
 		"/signup": ["sign_up", "forms"],
 		"/login": ["sign_up", "forms"],
 		"/confirmation": ["forms", "confirmation"],

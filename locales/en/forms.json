@@ -11,5 +11,9 @@
   "invalidEmail": "email is not valid",
   "sent": "sent",
   "cancel": "cancel",
-  "success": "success"
+  "success": "success",
+  "name": "Name",
+  "surname": "Surname",
+  "middlename": "Middle Name",
+  "notValidPhone": "not valid phone"
 }
