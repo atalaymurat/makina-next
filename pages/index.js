@@ -10,7 +10,7 @@ const Index = (props) => {
 	return (
 		<Layout>
 			<div className="absolute z-0 inset-0 w-screen h-full">
-				<video src="/pexels_bg_farm.mp4" muted loop autoPlay  className="w-screen h-full object-cover"/>
+				<video src="/pexels_bg_farm.mp4" muted loop autoPlay  className="w-screen h-full object-cover filter filter-contrast-150"/>
 			</div>
 			<div className="relative z-10 flex flex-col items-start w-full pt-12">
 				<h1 className="w-full h-full max-w-5xl px-8 mx-auto text-5xl font-bold md:text-7xl lg:text-6xl ">
