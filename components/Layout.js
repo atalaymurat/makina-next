@@ -68,8 +68,8 @@ const Layout = (props) => {
       </Head>
       <Navbar />
       <div className="main-content">{props.children}</div>
-      <div className="w-full footer-content">
-        <div className="h-20 font-semibold text-white bg-black border-t-2 border-green-50">
+      <div className="relative z-10 w-full footer-content">
+        <div className="h-20 font-semibold text-black bg-transparent border-t-2 border-black">
           <div className="mx-auto my-4 text-2xl text-center w-44">
             {process.env.NEXT_PUBLIC_SITE_NAME}
           </div>
