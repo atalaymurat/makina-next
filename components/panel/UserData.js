@@ -3,7 +3,10 @@ import { formatPhoneNumberIntl } from 'react-phone-number-input'
 
 const UserData = ({ user, togleModal, setForm }) => {
   // this block does not include password field
-  if (user && user.methods.includes('facebook', 'linkedin')) {
+  if (
+    user &&
+    (user.methods.includes('facebook') || user.methods.includes('linkedin'))
+  ) {
     return (
       <div className="my-1 w-full max-w-lg border border-gray-400 mx-auto rounded px-4 pt-2 pb-4">
         <h1 className="block text-xl font-semibold pb-1">Information</h1>
