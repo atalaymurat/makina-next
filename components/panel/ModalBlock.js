@@ -17,7 +17,6 @@ const ModalBlock = ({
         className="fixed top-0 z-40 left-0 w-screen h-full max-h-full bg-black bg-opacity-60"
         onClick={() => togleModal(false)}
       >
-        {JSON.stringify(modal)}
       </div>
       <div className="fixed z-50 inset-0 mx-auto my-auto flex flex-col max-w-xl w-10/12 h-3/5 bg-gray-200 border-2 border-gray-700 rounded-b-xl text-gray-700 overflow-x-hidden">
         <div className="flex justify-between">

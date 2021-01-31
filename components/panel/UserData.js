@@ -1,4 +1,5 @@
 import { formingDateShort } from '../../lib/helpers'
+import { formatPhoneNumberIntl } from 'react-phone-number-input'
 
 const UserData = ({ user, togleModal, setForm }) => {
   if (user && user.methods.includes('local')) {
@@ -40,7 +41,7 @@ const UserData = ({ user, togleModal, setForm }) => {
               GSM TEL
             </div>
             <div className="w-6/12 px-2 py-4 text-gray-400">
-              {user.phone.mobile}
+              {formatPhoneNumberIntl(user.phone.mobile)}
             </div>
             <div className="w-2/12 px-1 py-4">
               <svg
@@ -65,7 +66,7 @@ const UserData = ({ user, togleModal, setForm }) => {
               COMPANY TEL
             </div>
             <div className="w-6/12 px-2 py-4 text-gray-400">
-              {user.phone.company}
+              { formatPhoneNumberIntl(user.phone.company)}
             </div>
             <div className="w-2/12 px-1 py-4">
               <svg
