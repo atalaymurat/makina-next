@@ -15,7 +15,7 @@ body {
 div#__next {
   /* display: flex; */
   /* flex-direction: column; */
-  @apply flex flex-col min-h-screen;
+  @apply flex flex-col min-h-screen h-full;
 }
 
 div.main-content {
