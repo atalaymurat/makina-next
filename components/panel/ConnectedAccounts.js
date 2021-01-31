@@ -1,18 +1,20 @@
 import React from 'react'
 import Image from 'next/image'
+import useTranslation from 'next-translate/useTranslation'
 
 const ConnectedAccounts = ({ user }) => {
+  const { t } = useTranslation()
   if ((user.linkedin.id) || (user.facebook.id)) {
     return (
       <div className="my-1 w-full max-w-lg border border-gray-400 mx-auto rounded px-4 pt-2 pb-4">
         <h1 className="block text-xl mb-2 font-semibold border-b border-gray-600">
-          Connected Accounts
+          {t("panel:connectedAccounts")}
         </h1>
         {user.local.email && (
           <div className="flex flex-row justify-between items-center border-b py-2 px-1 border-gray-700">
             <Image src="/siteLogo.svg" alt="Site Logo" width="48" height="48" />
             <div className="px-4 flex-grow">
-              <div className="block text-md font-semibold">makinaTr</div>
+              <div className="block text-md font-semibold">{process.env.NEXT_PUBLIC_SITE_NAME}</div>
               <div className="block text-sm">
                 {user.name.firstName}
                 {user.name.middleName && ` ${user.name.middleName}`}{' '}
@@ -20,7 +22,7 @@ const ConnectedAccounts = ({ user }) => {
               </div>
             </div>
             <div className="w-2/12 font-bold">
-              {user.provider === 'local' && 'login'}
+              {user.provider === 'local' && t("panel:login")}
             </div>
           </div>
         )}
@@ -39,7 +41,7 @@ const ConnectedAccounts = ({ user }) => {
               </div>
             </div>
             <div className="w-2/12 font-bold">
-              {user.provider === 'linkedin' && 'login'}{' '}
+              {user.provider === 'linkedin' && t("panel:login")}
             </div>
           </div>
         )}
@@ -58,7 +60,7 @@ const ConnectedAccounts = ({ user }) => {
               </div>
             </div>
             <div className="w-2/12 font-bold">
-              {user.provider === 'facebook' && 'login'}{' '}
+              {user.provider === 'facebook' && t("panel:login")}
             </div>
           </div>
         )}

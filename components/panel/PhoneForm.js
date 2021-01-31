@@ -39,7 +39,7 @@ const PhoneForm = ({ user, mutate, togleModal }) => {
         {({ isSubmitting, setFieldValue, handleBlur }) => (
           <Form className="space-y-3">
             <PhoneInputField
-              label="GSM TEL"
+              label={t("panel:gsmTel")}
               id="mobile"
               name="mobile"
               handleBlur={handleBlur}
@@ -47,7 +47,7 @@ const PhoneForm = ({ user, mutate, togleModal }) => {
               setFieldValue={setFieldValue}
             />
             <PhoneInputField
-              label="COMPANY TEL"
+              label={t("panel:companyTel")}
               id="company"
               name="company"
               handleBlur={handleBlur}

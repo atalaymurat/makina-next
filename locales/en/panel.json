@@ -1,3 +1,5 @@
 {
-	"welcome": "Welcome, {{firstName}} {{lastName}}"
+	"welcome": "Welcome, {{firstName}} {{lastName}}",
+	"connectedAccounts": "Connected Login Accounts",
+	"login": "Login"
 }
