@@ -50,7 +50,7 @@ app
     server.use('/api/user', userRoutes)
     server.use('/api/images', imagesRoutes)
     server.use(express.static(path.join(__dirname, '../public')))
-    server.use('/_next', express.static(path.join(__dirname, '../.next')))
+    // server.use('/_next', express.static(path.join(__dirname, '../.next')))
 
     server.get('*', (req, res) => {
       return handle(req, res)
