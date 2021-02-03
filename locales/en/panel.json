@@ -1,5 +1,21 @@
 {
 	"welcome": "Welcome, {{firstName}} {{lastName}}",
 	"connectedAccounts": "Connected Login Accounts",
-	"login": "Login"
+	"login": "Login",
+	"user": "user",
+  "seller": "seller",
+  "manufacturer": "manufacturer",
+  "upgrade": "upgrade",
+  "local": "login with makinaTr",
+  "facebook": "login with facebook",
+  "linkedin": "login with linkedin",
+  "since": "since",
+  "edit": "edit",
+  "name": "NAME",
+  "company": "COMPANY",
+  "password": "PASSWORD",
+  "lastChanged": "last changed at",
+  "gsmTel": "GSM Tel",
+  "companyTel": "Company Tel",
+  "information": "Account Information"
 }

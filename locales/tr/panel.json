@@ -1,3 +1,19 @@
 {
-	"welcome": "Hoşgeldin, {{firstName}} {{lastName}}"
+	"welcome": "Hoşgeldin, {{firstName}} {{lastName}}",
+	"edit": "değiştir",
+  "user": "üye",
+  "seller": "satıcı",
+  "manufacturer": "imalatçı",
+  "upgrade": "yükselt",
+  "local": "makinaTr",
+  "facebook": "facebook",
+  "linkedin": "linkedin",
+  "since": "başlangıç",
+  "name": "AD SOYAD",
+  "company": "ŞİRKET",
+  "password": "ŞİFRE",
+  "lastChanged": "son değiştirilme zamanı",
+  "gsmTel": "GSM Tel",
+  "companyTel": "Şirket Tel",
+  "information": "Hesap Bilgileri"
 }

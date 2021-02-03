@@ -3,6 +3,7 @@ import { formingDateShort } from '../../lib/helpers'
 import BadgeBlock from './BadgeBlock'
 import axios from 'axios'
 import useUser from '../../lib/useUser'
+import useTranslation from 'next-translate/useTranslation'
 
 const getNameByProvider = (provider, user) => {
   if (provider === 'facebook') return user.facebook.name.givenName
@@ -31,6 +32,7 @@ const getUserEmail = (provider, user) => {
 }
 
 const Profile = ({ user }) => {
+  const { t } = useTranslation()
   const [file, setFile] = useState('')
   const [filename, setFilename] = useState('')
   const [toggleModal, setTogglemodal] = useState(false)
@@ -84,13 +86,13 @@ const Profile = ({ user }) => {
                 className="px-4 py-2 text-red-600 rounded shadow hover:bg-red-600 hover:text-white focus:outline-none"
                 onClick={() => setTogglemodal(false)}
               >
-                Cancel
+                {t('forms:cancel')}
               </button>
               <button
                 className="px-4 py-2 bg-gray-600 rounded shadow-lg focus:outline-none hover:bg-indigo-600 text-white font-bold"
                 onClick={uploadFile}
               >
-                Save
+                {t('forms:save')}
               </button>
             </div>
           </div>
@@ -133,7 +135,7 @@ const Profile = ({ user }) => {
                 className="bg-gray-800 w-full py-1 bg-opacity-60 text-center absolute bottom-0 inset-x-0 rounded-b-xl cursor-pointer text-sm hover:bg-opacity-80 focus:outline-none"
                 onClick={() => fileInput.current.click()}
               >
-                edit
+                {t('panel:edit')}
               </button>
               <input
                 type="file"
@@ -150,11 +152,11 @@ const Profile = ({ user }) => {
             {getNameByProvider(user.provider, user)}{' '}
             {getMiddleNameByProvider(user.provider, user)}{' '}
             {getLastNameByProvider(user.provider, user)}
-            <span className="text-xs float-right">by {user.provider}</span>
+            <span className="text-xs float-right">{t(`panel:${user.provider}`)}</span>
           </div>
           <div className="text-sm">{getUserEmail(user.provider, user)}</div>
           <div className="text-xs font-normal text-gray-500 mb-2">
-            since {formingDateShort(user.created_at)}
+            {t('panel:since')} {formingDateShort(user.created_at)}
           </div>
 
           {/* BADGE BLOCK */}
@@ -163,11 +165,11 @@ const Profile = ({ user }) => {
           {/* USER TYPE  and UPGRADE */}
           <div className="text-xs inline-flex justify-between">
             <div className="p-1 text-center mr-1 w-1/2 rounded border border-gray-700 text-gray-400">
-              {user.accountType}
+              {t(`panel:${user.accountType}`)}
             </div>
             {user.accountType === 'user' && (
               <button className="w-1/2 ml-1 border border-gray-400 shadow font-semibold rounded p-1 hover:bg-gray-800">
-                Upgrade
+                {t('panel:upgrade')}
               </button>
             )}
           </div>
