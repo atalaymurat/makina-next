@@ -127,19 +127,23 @@ const Profile = ({ user }) => {
               </svg>
             </div>
           )}
-          <button
-            className="bg-gray-800 w-full py-1 bg-opacity-60 text-center absolute bottom-0 inset-x-0 rounded-b-xl cursor-pointer text-sm hover:bg-opacity-80 focus:outline-none"
-            onClick={() => fileInput.current.click()}
-          >
-            edit
-          </button>
-          <input
-            type="file"
-            className="hidden"
-            onChange={inputChange}
-            ref={fileInput}
-            accept="image/*"
-          />
+          {user.methods.includes('local') && (
+            <>
+              <button
+                className="bg-gray-800 w-full py-1 bg-opacity-60 text-center absolute bottom-0 inset-x-0 rounded-b-xl cursor-pointer text-sm hover:bg-opacity-80 focus:outline-none"
+                onClick={() => fileInput.current.click()}
+              >
+                edit
+              </button>
+              <input
+                type="file"
+                className="hidden"
+                onChange={inputChange}
+                ref={fileInput}
+                accept="image/*"
+              />
+            </>
+          )}
         </div>
         <div className="w-full px-4 flex flex-col">
           <div className="text-xl font-semibold">
