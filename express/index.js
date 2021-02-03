@@ -2,6 +2,7 @@ const express = require('express')
 var passport = require('passport')
 const next = require('next')
 var bodyParser = require('body-parser')
+const path = require('path')
 
 const PORT = process.env.PORT || 5000
 const dev = process.env.NODE_ENV !== 'production'
