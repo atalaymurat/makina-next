@@ -2,11 +2,7 @@ import { formingDateShort } from '../../lib/helpers'
 import { formatPhoneNumberIntl } from 'react-phone-number-input'
 
 const UserData = ({ user, togleModal, setForm }) => {
-  // this block does not include password field
-  if (
-    user &&
-    (user.methods.includes('facebook') || user.methods.includes('linkedin'))
-  ) {
+  if (user) {
     return (
       <div className="my-1 w-full max-w-lg border border-gray-400 mx-auto rounded px-4 pt-2 pb-4">
         <h1 className="block text-xl font-semibold pb-1">Information</h1>
@@ -87,7 +83,7 @@ const UserData = ({ user, togleModal, setForm }) => {
               </svg>
             </div>
           </a>
-
+          {/*  USER PASSWORD FIELD ONLY FOR LOCAL ACCOUNTS */}
           {user.methods.length && user.methods.includes('local') && (
             <a
               className="flex items-center border-b border-gray-600 hover:bg-gray-800 hover:text-white cursor-pointer"

@@ -41,11 +41,13 @@ app
 		const apiRoutes = require('./routes')
 		const authRoutes = require('./routes/auth')
 		const userRoutes = require('./routes/user')
+		const imagesRoutes = require('./routes/images')
 
 		server.use(bodyParser.json())
 		server.use('/api', apiRoutes)
 		server.use('/api/auth', authRoutes)
 		server.use('/api/user', userRoutes)
+		server.use('/api/images', imagesRoutes)
 
 		server.get('*', (req, res) => {
 			return handle(req, res)
