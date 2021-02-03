@@ -109,5 +109,6 @@ public/
 # TernJS port file
 .tern-port
 config/
-tmp/*
+tmp/uploads
+tmp/uploads/*
 useLater.js
