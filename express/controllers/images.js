@@ -47,7 +47,7 @@ module.exports = {
       console.log('CREATE IMAGES CTRL FILE ::', file)
       const dest = path.join(
         __dirname,
-        `/../../public/avatars/${user._id}/${fileName}.webp`
+        `/../../public/avatars/${user._id}/${fileName}.jpeg`
       )
       // Resize without croping
       const resizeImage = (pth, dst) => {
@@ -77,6 +77,8 @@ module.exports = {
       await user.save()
 
       res.json({ success: true })
-    } catch (err) {}
+    } catch (err) {
+      res.status(500).json({ success: false })
+    }
   },
 }
