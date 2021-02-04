@@ -6,7 +6,7 @@ const ConnectedAccounts = ({ user }) => {
   const { t } = useTranslation()
   if ((user.linkedin.id) || (user.facebook.id)) {
     return (
-      <div className="my-1 w-full max-w-lg border border-gray-400 mx-auto rounded px-4 pt-2 pb-4">
+      <div className="my-1 w-full max-w-lg bg-gray-800 text-gray-300 border border-gray-400 mx-auto rounded px-4 pt-2 pb-4">
         <h1 className="block text-xl mb-2 font-semibold border-b border-gray-600">
           {t("panel:connectedAccounts")}
         </h1>

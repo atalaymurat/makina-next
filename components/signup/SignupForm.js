@@ -45,7 +45,6 @@ const SignupForm = ({ setMessage }) => {
         })}
         onSubmit={async (values, { setSubmitting }) => {
           try {
-            alert(JSON.stringify(values))
             setMessage(null)
             setSubmitting(true)
             const token = await recaptchaRef.current.executeAsync()
@@ -54,7 +53,6 @@ const SignupForm = ({ setMessage }) => {
             const res = await axios.post('/api/auth/signup', values)
             setSubmitting(false)
             if (res.data.success && res.data.login) {
-              alert(res.data.login)
               router.push('/panel')
               return
             }

@@ -11,34 +11,45 @@ import useUser from '../lib/useUser'
 
 const Panel = (props) => {
   const [modal, setModal] = useState(false)
-  const [form , setForm] = useState("")
-  const { user , mutateUser } = useUser(props.user)
+  const [form, setForm] = useState('')
+  const { user, mutateUser } = useUser(props.user)
 
   const togleModal = (val) => {
     setModal(val)
   }
 
   if (user) {
-  return (
-    <Layout title="Panel">
-      {modal && (
-        <ModalBlock
-          modal={modal}
-          togleModal={togleModal}
-          user={user}
-          mutate={mutateUser}
-          setForm={setForm}
-          form={form}
-        />
-      )}
-      <div className="flex flex-col container mx-auto">
-        <h1 className="mx-auto my-8">Panel#SHOW</h1>
-        <Profile user={user} />
-        <ConnectedAccounts user={user} />
-        <UserData user={user} togleModal={togleModal} modal={modal} setForm={setForm} />
-      </div>
-    </Layout>
-  )
+    return (
+      <Layout title="Panel">
+        {modal && (
+          <ModalBlock
+            modal={modal}
+            togleModal={togleModal}
+            user={user}
+            mutate={mutateUser}
+            setForm={setForm}
+            form={form}
+          />
+        )}
+        <div className="flex flex-col max-w-5xl items-center container mx-auto">
+          <h1 className="mx-auto my-3">Panel</h1>
+          <div className="flex flex-col lg:flex-row lg:space-x-1 w-full">
+            <div className="w-full lg:w-1/2">
+              <Profile user={user} />
+              <ConnectedAccounts user={user} />
+            </div>
+            <div className="w-full lg:w-1/2">
+              <UserData
+                user={user}
+                togleModal={togleModal}
+                modal={modal}
+                setForm={setForm}
+              />
+            </div>
+          </div>
+        </div>
+      </Layout>
+    )
   } else {
     return (
       <Layout>
@@ -57,11 +68,10 @@ export const getServerSideProps = withSession(async ({ req, res }) => {
       return { props: {} }
     }
 
-
     const apiRes = await Axios.get(`/api/auth/user`, {
       headers: { cookie: req.headers.cookie },
     })
-    console.log("PANEL API RES :: ", apiRes.data)
+    console.log('PANEL API RES :: ', apiRes.data)
 
     const user = apiRes.data
     return {
