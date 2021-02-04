@@ -3,7 +3,7 @@ import React from 'react'
 const BadgeBlock = ({ user }) => {
   if (user.accountType === 'seller' || user.accountType === 'manufacturer') {
     return (
-      <div className="flex flex-row mb-2 items-center justify-end space-x-4">
+      <div className="flex flex-row mb-2 items-center justify-center space-x-4">
         <div>
           <div className="border flex flex-col mx-auto border-purple-800 rounded">
             <div className="text-center font-bold px-2 w-14 bg-purple-700 text-xs">

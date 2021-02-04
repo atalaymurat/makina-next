@@ -6,11 +6,11 @@ const UserData = ({ user, togleModal, setForm }) => {
   const { t } = useTranslation()
   if (user) {
     return (
-      <div className="my-1 w-full max-w-lg border border-gray-400 mx-auto rounded px-4 pt-2 pb-4">
+      <div className="my-1 w-full max-w-lg bg-gray-800 text-gray-300 border border-gray-400 mx-auto rounded px-4 pt-2 pb-4">
         <h1 className="block text-xl font-semibold pb-1">{t('panel:information')}</h1>
         <div className="border border-gray-600 flex flex-col">
           <a
-            className="flex items-center border-b border-gray-600  hover:bg-gray-800 hover:text-white cursor-pointer"
+            className="flex items-center border-b border-gray-600  hover:bg-gray-600 hover:text-white cursor-pointer"
             onClick={() => {
               togleModal(true)
               setForm('name')
@@ -35,7 +35,7 @@ const UserData = ({ user, togleModal, setForm }) => {
           </a>
 
           <a
-            className="flex items-center border-b border-gray-600 hover:bg-gray-800 hover:text-white cursor-pointer"
+            className="flex items-center border-b border-gray-600 hover:bg-gray-600 hover:text-white cursor-pointer"
             onClick={() => {
               togleModal(true)
               setForm('phone')
@@ -61,7 +61,7 @@ const UserData = ({ user, togleModal, setForm }) => {
           </a>
 
           <a
-            className="flex items-center border-b border-gray-600 hover:bg-gray-800 hover:text-white cursor-pointer"
+            className="flex items-center border-b border-gray-600 hover:bg-gray-600 hover:text-white cursor-pointer"
             onClick={() => {
               togleModal(true)
               setForm('phone')
@@ -88,7 +88,7 @@ const UserData = ({ user, togleModal, setForm }) => {
           {/*  USER PASSWORD FIELD ONLY FOR LOCAL ACCOUNTS */}
           {user.methods.length && user.methods.includes('local') && (
             <a
-              className="flex items-center border-b border-gray-600 hover:bg-gray-800 hover:text-white cursor-pointer"
+              className="flex items-center border-b border-gray-600 hover:bg-gray-600 hover:text-white cursor-pointer"
               onClick={() => {
                 togleModal(true)
                 setForm('password')

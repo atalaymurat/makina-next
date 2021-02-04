@@ -103,7 +103,7 @@ const Profile = ({ user }) => {
         </div>
       )}
 
-      <div className="my-1 w-full max-w-lg border border-gray-400 flex mx-auto rounded px-4 py-2">
+      <div className="my-1 w-full max-w-lg border border-gray-400 bg-gray-800 text-gray-100 flex mx-auto rounded px-4 py-2">
         <div className="relative w-44 h-36">
           {getUserPhoto(user.provider, user) ? (
             <img
@@ -159,7 +159,7 @@ const Profile = ({ user }) => {
             </div>
           </div>
           <div className="text-sm">{getUserEmail(user.provider, user)}</div>
-          <div className="text-xs font-normal text-gray-500 mb-2">
+          <div className="text-xs font-normal text-gray-300 mb-2">
             {t('panel:since')} {formingDateShort(user.created_at)}
           </div>
 
@@ -168,11 +168,11 @@ const Profile = ({ user }) => {
 
           {/* USER TYPE  and UPGRADE */}
           <div className="text-xs inline-flex justify-between">
-            <div className="p-1 text-center mr-1 w-1/2 rounded border border-gray-700 text-gray-400">
+            <div className="p-1 text-center mr-1 w-1/2 rounded border border-gray-500 text-gray-200">
               {t(`panel:${user.accountType}`)}
             </div>
             {user.accountType === 'user' && (
-              <button className="w-1/2 ml-1 border border-gray-400 shadow font-semibold rounded p-1 hover:bg-gray-800">
+              <button className="w-1/2 ml-1 border border-gray-300 shadow font-semibold rounded p-1 hover:bg-gray-800">
                 {t('panel:upgrade')}
               </button>
             )}

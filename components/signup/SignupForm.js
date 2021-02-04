@@ -126,12 +126,12 @@ const SignupForm = ({ setMessage }) => {
                         setFieldValue('accountType', 'user')
                       }}
                     >
-                      <div className="w-1/4 flex flex-col items-center justify-center">
+                      <div className="w-1/4 flex flex-col justify-center px-4">
                         <h2 className="text-lg font-medium">Üye</h2>
                         <span className="text-sm font-semibold">Bireysel</span>
                         <span className="text-sm mt-1">Ücretsiz</span>
                       </div>
-                      <div className="w-3/4">
+                      <div className="w-3/4 ml-1">
                         <ul className="list-reset text-sm ml-2 font-light">
                           <li className="mb-1">Favorilere Eklemek</li>
                           <li className="mb-1">İlan lokasyonlarını görmek</li>
@@ -167,12 +167,12 @@ const SignupForm = ({ setMessage }) => {
                       }}
                       type="button"
                     >
-                      <div className="w-1/4 flex flex-col items-center justify-center">
+                      <div className="w-1/4 flex flex-col justify-center px-4">
                         <h2 className="text-lg font-medium">Satıcı</h2>
                         <span className="text-sm font-semibold">Kurumsal</span>
                         <span className="text-sm mt-1">Ücretsiz</span>
                       </div>
-                      <div className="w-3/4">
+                      <div className="w-3/4 ml-1">
                         <ul className="list-reset text-sm ml-2 font-light">
                           <li className="mb-1">İlan vermek, eposta tanıtım</li>
                           <li className="mb-1">

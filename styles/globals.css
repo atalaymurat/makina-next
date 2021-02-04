@@ -10,7 +10,7 @@ div#__next {
 }
 
 body {
-  @apply antialiased text-gray-900 bg-gradient-to-t from-black to-gray-700;
+  @apply antialiased bg-gray-300;
 }
 
 div#__next {
@@ -19,7 +19,7 @@ div#__next {
 }
 
 div.main-content {
-  @apply flex-grow text-gray-300;
+  @apply flex-grow;
 }
 
 div.footer-content {
@@ -27,7 +27,7 @@ div.footer-content {
 }
 
 .logo {
-  @apply mx-1 text-gray-200 font-semibold;
+  @apply mx-1 text-white font-semibold;
 }
 
 /* React-phone-ınput styles */
