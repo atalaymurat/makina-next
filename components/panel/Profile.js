@@ -148,11 +148,15 @@ const Profile = ({ user }) => {
           )}
         </div>
         <div className="w-full px-4 flex flex-col">
-          <div className="text-xl font-semibold">
-            {getNameByProvider(user.provider, user)}{' '}
-            {getMiddleNameByProvider(user.provider, user)}{' '}
-            {getLastNameByProvider(user.provider, user)}
-            <span className="text-xs float-right">{t(`panel:${user.provider}`)}</span>
+          <div className="flex flex-row items-center">
+            <div className="w-9/12 text-xl font-semibold">
+              {getNameByProvider(user.provider, user)}{' '}
+              {getMiddleNameByProvider(user.provider, user)}{' '}
+              {getLastNameByProvider(user.provider, user)}
+            </div>
+            <div className="w-3/12 text-xs text-right">
+              {t(`panel:${user.provider}`)}
+            </div>
           </div>
           <div className="text-sm">{getUserEmail(user.provider, user)}</div>
           <div className="text-xs font-normal text-gray-500 mb-2">

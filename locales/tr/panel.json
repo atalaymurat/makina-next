@@ -1,5 +1,7 @@
 {
 	"welcome": "Hoşgeldin, {{firstName}} {{lastName}}",
+  "connectedAccounts": "Bağlantılı Hesaplar",
+  "login": "Giriş Yapılan Hesap",
 	"edit": "değiştir",
   "user": "üye",
   "seller": "satıcı",

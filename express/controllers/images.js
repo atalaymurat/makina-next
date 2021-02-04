@@ -80,7 +80,7 @@ module.exports = {
       console.log('CREATE IMAGES CTRL FILE ::', file)
       const dest = path.join(
         __dirname,
-        `/../../public/avatars/${user._id}/${fileName}.webp`
+        `/../../public/avatars/${user._id}/${fileName}.jpeg`
       )
 
       await resizeImage(file.path, dest)

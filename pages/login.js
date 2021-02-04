@@ -10,7 +10,7 @@ import Message from '../components/Message'
 import useUser from '../lib/useUser'
 import { useRouter } from 'next/router'
 import CircleSpin from '../components/CircleSpin'
-import SocialLogin from '../components/SocialLogin'
+import SocialLogin from '../components/signup/SocialLogin'
 
 const Login = (props) => {
   const [forget, setForget] = useState(false)

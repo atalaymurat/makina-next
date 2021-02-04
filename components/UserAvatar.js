@@ -18,7 +18,7 @@ function UserAvatar({ user }) {
 
   if ( user && userPhoto) {
     return (
-      <button className="relative z-10 text-white bg-indigo-900 focus:outline-none font-semibold inline-flex items-center text-xs justify-center align-middle overflow-hidden">
+      <button className="relative z-10 text-white bg-indigo-900 rounded-full focus:outline-none font-semibold inline-flex items-center text-xs justify-center align-middle overflow-hidden">
         <img src={userPhoto} alt="IMG" className="w-8 h-8 rounded-full object-cover" />
       </button>
     )

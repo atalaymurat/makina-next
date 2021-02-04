@@ -65,6 +65,7 @@ module.exports = {
       if (liUser) {
         liUser.methods.push('local')
         liUser.name = { firstName, lastName }
+        liUser.accountType = accountType,
         liUser.local = {
           email,
           email_verified: true,
@@ -96,6 +97,7 @@ module.exports = {
       if (fbUser) {
         fbUser.methods.push('local')
         fbUser.name = { firstName, lastName }
+        fbUser.accountType = accountType,
         fbUser.local = {
           email,
           email_verified: true,

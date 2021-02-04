@@ -21,7 +21,7 @@ const ConnectedAccounts = ({ user }) => {
                 {user.name.lastName}
               </div>
             </div>
-            <div className="w-2/12 font-bold">
+            <div className="w-3/12 font-bold text-center text-xs">
               {user.provider === 'local' && t("panel:login")}
             </div>
           </div>
@@ -40,7 +40,7 @@ const ConnectedAccounts = ({ user }) => {
                 {user.linkedin.name.givenName} {user.linkedin.name.familyName}
               </div>
             </div>
-            <div className="w-2/12 font-bold">
+            <div className="w-3/12 font-bold text-center text-xs">
               {user.provider === 'linkedin' && t("panel:login")}
             </div>
           </div>
@@ -59,7 +59,7 @@ const ConnectedAccounts = ({ user }) => {
                 {user.facebook.name.givenName} {user.facebook.name.familyName}
               </div>
             </div>
-            <div className="w-2/12 font-bold">
+            <div className="w-3/12 font-bold text-center text-xs">
               {user.provider === 'facebook' && t("panel:login")}
             </div>
           </div>
