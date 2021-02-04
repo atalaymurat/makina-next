@@ -111,7 +111,7 @@ const SignupForm = ({ setMessage }) => {
                 </div>
 
                 <div className="w-full lg:w-1/2 h-full">
-                  <div className="space-y-6 mt-6 text-gray-600">
+                  <div className="space-y-6 mt-7 text-gray-600 h-full">
                     <button
                       className={`flex text-left w-full h-1/2 flex-row border border-gray-300 px-2 py-5 items-center rounded shadow focus:outline-none ${
                         selected === 'user'
@@ -124,13 +124,12 @@ const SignupForm = ({ setMessage }) => {
                         setFieldValue('accountType', 'user')
                       }}
                     >
-                      <div className="w-1/4 flex flex-col justify-center px-4">
-                        <h2 className="text-lg font-medium">Üye</h2>
+                      <div className="w-1/4 flex flex-col justify-center px-4 py-3 mr-2">
+                        <h2 className="text-xl font-bold">Üye</h2>
                         <span className="text-sm font-semibold">Bireysel</span>
-                        <span className="text-sm mt-1">Ücretsiz</span>
                       </div>
                       <div className="w-3/4 ml-1">
-                        <ul className="list-reset text-sm ml-2 font-light">
+                        <ul className="list-reset text-xs ml-2 font-light">
                           <li className="mb-1">Favorilere Eklemek</li>
                           <li className="mb-1">İlan lokasyonlarını görmek</li>
                           <li className="mb-1">teklif vermek ve fazlası...</li>
@@ -165,13 +164,12 @@ const SignupForm = ({ setMessage }) => {
                       }}
                       type="button"
                     >
-                      <div className="w-1/4 flex flex-col justify-center px-4">
-                        <h2 className="text-lg font-medium">Satıcı</h2>
+                      <div className="w-1/4 flex flex-col justify-center px-4 py-3 mr-2">
+                        <h2 className="text-xl font-bold">Satıcı</h2>
                         <span className="text-sm font-semibold">Kurumsal</span>
-                        <span className="text-sm mt-1">Ücretsiz</span>
                       </div>
                       <div className="w-3/4 ml-1">
-                        <ul className="list-reset text-sm ml-2 font-light">
+                        <ul className="list-reset text-xs ml-2 font-light">
                           <li className="mb-1">İlan vermek, eposta tanıtım</li>
                           <li className="mb-1">
                             2.el ve Yeni ekipman listeleme

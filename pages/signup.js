@@ -11,8 +11,7 @@ const Signup = (props) => {
   const [message, setMessage] = useState(null)
 
   return (
-    <Layout title={t('sign_up:title')}>
-      <div className="flex items-center h-full p-4 lg:justify-center">
+      <div className="flex min-h-screen items-center p-4 lg:justify-center">
         <div className="flex flex-col overflow-hidden bg-white shadow-lg rounded-md max md:flex-row md:flex-1 lg:max-w-screen-lg">
           <InfoCard />
           <div className="p-5 bg-white md:flex-1">
@@ -34,7 +33,6 @@ const Signup = (props) => {
           </div>
         </div>
       </div>
-    </Layout>
   )
 }
 
