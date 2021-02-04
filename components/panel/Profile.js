@@ -21,9 +21,15 @@ const getLastNameByProvider = (provider, user) => {
   if (provider === 'local') return user.name.lastName
 }
 const getUserPhoto = (provider, user) => {
-  if (provider === 'facebook') return user.facebook.picture
-  if (provider === 'linkedin') return user.linkedin.picture
-  if (provider === 'local') return user.photos[0] && user.photos[0].value
+  if (!user.photos[0]) {
+    switch (provider){
+      case ('facebook') : return user.facebook.picture
+      case ('linkedin') : return user.linkedin.picture
+      default: return null
+    }
+  } else {
+    return user.photos[0].value
+  }
 }
 const getUserEmail = (provider, user) => {
   if (provider === 'facebook') return user.facebook.email

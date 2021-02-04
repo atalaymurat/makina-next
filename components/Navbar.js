@@ -49,7 +49,7 @@ const Navbar = () => {
         <div className="sm:hidden">
           <button
             type="button"
-            className="block text-gray-300 hover:text-white focus:outline-none"
+            className="block text-gray-300 hover:text-white focus:outline-none mr-2"
             onClick={() => setIsOpen(!isOpen)}
           >
             <svg className="w-8 h-8 fill-current" viewBox="0 0 24 24">

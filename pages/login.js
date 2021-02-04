@@ -28,7 +28,7 @@ const Login = (props) => {
   return (
     <Layout>
       <div className="flex items-center p-4 lg:justify-center">
-        <div className="flex mt-12 flex-col overflow-hidden bg-white shadow-lg rounded-md max md:flex-row md:flex-1 lg:max-w-screen-md">
+        <div className="flex flex-col overflow-hidden bg-white shadow-lg rounded-md max md:flex-row md:flex-1 lg:max-w-screen-md">
           {/* LEFT SIDE ITEMS */}
           <div className="p-4 py-6 text-white bg-gray-800 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
             <div className="my-3 text-4xl font-bold tracking-wider text-center">

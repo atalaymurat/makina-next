@@ -32,7 +32,7 @@ const Panel = (props) => {
           />
         )}
         <div className="flex flex-col max-w-5xl items-center container mx-auto">
-          <h1 className="mx-auto my-3">Panel</h1>
+          <h1 className="mx-auto my-2 text-xl font-semibold text-gray-500">Panel</h1>
           <div className="flex flex-col lg:flex-row lg:space-x-1 w-full">
             <div className="w-full lg:w-1/2">
               <Profile user={user} />
