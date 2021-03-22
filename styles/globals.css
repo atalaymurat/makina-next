@@ -44,3 +44,12 @@ div.footer-content {
 
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .btn-submit {
+    @apply inline-flex items-center justify-center w-full px-4 py-2 text-lg font-semibold text-white bg-gray-700 shadow transition-colors duration-300 rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-blue-200 focus:ring-4
+  }
+  .btn-cancel {
+    @apply inline-flex items-center justify-center w-full px-4 py-2 text-lg font-semibold text-white bg-red-600 shadow transition-colors duration-300 rounded-md hover:bg-red-400 focus:outline-none focus:ring-blue-200 focus:ring-4
+  }
+}

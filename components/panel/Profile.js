@@ -178,7 +178,7 @@ const Profile = ({ user }) => {
               {t(`panel:${user.accountType}`)}
             </div>
             {user.accountType === 'user' && (
-              <button className="w-1/2 ml-1 border border-gray-300 shadow font-semibold rounded p-1 hover:bg-gray-800">
+              <button className="hidden w-1/2 ml-1 border border-gray-300 shadow font-semibold rounded p-1 hover:bg-gray-800">
                 {t('panel:upgrade')}
               </button>
             )}

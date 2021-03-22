@@ -25,21 +25,21 @@ function UserAvatar({ user }) {
 
   if (user && getUserPhoto(user.provider, user)) {
     return (
-      <button className="relative z-10 text-white bg-indigo-900 rounded-full focus:outline-none font-semibold inline-flex items-center text-xs justify-center align-middle overflow-hidden">
+      <a className="relative z-10 text-white bg-indigo-900 rounded-full focus:outline-none font-semibold inline-flex items-center text-xs justify-center align-middle overflow-hidden">
         <img
           src={getUserPhoto(user.provider, user)}
           alt="IMG"
           className="w-8 h-8 rounded-full object-cover"
         />
-      </button>
+      </a>
     )
   }
 
   if (user && getUserPhoto(user.provider, user)) {
     return (
-      <button className="relative z-10 w-8 h-8 text-white bg-indigo-900 border-2 rounded-full focus:outline-none focus:border-white font-semibold inline-flex items-center text-xs justify-center align-middle">
+      <a className="relative z-10 w-8 h-8 text-white bg-indigo-900 border-2 rounded-full focus:outline-none focus:border-white font-semibold inline-flex items-center text-xs justify-center align-middle">
         {userName[0].toUpperCase() + userLastName[0].toUpperCase()}
-      </button>
+      </a>
     )
   } else {
     return null

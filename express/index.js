@@ -43,12 +43,14 @@ app
     const authRoutes = require('./routes/auth')
     const userRoutes = require('./routes/user')
     const imagesRoutes = require('./routes/images')
+    const usedRoutes = require('./routes/used')
 
     server.use(bodyParser.json())
     server.use('/api', apiRoutes)
     server.use('/api/auth', authRoutes)
     server.use('/api/user', userRoutes)
     server.use('/api/images', imagesRoutes)
+    server.use('/api/used', usedRoutes)
     server.use(express.static(path.join(__dirname, '../public')))
 
     server.get('*', (req, res) => {
