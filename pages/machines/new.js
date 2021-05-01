@@ -3,7 +3,6 @@ import Layout from '../../components/Layout'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { TextInput } from '../../lib/formikInputs'
-import CircleSpin from '../../components/CircleSpin'
 
 const Wizard = ({ children, initialValues, onSubmit }) => {
   const [stepNumber, setStepNumber] = useState(0)
@@ -43,18 +42,26 @@ const Wizard = ({ children, initialValues, onSubmit }) => {
       onSubmit={handleSubmit}
     >
       {(formik) => (
-        <Form>
+        <Form autoComplete="off">
           <p>
             Step {stepNumber + 1} of {totalSteps}
           </p>
           {step}
           <div className="flex flex-row divide-x-4 mt-6">
             {stepNumber > 0 && (
-              <button className="btn-cancel "onClick={() => previous(formik.values)} type="button">
+              <button
+                className="btn-cancel "
+                onClick={() => previous(formik.values)}
+                type="button"
+              >
                 Back
               </button>
             )}
-            <button className="btn-submit" disabled={formik.isSubmitting} type="submit">
+            <button
+              className="btn-submit"
+              disabled={formik.isSubmitting}
+              type="submit"
+            >
               {isLastStep ? 'Save' : 'Next'}
             </button>
           </div>
@@ -66,56 +73,114 @@ const Wizard = ({ children, initialValues, onSubmit }) => {
 
 const WizardStep = ({ children }) => children
 
-const New = () => (
-  <Layout>
-    <div className="container mx-auto">
-      <h1 className="text-center">Machine#New</h1>
-      <Wizard
-        initialValues={{
-          title: '',
-          description: '',
-          new: false,
-          any: false,
-        }}
-        onSubmit={async (values) => {
-          alert(JSON.stringify(values))
-        }}
-      >
-        <WizardStep
-          onSubmit={() => console.log('Step1 onSubmit')}
-          validationSchema={Yup.object({
-            title: Yup.string().required('required'),
-            description: Yup.string().required('required'),
-          })}
+const New = () => {
+  const [listType, setListType] = useState('new')
+  return (
+    <Layout>
+      <div className="container mx-auto">
+        <h1 className="text-center">Machine#New</h1>
+        <Wizard
+          initialValues={{
+            title: '',
+            description: '',
+            listType: '',
+            any: '',
+            used: {
+              modelYear: '',
+            },
+            new: {
+              saleType: '',
+            },
+          }}
+          onSubmit={async (val) => {
+            let _values = { ...val }
+            if (val.listType === 'new') {
+              _values = { ...val, used: null }
+            }
+            if (val.listType === 'used') {
+              _values = { ...val, used: null }
+            }
+            alert(JSON.stringify(_values))
+          }}
         >
-          <TextInput name="title" type="text" id="title" label="title" />
-          <TextInput
-            name="description"
-            type="text"
-            id="desc"
-            label="description"
-          />
+          <WizardStep
+            onSubmit={() => console.log('Step1 onSubmit')}
+            validationSchema={Yup.object({
+              title: Yup.string().required('required'),
+              description: Yup.string().required('required'),
+            })}
+          >
+            <TextInput name="title" type="text" id="title" label="title" />
+            <TextInput
+              name="description"
+              type="text"
+              id="desc"
+              label="description"
+            />
+          </WizardStep>
+          <WizardStep
+            onSubmit={(values) => {
+              console.log('Step2 onSubmit', values)
+              setListType(values.listType)
+              console.log('SELECTED:', listType)
+            }}
+            validationSchema={Yup.object({
+              listType: Yup.string().required(
+                'You must Select one of the options'
+              ),
+            })}
+          >
+            <label className="mr-4">
+              <Field
+                name="listType"
+                type="radio"
+                className="mr-2"
+                value="new"
+              />
+              Listing a New (unused) machine
+            </label>
+            <label>
+              <Field
+                name="listType"
+                type="radio"
+                className="mr-2"
+                value="used"
+              />
+              Listing a Used (second hand) machine
+            </label>
+            <ErrorMessage className="error" component="div" name="new" />
+          </WizardStep>
 
+          {listType === 'new' && (
+            <WizardStep>
+              <p>MACHINE OPTIONS FOR NEW ONES</p>
+              <TextInput
+                name="new.saleType"
+                type="text"
+                id="saleType"
+                label="sale type"
+              />
+            </WizardStep>
+          )}
+          {listType === 'used' && (
+            <WizardStep>
+              <p>MACHINE OPTIONS FOR USED ONES</p>
+              <TextInput
+                name="used.modelYear"
+                type="number"
+                id="year"
+                label="year"
+              />
+            </WizardStep>
+          )}
 
-        </WizardStep>
-        <WizardStep
-          onSubmit={() => console.log('Step2 onSubmit')}
-          validationSchema={Yup.object({
-            new: Yup.boolean().oneOf( [true], 'Field must checked'),
-          })}
-        >
-          <label>
-            <Field name="new" type="checkbox" label="is new" className="mr-2" />
-            is this a new machine
-          </label>
-          <ErrorMessage className="error" component="div" name="new" />
-        </WizardStep>
-        <WizardStep>
-        <a href="/">go index</a>
-        </WizardStep>
-      </Wizard>
-    </div>
-  </Layout>
-)
-
+          <WizardStep>
+            <p>Listing Machine Values</p>
+            {console.log()}
+          </WizardStep>
+        </Wizard>
+      </div>
+    </Layout>
+  )
+}
 export default New
