@@ -212,6 +212,14 @@ const Navbar = () => {
                   {t('menu:myAccount')}
                 </a>
               </Link>
+              <Link href="/machines/new">
+                <a
+                  className="block px-4 py-1 text-gray-300 hover:bg-gray-700 hover:text-white"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {t('Add Machine')}
+                </a>
+              </Link>
               <Link href="/">
                 <a
                   className="block px-4 py-1 text-gray-300 hover:bg-gray-700 hover:text-white"

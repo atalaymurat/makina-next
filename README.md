@@ -10,3 +10,10 @@ brew install graphicsmagick
 sudo apt-get install graphicsmagick
 sudo apt-get install imagemagick
 sudo apt-get install webp
+
+// For deploying the Project
+
+git add .
+git commit -m "deploy"
+git push
+cap production deply

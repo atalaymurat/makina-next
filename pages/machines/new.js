@@ -1,17 +1,27 @@
 import React, { useState } from 'react'
 import Layout from '../../components/Layout'
-import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { Formik, Form, Field, ErrorMessage, useFormikContext } from 'formik'
 import * as Yup from 'yup'
-import { TextInput } from '../../lib/formikInputs'
+import {
+  TextInput,
+  TextAreaInput,
+  SelectCreatable,
+} from '../../lib/formikInputs'
 
-const Wizard = ({ children, initialValues, onSubmit }) => {
+const MacForm = ({ initialValues, onSubmit }) => {
   const [stepNumber, setStepNumber] = useState(0)
-  const steps = React.Children.toArray(children)
   const [snapshot, setSnapshot] = useState(initialValues)
-
-  const step = steps[stepNumber]
+  const steps = [<Step1 />, <Step2 />]
   const totalSteps = steps.length
-  const isLastStep = stepNumber === totalSteps - 1
+  const isLast = stepNumber === totalSteps - 1
+
+  const schemaArray = [
+    Yup.object({
+      title: Yup.string().required('Gerekli'),
+      description: Yup.string().required('Gerekli'),
+    }),
+    Yup.object({ brand: Yup.string().nullable().required('Gerekli') }),
+  ]
 
   const next = (values) => {
     setSnapshot(values)
@@ -24,10 +34,7 @@ const Wizard = ({ children, initialValues, onSubmit }) => {
   }
 
   const handleSubmit = async (values, bag) => {
-    if (step.props.onSubmit) {
-      await step.props.onSubmit(values, bag)
-    }
-    if (isLastStep) {
+    if (isLast) {
       return onSubmit(values, bag)
     } else {
       bag.setTouched({})
@@ -38,17 +45,15 @@ const Wizard = ({ children, initialValues, onSubmit }) => {
   return (
     <Formik
       initialValues={snapshot}
-      validationSchema={step.props.validationSchema}
       onSubmit={handleSubmit}
+      validationSchema={schemaArray[stepNumber]}
     >
       {(formik) => (
         <Form autoComplete="off">
-          <p>
-            Step {stepNumber + 1} of {totalSteps}
-          </p>
-          {step}
+          {React.cloneElement(steps[stepNumber], { ...formik })}
+
           <div className="flex flex-row divide-x-4 mt-6">
-            {stepNumber > 0 && (
+            {stepNumber !== 0 && (
               <button
                 className="btn-cancel "
                 onClick={() => previous(formik.values)}
@@ -57,12 +62,13 @@ const Wizard = ({ children, initialValues, onSubmit }) => {
                 Back
               </button>
             )}
+
             <button
               className="btn-submit"
               disabled={formik.isSubmitting}
               type="submit"
             >
-              {isLastStep ? 'Save' : 'Next'}
+              {stepNumber === totalSteps - 1 ? 'save' : 'next'}
             </button>
           </div>
         </Form>
@@ -71,20 +77,45 @@ const Wizard = ({ children, initialValues, onSubmit }) => {
   )
 }
 
-const WizardStep = ({ children }) => children
+const Step1 = () => (
+  <>
+    <TextInput name="title" type="text" id="title" label="title" />
+    <TextAreaInput
+      name="description"
+      type="text"
+      id="desc"
+      label="Description"
+    />
+  </>
+)
+const Step2 = (props) => (
+  <>
+  {JSON.stringify(props.values)}
+    <SelectCreatable
+      name="brand"
+      label="Brand"
+      id="brand"
+      value={props.values.brand}
+      options={[
+        { value: 'Ima', label: 'Ima' },
+        { value: 'Schelling', label: 'Schelling' },
+      ]}
+    />
+  </>
+)
 
 const New = () => {
   const [listType, setListType] = useState('new')
   return (
     <Layout>
-      <div className="container mx-auto">
+      <div className="container mx-auto px-4">
         <h1 className="text-center">Machine#New</h1>
-        <Wizard
+        <MacForm
           initialValues={{
             title: '',
             description: '',
             listType: '',
-            any: '',
+            brand: "",
             used: {
               modelYear: '',
             },
@@ -98,87 +129,11 @@ const New = () => {
               _values = { ...val, used: null }
             }
             if (val.listType === 'used') {
-              _values = { ...val, used: null }
+              _values = { ...val, new: null }
             }
             alert(JSON.stringify(_values))
           }}
-        >
-          <WizardStep
-            onSubmit={() => console.log('Step1 onSubmit')}
-            validationSchema={Yup.object({
-              title: Yup.string().required('required'),
-              description: Yup.string().required('required'),
-            })}
-          >
-            <TextInput name="title" type="text" id="title" label="title" />
-            <TextInput
-              name="description"
-              type="text"
-              id="desc"
-              label="description"
-            />
-          </WizardStep>
-          <WizardStep
-            onSubmit={(values) => {
-              console.log('Step2 onSubmit', values)
-              setListType(values.listType)
-              console.log('SELECTED:', listType)
-            }}
-            validationSchema={Yup.object({
-              listType: Yup.string().required(
-                'You must Select one of the options'
-              ),
-            })}
-          >
-            <label className="mr-4">
-              <Field
-                name="listType"
-                type="radio"
-                className="mr-2"
-                value="new"
-              />
-              Listing a New (unused) machine
-            </label>
-            <label>
-              <Field
-                name="listType"
-                type="radio"
-                className="mr-2"
-                value="used"
-              />
-              Listing a Used (second hand) machine
-            </label>
-            <ErrorMessage className="error" component="div" name="new" />
-          </WizardStep>
-
-          {listType === 'new' && (
-            <WizardStep>
-              <p>MACHINE OPTIONS FOR NEW ONES</p>
-              <TextInput
-                name="new.saleType"
-                type="text"
-                id="saleType"
-                label="sale type"
-              />
-            </WizardStep>
-          )}
-          {listType === 'used' && (
-            <WizardStep>
-              <p>MACHINE OPTIONS FOR USED ONES</p>
-              <TextInput
-                name="used.modelYear"
-                type="number"
-                id="year"
-                label="year"
-              />
-            </WizardStep>
-          )}
-
-          <WizardStep>
-            <p>Listing Machine Values</p>
-            {console.log()}
-          </WizardStep>
-        </Wizard>
+        ></MacForm>
       </div>
     </Layout>
   )
