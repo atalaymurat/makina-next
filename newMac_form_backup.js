@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import Layout from '../../components/Layout'
+import Layout from './components/Layout'
 import { Formik, Form, Field, ErrorMessage, useFormikContext } from 'formik'
 import * as Yup from 'yup'
 import {
   TextInput,
   TextAreaInput,
   SelectCreatable,
-} from '../../lib/formikInputs'
+} from './lib/formikInputs'
 
 const Wizard = ({ children, initialValues, onSubmit }) => {
   const [stepNumber, setStepNumber] = useState(0)

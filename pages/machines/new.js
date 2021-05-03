@@ -8,10 +8,17 @@ import {
   SelectCreatable,
 } from '../../lib/formikInputs'
 
-const MacForm = ({ initialValues, onSubmit }) => {
+const MacForm = ({ initialValues }) => {
+  const [formValues, setFormValues] = useState({})
+  const [listType, setListType] = useState('new')
   const [stepNumber, setStepNumber] = useState(0)
   const [snapshot, setSnapshot] = useState(initialValues)
-  const steps = [<Step1 />, <Step2 />]
+  const steps = [
+    <Step1 />,
+    <Step2 />,
+    <Step3 />,
+    listType === 'new' ? <StepNew /> : <StepUsed />,
+  ]
   const totalSteps = steps.length
   const isLast = stepNumber === totalSteps - 1
 
@@ -21,10 +28,14 @@ const MacForm = ({ initialValues, onSubmit }) => {
       description: Yup.string().required('Gerekli'),
     }),
     Yup.object({ brand: Yup.string().nullable().required('Gerekli') }),
+    Yup.object({
+      listType: Yup.string().required('You must Select one of the options'),
+    }),
   ]
 
   const next = (values) => {
     setSnapshot(values)
+
     setStepNumber(Math.min(stepNumber + 1, totalSteps - 1))
   }
 
@@ -35,7 +46,7 @@ const MacForm = ({ initialValues, onSubmit }) => {
 
   const handleSubmit = async (values, bag) => {
     if (isLast) {
-      return onSubmit(values, bag)
+      return setFormValues(values)
     } else {
       bag.setTouched({})
       next(values)
@@ -50,7 +61,11 @@ const MacForm = ({ initialValues, onSubmit }) => {
     >
       {(formik) => (
         <Form autoComplete="off">
-          {React.cloneElement(steps[stepNumber], { ...formik })}
+          {React.cloneElement(steps[stepNumber], {
+            ...formik,
+            listType,
+            setListType,
+          })}
 
           <div className="flex flex-row divide-x-4 mt-6">
             {stepNumber !== 0 && (
@@ -71,26 +86,31 @@ const MacForm = ({ initialValues, onSubmit }) => {
               {stepNumber === totalSteps - 1 ? 'save' : 'next'}
             </button>
           </div>
+
+          <p className="m-2 p-2">
+            <code>{JSON.stringify(formValues, null, 4)}</code>
+          </p>
         </Form>
       )}
     </Formik>
   )
 }
 
-const Step1 = () => (
-  <>
-    <TextInput name="title" type="text" id="title" label="title" />
-    <TextAreaInput
-      name="description"
-      type="text"
-      id="desc"
-      label="Description"
-    />
-  </>
-)
+const Step1 = (props) => {
+  return (
+    <>
+      <TextInput name="title" type="text" id="title" label="title" />
+      <TextAreaInput
+        name="description"
+        type="text"
+        id="desc"
+        label="Description"
+      />
+    </>
+  )
+}
 const Step2 = (props) => (
   <>
-  {JSON.stringify(props.values)}
     <SelectCreatable
       name="brand"
       label="Brand"
@@ -103,9 +123,58 @@ const Step2 = (props) => (
     />
   </>
 )
+const Step3 = (props) => (
+  <>
+    <h2 className="text-3xl text-center font-semibold mb-4 p-2">Are you going to list new or used machine?</h2>
+    <div className="flex">
+      <div className="flex-1">
+        <label className="mr-4">
+          <Field
+            name="listType"
+            type="radio"
+            className="mr-2"
+            value="new"
+            onClick={() => props.setListType('new')}
+          />
+          Listing a New (unused) machine
+        </label>
+      </div>
+
+      <div className="flex-1">
+        <label>
+          <Field
+            name="listType"
+            type="radio"
+            className="mr-2"
+            value="used"
+            onClick={() => props.setListType('used')}
+          />
+          Listing a Used (second hand) machine
+        </label>
+      </div>
+    </div>
+
+    <ErrorMessage
+      className="text-red-600 italic inline-block mb-2"
+      component="div"
+      name="listType"
+    />
+  </>
+)
+
+const StepNew = (props) => (
+  <>
+    <p>NEW Machines Information Form</p>
+  </>
+)
+
+const StepUsed = (props) => (
+  <>
+    <p>USED Machines Information Form</p>
+  </>
+)
 
 const New = () => {
-  const [listType, setListType] = useState('new')
   return (
     <Layout>
       <div className="container mx-auto px-4">
@@ -115,25 +184,9 @@ const New = () => {
             title: '',
             description: '',
             listType: '',
-            brand: "",
-            used: {
-              modelYear: '',
-            },
-            new: {
-              saleType: '',
-            },
+            brand: '',
           }}
-          onSubmit={async (val) => {
-            let _values = { ...val }
-            if (val.listType === 'new') {
-              _values = { ...val, used: null }
-            }
-            if (val.listType === 'used') {
-              _values = { ...val, new: null }
-            }
-            alert(JSON.stringify(_values))
-          }}
-        ></MacForm>
+        />
       </div>
     </Layout>
   )
