@@ -83,13 +83,16 @@ const MacForm = ({ initialValues }) => {
               disabled={formik.isSubmitting}
               type="submit"
             >
-              {stepNumber === totalSteps - 1 ? 'save' : 'next'}
+              {stepNumber === totalSteps - 1 ? 'Save' : 'Next'}
             </button>
           </div>
 
-          <p className="m-2 p-2">
-            <code>{JSON.stringify(formValues, null, 4)}</code>
-          </p>
+          {formValues.title ? (
+            <p className="m-2 p-2 text-indigo-600">
+              <p>Form Data Preview for Server Database</p>
+              <code>{JSON.stringify(formValues, null, 4)}</code>
+            </p>
+          ) : null}
         </Form>
       )}
     </Formik>
@@ -99,7 +102,7 @@ const MacForm = ({ initialValues }) => {
 const Step1 = (props) => {
   return (
     <>
-      <TextInput name="title" type="text" id="title" label="title" />
+      <TextInput name="title" type="text" id="title" label="Title" />
       <TextAreaInput
         name="description"
         type="text"
@@ -119,13 +122,20 @@ const Step2 = (props) => (
       options={[
         { value: 'Ima', label: 'Ima' },
         { value: 'Schelling', label: 'Schelling' },
+        { value: 'Motoman', label: 'Motoman' },
+        { value: 'Fanuc', label: 'Fanuc' },
+        { value: 'Kawasaki', label: 'Kawasaki' },
+        { value: 'Kuka', label: 'Kuka' },
       ]}
     />
+    <TextInput name="modelType" label="Model Type" type="text" id="modelType" />
   </>
 )
 const Step3 = (props) => (
   <>
-    <h2 className="text-3xl text-center font-semibold mb-4 p-2">Are you going to list new or used machine?</h2>
+    <h2 className="text-3xl text-center font-semibold mb-4 p-2">
+      Are you going to list a NEW or USED machine?
+    </h2>
     <div className="flex">
       <div className="flex-1">
         <label className="mr-4">
@@ -164,13 +174,20 @@ const Step3 = (props) => (
 
 const StepNew = (props) => (
   <>
-    <p>NEW Machines Information Form</p>
+    <p>NEW Machine Information Form</p>
   </>
 )
 
 const StepUsed = (props) => (
   <>
-    <p>USED Machines Information Form</p>
+    <h2>USED Machine Information Form</h2>
+    <TextInput name="modelYear" label="Model Production Year" type="number" id="modelType" />
+    <TextAreaInput
+        name="technicData"
+        type="text"
+        id="desc"
+        label="Technical Data"
+      />
   </>
 )
 
@@ -178,13 +195,15 @@ const New = () => {
   return (
     <Layout>
       <div className="container mx-auto px-4">
-        <h1 className="text-center">Machine#New</h1>
+        <h1 className="text-center text-xs">Machine#New#Form [DEVELOPMENT]</h1>
         <MacForm
           initialValues={{
             title: '',
             description: '',
             listType: '',
             brand: '',
+            modelType: '',
+            modelYear: '',
           }}
         />
       </div>
