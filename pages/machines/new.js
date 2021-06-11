@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import Layout from '../../components/Layout'
-import { Formik, Form, Field, ErrorMessage, useFormikContext } from 'formik'
+import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import {
   TextInput,
   TextAreaInput,
   SelectCreatable,
 } from '../../lib/formikInputs'
+import SelectCatInput from '../../lib/selectCatInput'
 
 const MacForm = ({ initialValues }) => {
   const [formValues, setFormValues] = useState({})
@@ -18,6 +19,7 @@ const MacForm = ({ initialValues }) => {
     <Step2 />,
     <Step3 />,
     listType === 'new' ? <StepNew /> : <StepUsed />,
+    <StepCategory />,
   ]
   const totalSteps = steps.length
   const isLast = stepNumber === totalSteps - 1
@@ -181,13 +183,25 @@ const StepNew = (props) => (
 const StepUsed = (props) => (
   <>
     <h2>USED Machine Information Form</h2>
-    <TextInput name="modelYear" label="Model Production Year" type="number" id="modelType" />
+    <TextInput
+      name="modelYear"
+      label="Model Production Year"
+      type="number"
+      id="modelType"
+    />
     <TextAreaInput
-        name="technicData"
-        type="text"
-        id="desc"
-        label="Technical Data"
-      />
+      name="technicData"
+      type="text"
+      id="desc"
+      label="Technical Data"
+    />
+  </>
+)
+
+const StepCategory = (props) => (
+  <>
+    <h2>Select the Category</h2>
+    <SelectCatInput {...props} />
   </>
 )
 
@@ -204,6 +218,7 @@ const New = () => {
             brand: '',
             modelType: '',
             modelYear: '',
+            category: '5f4f7428e663528f31e0d3ac',
           }}
         />
       </div>
