@@ -44,6 +44,7 @@ app
     const userRoutes = require('./routes/user')
     const imagesRoutes = require('./routes/images')
     const usedRoutes = require('./routes/used')
+    const categoriesRoutes = require('./routes/categories')
 
     server.use(bodyParser.json())
     server.use('/api', apiRoutes)
@@ -51,6 +52,7 @@ app
     server.use('/api/user', userRoutes)
     server.use('/api/images', imagesRoutes)
     server.use('/api/used', usedRoutes)
+    server.use('/api/categories', categoriesRoutes)
     server.use(express.static(path.join(__dirname, '../public')))
 
     server.get('*', (req, res) => {
