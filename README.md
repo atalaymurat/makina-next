@@ -16,4 +16,8 @@ sudo apt-get install webp
 git add .
 git commit -m "deploy"
 git push
-cap production deply
+cap production deploy
+
+//First Deploy to server
+need to copy shared folder
+scp -r /shared user@0.0.0.0:/productionFolder
