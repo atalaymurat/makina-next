@@ -159,7 +159,7 @@ module.exports = {
 
       res.status(200).json({ success: true })
     } catch (err) {
-      console.error('Server Error:', err)
+      console.error('SIGN UP CONTROLLER SERVER:', err)
       if (err.code === 'EENVELOPE') {
         return res.status(550).json({
           success: false,
