@@ -5,7 +5,7 @@ source "https://rubygems.org"
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
 
-gem 'capistrano', '~> 3.14'
+gem 'capistrano', '~> 3.16'
 gem 'capistrano-copy-files'
 gem 'capistrano-npm'
 gem 'capistrano-passenger'

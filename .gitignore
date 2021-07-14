@@ -111,3 +111,5 @@ public/
 config/
 tmp/uploads/*
 useLater.js
+old_cap/
+log/

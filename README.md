@@ -21,3 +21,6 @@ cap production deploy
 //First Deploy to server
 need to copy shared folder
 scp -r /shared user@0.0.0.0:/productionFolder
+
+
+be sure nginx or webserver is listening local host 127.0.0.1:5000
