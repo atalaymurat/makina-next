@@ -140,21 +140,22 @@ module.exports = {
 
       const subject = locale === 'tr' ? 'Üyelik Onayı' : 'Confirm Your Account'
 
-      await mailer.sendEmail(
-        process.env.APP_MAIL_EMAIL,
-        email,
-        subject,
-        html,
-        text
-      )
+      // await mailer.sendEmail(
+      //  process.env.APP_MAIL_EMAIL,
+      //  email,
+      //  subject,
+      //  html,
+      //  text
+      // )
       // sent a mail to site admin
-      await mailer.sendEmail(
-        process.env.APP_MAIL_EMAIL,
-        process.env.APP_MAIL_EMAIL,
-        `New User Register - ${name}`,
-        html,
-        text
-      )
+      // await mailer.sendEmail(
+      //  process.env.APP_MAIL_EMAIL,
+      //  process.env.APP_MAIL_EMAIL,
+      //  `New User Register - ${name}`,
+      //  html,
+      //  text
+      // )
+
       await newUser.save()
 
       res.status(200).json({ success: true })
