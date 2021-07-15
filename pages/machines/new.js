@@ -218,7 +218,7 @@ const New = () => {
             brand: '',
             modelType: '',
             modelYear: '',
-            category: '5f4f7428e663528f31e0d3ac',
+            category: '',
           }}
         />
       </div>
