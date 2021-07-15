@@ -72,7 +72,14 @@ module.exports = {
     }
   },
   tree: async (req, res, next) => {
-    console.log("Tree Controller Categories")
+    console.log("Tree Controller at Categories")
+    // Burda kategori kaydı yok ise hata veriyor düzeltme gerekli
+    const cat = await Category.find()
+    if (cat.length === 0 ) {
+      console.log("ERROR: There is no category in the list please be sure to add some cats")
+      res.end()
+    }
+
     const fullTree = await Category.GetFullArrayTree()
     res.status(200).json({ success: true, tree: fullTree })
   },
