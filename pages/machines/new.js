@@ -8,6 +8,7 @@ import {
   SelectCreatable,
 } from '../../lib/formikInputs'
 import SelectCatInput from '../../lib/selectCatInput'
+import Dropzone from 'react-dropzone'
 
 const MacForm = ({ initialValues }) => {
   const [formValues, setFormValues] = useState({})
@@ -20,6 +21,7 @@ const MacForm = ({ initialValues }) => {
     <Step3 />,
     listType === 'new' ? <StepNew /> : <StepUsed />,
     <StepCategory />,
+    <StepImages />,
   ]
   const totalSteps = steps.length
   const isLast = stepNumber === totalSteps - 1
@@ -176,7 +178,7 @@ const Step3 = (props) => (
 
 const StepNew = (props) => (
   <>
-    <p>NEW Machine Information Form</p>
+    <h2>NEW Machine Information Form</h2>
   </>
 )
 
@@ -205,6 +207,24 @@ const StepCategory = (props) => (
   </>
 )
 
+const StepImages = (props) => {
+  return (
+    <>
+      <h2>Upload Machine Images</h2>
+      <Dropzone onDrop={(acceptedFiles) => console.log(acceptedFiles)}>
+        {({ getRootProps, getInputProps }) => (
+          <section>
+            <div {...getRootProps()}>
+              <input {...getInputProps()} />
+              <p>Drag 'n' drop some files here, or click to select files</p>
+            </div>
+          </section>
+        )}
+      </Dropzone>
+    </>
+  )
+}
+
 const New = () => {
   return (
     <Layout>
@@ -219,6 +239,7 @@ const New = () => {
             modelType: '',
             modelYear: '',
             category: '',
+            images: [],
           }}
         />
       </div>
