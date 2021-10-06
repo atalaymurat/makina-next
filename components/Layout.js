@@ -12,7 +12,10 @@ const Layout = (props) => {
     <>
       <Head>
         <title>
-          {(title && `${title} -- ${process.env.NEXT_PUBLIC_SITE_NAME}`) ||
+          {(title &&
+             `${t(title)} | ${t('site_title', {
+              site_name: process.env.NEXT_PUBLIC_SITE_NAME,
+            })}`) ||
             t('site_title', { site_name: process.env.NEXT_PUBLIC_SITE_NAME })}
         </title>
         <link rel="canonical" href={process.env.NEXT_PUBLIC_BASE_URL + '/'} />
