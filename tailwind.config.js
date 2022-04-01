@@ -1,14 +1,12 @@
 const colors = require('tailwindcss/colors')
 
 module.exports = {
-  purge: {
-    content: process.env.NODE_ENV !== 'development' && [
-      './components/**/*.js',
-      './pages/**/*.js',
-      './lib/**/*.js',
-    ],
-  },
-  darkMode: false, // or 'media' or 'class'
+  content:  [
+    './components/**/*.js',
+    './pages/**/*.js',
+    './lib/**/*.js',
+  ],
+
   theme: {
     extend: {
       minHeight: {
@@ -17,7 +15,7 @@ module.exports = {
       colors: {
         transparent: 'transparent',
         current: 'currentColor',
-        gray: colors.coolGray,
+        gray: colors.gray,
         purple: colors.violet,
         red: colors.red,
         lime: colors.lime,

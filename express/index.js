@@ -20,10 +20,6 @@ app
     //Set up default mongoose connection
     var mongoDB = process.env.APP_MONGO_DB_URL
     mongoose.connect(mongoDB, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
     })
 
     //Get the default connection
