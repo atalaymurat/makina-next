@@ -61,19 +61,15 @@ export const getServerSideProps = withSession(async ({ req, res }) => {
     })
     console.log('PANEL API RES :: ', apiRes.data)
 
-    if (user) {
+    if (sessionUser) {
       const user = apiRes.data
       return {
         props: { user },
       }
-    } else {
-      return {
-        props: {},
-      }
     }
   } catch (err) {
     console.error('Error: RequestNew.js', err)
-    res.redirect('/404')
+    res.end()
   }
 })
 
