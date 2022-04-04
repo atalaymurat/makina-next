@@ -134,6 +134,7 @@ const ReqForm = ({ initialValues, user }) => {
   const handleSubmit = async (values, bag) => {
     if (isLast) {
       return setFormValues(values)
+    return
     } else {
       bag.setTouched({})
       next(values)
@@ -273,10 +274,6 @@ const Step2 = (props) => {
                   key={index}
                   className="bg-yellow-500 p-4 m-2 rounded-sm shadow-md"
                 >
-                  <SelectCatInput
-                    name={`requests.${index}.category`}
-                    {...props}
-                  />
 
                   <FormikControl
                     control="reactSelect"

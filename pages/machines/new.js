@@ -210,7 +210,6 @@ const StepUsed = (props) => (
 const StepCategory = (props) => (
   <>
     <h2>Select the Category</h2>
-    <SelectCatInput {...props} />
   </>
 )
 
