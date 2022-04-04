@@ -2,11 +2,7 @@ import React, { useState } from 'react'
 import Layout from '../../components/Layout'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
-import {
-  TextInput,
-  TextAreaInput,
-  SelectCreatable,
-} from '../../lib/formikInputs'
+import FormikControl from '../../components/formik/FormikControl'
 import SelectCatInput from '../../lib/selectCatInput'
 import Dropzone from 'react-dropzone'
 
@@ -31,7 +27,7 @@ const MacForm = ({ initialValues }) => {
       title: Yup.string().required('Gerekli'),
       description: Yup.string().required('Gerekli'),
     }),
-    Yup.object({ brand: Yup.string().nullable().required('Gerekli') }),
+    Yup.object({ brand: Yup.object().nullable().required('Gerekli') }),
     Yup.object({
       listType: Yup.string().required('You must Select one of the options'),
     }),
@@ -92,10 +88,10 @@ const MacForm = ({ initialValues }) => {
           </div>
 
           {formValues.title ? (
-            <p className="m-2 p-2 text-indigo-600">
-              <p>Form Data Preview for Server Database</p>
+            <div className="m-2 p-2 text-indigo-600">
+              <div>Form Data Preview for Server Database</div>
               <code>{JSON.stringify(formValues, null, 4)}</code>
-            </p>
+            </div>
           ) : null}
         </Form>
       )}
@@ -106,11 +102,17 @@ const MacForm = ({ initialValues }) => {
 const Step1 = (props) => {
   return (
     <>
-      <TextInput name="title" type="text" id="title" label="Title" />
-      <TextAreaInput
+      <FormikControl
+        control="input"
+        name="title"
+        type="text"
+        id="title"
+        label="Title"
+      />
+      <FormikControl
+        control="textarea"
         name="description"
         type="text"
-        id="desc"
         label="Description"
       />
     </>
@@ -118,11 +120,10 @@ const Step1 = (props) => {
 }
 const Step2 = (props) => (
   <>
-    <SelectCreatable
+    <FormikControl
+      control="reactSelect"
       name="brand"
       label="Brand"
-      id="brand"
-      value={props.values.brand}
       options={[
         { value: 'Ima', label: 'Ima' },
         { value: 'Schelling', label: 'Schelling' },
@@ -131,8 +132,14 @@ const Step2 = (props) => (
         { value: 'Kawasaki', label: 'Kawasaki' },
         { value: 'Kuka', label: 'Kuka' },
       ]}
+      isMulti={false}
     />
-    <TextInput name="modelType" label="Model Type" type="text" id="modelType" />
+    <FormikControl
+      control="input"
+      name="modelType"
+      label="Model Type"
+      type="text"
+    />
   </>
 )
 const Step3 = (props) => (
@@ -185,16 +192,16 @@ const StepNew = (props) => (
 const StepUsed = (props) => (
   <>
     <h2>USED Machine Information Form</h2>
-    <TextInput
+    <FormikControl
+      control="input"
       name="modelYear"
       label="Model Production Year"
       type="number"
-      id="modelType"
     />
-    <TextAreaInput
+    <FormikControl
+      control="input"
       name="technicData"
       type="text"
-      id="desc"
       label="Technical Data"
     />
   </>
@@ -235,7 +242,7 @@ const New = () => {
             title: '',
             description: '',
             listType: '',
-            brand: '',
+            brand: {},
             modelType: '',
             modelYear: '',
             category: '',

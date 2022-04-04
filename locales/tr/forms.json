@@ -17,6 +17,18 @@
   "middlename": "Diğer Ad",
   "notValidPhone": "Geçerli bir telefon gereklidir",
   "currentPassword": "Mevcut Şifre",
-  "newPassword": "Yeni Şifre"
+  "newPassword": "Yeni Şifre",
+  "minBrand": "En az 1 marka seçmeslisiniz",
+  "brandPrefer": "Tercih ettğiniz markalar",
+  "back": "önceki",
+  "next": "sonraki",
+  "select": "Seçiniz...",
+  "phone": "Telefon",
+  "company": "Firma Bilgileri",
+  "companyName": "Firma Ünvanı",
+  "city": "Şehir",
+  "country": "Ülke",
+  "contactInfo": "İlgili Kişi Bilgileri"
+
 
 }

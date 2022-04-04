@@ -4,13 +4,13 @@ import Link from 'next/link'
 import useTranslation from 'next-translate/useTranslation'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
-import { TextInput, PassInput } from '../lib/formikInputs'
 import Axios from 'axios'
 import Message from '../components/Message'
 import useUser from '../lib/useUser'
 import { useRouter } from 'next/router'
 import CircleSpin from '../components/CircleSpin'
 import SocialLogin from '../components/signup/SocialLogin'
+import FormikControl from '../components/formik/FormikControl'
 
 const Login = (props) => {
   const [forget, setForget] = useState(false)
@@ -105,10 +105,10 @@ const Login = (props) => {
                     {t('sign_up:resetPass')}
                   </h3>
                   <Form className="max-w-xl mx-auto bg-transparent">
-                    <TextInput
+                    <FormikControl
+                      control="input"
                       name="email"
                       type="text"
-                      id="email"
                       label={t('sign_up:email')}
                     />
 
@@ -176,13 +176,14 @@ const Login = (props) => {
                     {t('sign_up:loginTitle')}
                   </h3>
                   <Form className="max-w-xl mx-auto bg-transparent">
-                    <TextInput
+                    <FormikControl
+                      control="input"
                       name="email"
                       type="text"
-                      id="email"
                       label={t('sign_up:email')}
                     />
-                    <PassInput
+                    <FormikControl
+                      control="password"
                       name="password"
                       id="password"
                       label={t('sign_up:password')}

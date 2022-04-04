@@ -17,6 +17,17 @@
   "middlename": "Middle Name",
   "notValidPhone": "not valid phone",
   "currentPassword": "Current Password",
-  "newPassword": "New Password"
+  "newPassword": "New Password",
+  "minBrand": "At least 1 brand required",
+  "brandPrefer": "Brands you prefer",
+  "back": "back",
+  "next": "next",
+  "select": "Select...",
+  "phone": "Phone",
+  "company": "Company Informations",
+  "companyName": "Company Name",
+  "city": "City",
+  "country": "Country",
+  "contactInfo": "Contact Person"
 
 }

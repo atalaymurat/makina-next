@@ -4,11 +4,11 @@ import Message from '../../components/Message'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 import useTranslation from 'next-translate/useTranslation'
-import { TextInput, PassInput } from '../../lib/formikInputs'
 import { useRouter } from 'next/router'
 import CircleSpin from '../../components/CircleSpin'
 import Axios from 'axios'
 import Link from 'next/link'
+import FormikControl from '../../components/formik/FormikControl'
 
 const Reset = () => {
   const [message, setMessage] = useState(null)
@@ -84,15 +84,15 @@ const Reset = () => {
                       id="token"
                       value={token}
                     />
-                    <PassInput
+                    <FormikControl
+                      control="password"
                       name="password"
-                      id="password"
                       label={t('reset:password')}
                       autoComplete="new-password"
                     />
-                    <PassInput
+                    <FormikControl
+                      control="password"
                       name="passConfirm"
-                      id="passConfirm"
                       label={t('reset:passConfirm')}
                       autoComplete="new-password"
                     />

@@ -1,9 +1,9 @@
 import * as Yup from 'yup'
 import { Formik, Form } from 'formik'
-import { PhoneInputField } from '../../lib/formikInputs'
 import CircleSpin from '../CircleSpin'
 import useTranslation from 'next-translate/useTranslation'
 import Axios from 'axios'
+import FormikControl from '../formik/FormikControl'
 
 const PhoneForm = ({ user, mutate, togleModal }) => {
   const { t } = useTranslation()
@@ -38,21 +38,15 @@ const PhoneForm = ({ user, mutate, togleModal }) => {
       >
         {({ isSubmitting, setFieldValue, handleBlur }) => (
           <Form className="space-y-3">
-            <PhoneInputField
+            <FormikControl
+              control="phone"
               label={t("panel:gsmTel")}
-              id="mobile"
               name="mobile"
-              handleBlur={handleBlur}
-              onChange={(e) => setFieldValue('mobile', e)}
-              setFieldValue={setFieldValue}
             />
-            <PhoneInputField
+            <FormikControl
+              control="phone"
               label={t("panel:companyTel")}
-              id="company"
               name="company"
-              handleBlur={handleBlur}
-              onChange={(e) => setFieldValue('company', e)}
-              setFieldValue={setFieldValue}
             />
             <div className="py-2 mt-2">
               <button

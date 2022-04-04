@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react'
-import { TextInput, PassInput } from '../../lib/formikInputs'
 import useTranslation from 'next-translate/useTranslation'
 import * as Yup from 'yup'
 import axios from 'axios'
@@ -7,6 +6,7 @@ import { Formik, Form, Field } from 'formik'
 import ReCAPTCHA from 'react-google-recaptcha'
 import CircleSpin from '../CircleSpin'
 import { useRouter } from 'next/router'
+import FormikControl from '../formik/FormikControl'
 
 const SignupForm = ({ setMessage }) => {
   const { t } = useTranslation()
@@ -71,26 +71,27 @@ const SignupForm = ({ setMessage }) => {
             <div className="flex flex-col">
               <div className="flex flex-col lg:flex-row lg:flex-1 lg:space-x-2">
                 <div className="w-full lg:w-1/2">
-                  <TextInput
+                  <FormikControl
+                    control="input"
                     name="firstName"
                     type="text"
-                    id="firstName"
                     label={t('sign_up:name')}
                   />
-                  <TextInput
+                  <FormikControl
+                    control="input"
                     name="lastName"
                     type="text"
-                    id="lastName"
                     label={t('sign_up:surname')}
                   />
-                  <TextInput
+                  <FormikControl
+                    control="input"
                     name="email"
                     type="text"
-                    id="email"
                     label={t('sign_up:email')}
                   />
 
-                  <PassInput
+                  <FormikControl
+                    control="password"
                     name="password"
                     id="password"
                     label={t('sign_up:password')}

@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import * as Yup from 'yup'
 import { Formik, Form } from 'formik'
-import { PassInput } from '../../lib/formikInputs'
 import CircleSpin from '../CircleSpin'
 import useTranslation from 'next-translate/useTranslation'
 import Axios from 'axios'
 import Message from '../Message'
+import FormikControl from '../formik/FormikControl'
 
 const PassForm = ({ user, mutate, togleModal, setSuccessMessage }) => {
   const [message, setMessage] = useState(null)
@@ -67,15 +67,15 @@ const PassForm = ({ user, mutate, togleModal, setSuccessMessage }) => {
         >
           {({ isSubmitting, setFieldValue, handleBlur }) => (
             <Form className="space-y-3">
-              <PassInput
+              <FormikControl
+                control="password"
                 name="currentPassword"
-                id="currentPassword"
                 label={t('forms:currentPassword')}
                 autoComplete="current-password"
               />
-              <PassInput
+              <FormikControl
+                control="password"
                 name="newPassword"
-                id="newPassword"
                 label={t('forms:newPassword')}
                 autoComplete="new-password"
               />

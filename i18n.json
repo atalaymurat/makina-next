@@ -10,6 +10,7 @@
 		"/confirmation": ["forms", "confirmation"],
 		"/confirmation/[token]": ["confirmation", "forms"],
 		"/logout": ["logout"],
-		"/reset/[token]": ["reset", "forms"]
+		"/reset/[token]": ["reset", "forms"],
+		"/requests/new": ["forms"]
 	}
 }

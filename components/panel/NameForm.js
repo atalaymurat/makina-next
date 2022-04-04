@@ -1,9 +1,9 @@
 import * as Yup from 'yup'
 import { Formik, Form } from 'formik'
-import { TextInput } from '../../lib/formikInputs'
 import CircleSpin from '../CircleSpin'
 import useTranslation from 'next-translate/useTranslation'
 import Axios from 'axios'
+import FormikControl from '../formik/FormikControl'
 
 const NameForm = ({ user, mutate, togleModal }) => {
   const { t } = useTranslation()
@@ -41,19 +41,20 @@ const NameForm = ({ user, mutate, togleModal }) => {
       >
         {({ isSubmitting, setFieldValue }) => (
           <Form>
-            <TextInput
+            <FormikControl
+              control="input"
               name="firstName"
               type="text"
-              id="firstName"
               label={t('forms:name')}
             />
-            <TextInput
+            <FormikControl
+              control="input"
               name="middleName"
               type="text"
-              id="middleName"
               label={t('forms:middlename')}
             />
-            <TextInput
+            <FormikControl
+              control="input"
               name="lastName"
               type="text"
               id="lastName"
