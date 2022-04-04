@@ -61,9 +61,15 @@ export const getServerSideProps = withSession(async ({ req, res }) => {
     })
     console.log('PANEL API RES :: ', apiRes.data)
 
-    const user = apiRes.data
-    return {
-      props: { user },
+    if (user) {
+      const user = apiRes.data
+      return {
+        props: { user },
+      }
+    } else {
+      return {
+        props: {},
+      }
     }
   } catch (err) {
     console.error('Error: RequestNew.js', err)
