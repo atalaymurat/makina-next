@@ -13,7 +13,6 @@ function ReactSelect(props) {
       <Field id={name} name={name} {...rest}>
         {(props) => {
           const { field, form, meta } = props
-          console.log(props)
           return (
             <CreatableSelect
               options={options}

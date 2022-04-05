@@ -2,6 +2,7 @@ import Layout from '../components/Layout'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import useTranslation from 'next-translate/useTranslation'
+import Link from 'next/link'
 
 const Index = (props) => {
   const Router = useRouter()
@@ -15,32 +16,28 @@ const Index = (props) => {
             {t('index:greeting')}
           </span>
         </h1>
-        <div className="p-4 mx-auto my-8 border border-gray-900 hover:border-gray-700">
-          {props.data.success ? (
-            <p className="font-semibold text-center text-green-600"># API</p>
-          ) : (
-            <p className="font-extrabold text-center text-red-800"># API</p>
-          )}
-        </div>
+        <Link href="/requests/new">
+          <button type="button" className="btn-submit max-w-xs mx-auto my-10">
+            {t('index:requestMachine')}
+          </button>
+        </Link>
       </div>
     </Layout>
   )
 }
 
 export async function getServerSideProps() {
-  const res = await axios.get(`/api/test`)
   const res2 = await axios.get('/api/index')
-  const data = res.data
   const data2 = res2.data
 
-  if (!data) {
+  if (!data2) {
     return {
       notFound: true,
     }
   }
 
   return {
-    props: { data: { ...data, ...data2 } },
+    props: { data: { ...data2 } },
   }
 }
 

@@ -2,18 +2,15 @@ import React, { useState, useEffect } from 'react'
 import Layout from '../../components/Layout'
 import useTranslation from 'next-translate/useTranslation'
 import withSession from '../../lib/session'
-import SelectCatInput from '../../lib/selectCatInput'
 import Axios from 'axios'
 import FormikControl from '../../components/formik/FormikControl'
 
-import { Formik, Form, Field, ErrorMessage, FieldArray } from 'formik'
+
+import { Formik, Form, FieldArray } from 'formik'
 import * as Yup from 'yup'
 
 const New = (props) => {
   const { user } = props
-  useEffect(() => {
-    console.log('use effect runed:', user)
-  })
   return (
     <Layout>
       <div className="container mx-auto px-4">
@@ -35,9 +32,10 @@ const New = (props) => {
             company: { name: '', country: 'TR', city: '' },
             requests: [
               {
+                sector: '',
+                category: '',
                 brand: [],
                 description: '',
-                category: '',
               },
             ],
           }}
@@ -113,6 +111,8 @@ const ReqForm = ({ initialValues, user }) => {
     Yup.object({
       requests: Yup.array().of(
         Yup.object({
+          sector: Yup.string().required(t('forms:required')),
+          category: Yup.string().required(t('forms:required')),
           brand: Yup.array().min(1, t('forms:required')),
           description: Yup.string(),
         })
@@ -134,7 +134,7 @@ const ReqForm = ({ initialValues, user }) => {
   const handleSubmit = async (values, bag) => {
     if (isLast) {
       return setFormValues(values)
-    return
+      return
     } else {
       bag.setTouched({})
       next(values)
@@ -262,6 +262,36 @@ const Step1 = (props) => {
 const Step2 = (props) => {
   const { t } = useTranslation()
 
+
+  const sectorOptions = [
+    { label: 'Ahşap', value: 'ahsap' },
+    { label: 'Metal', value: 'metal' },
+    { label: 'Diğer', value: 'other' },
+  ]
+  const brandOptions = [
+    { value: 'Ima', label: 'Ima' },
+    { value: 'Schelling', label: 'Schelling' },
+    { value: 'Motoman', label: 'Motoman' },
+    { value: 'Fanuc', label: 'Fanuc' },
+    { value: 'Kawasaki', label: 'Kawasaki' },
+    { value: 'Kuka', label: 'Kuka' },
+  ]
+  const categoryOptions = [
+    { label: 'Panel Ebatlama', value: 'panel ebatlama', root: 'ahsap' },
+    { label: 'Cnc', value: 'cnc', root: 'ahsap' },
+    { label: 'Delik Makinesi', value: 'delik makinesi', root: 'ahsap' },
+    { label: 'Freze', value: 'freze', root: 'metal' },
+    { label: 'Torna', value: 'torna', root: 'metal' },
+    { label: 'Polisaj', value: 'polisaj', root: 'metal' },
+    { label: 'İşlem Merkezi', value: 'islem merkezi', root: 'metal' },
+    { label: 'Çapak Alma', value: 'capak alma', root: 'metal' },
+    { label: 'Laser', value: 'laser', root: 'metal' },
+    { label: 'Diğer', value: 'other', root: 'other' },
+  ]
+  const categoryFiltered = (sec) => {
+    return categoryOptions.filter((cat) => cat.root === sec)
+  }
+
   return (
     <div>
       <h1 className="text-2xl font-extrabold">{t('forms:addMachine')} </h1>
@@ -274,21 +304,27 @@ const Step2 = (props) => {
                   key={index}
                   className="bg-yellow-500 p-4 m-2 rounded-sm shadow-md"
                 >
-
+                  <FormikControl
+                    control="radio"
+                    name={`requests.${index}.sector`}
+                    label={t('forms:sector')}
+                    options={sectorOptions}
+                    sid={index}
+                  />
+                  <FormikControl
+                    control="radioSub"
+                    name={`requests.${index}.category`}
+                    label={t('forms:selectCat')}
+                    options={categoryFiltered(req.sector)}
+                    sid={index}
+                  />
                   <FormikControl
                     control="reactSelect"
                     name={`requests.${index}.brand`}
                     label={t('forms:brandPrefer')}
                     placeholder={t('forms:select')}
                     isMulti
-                    options={[
-                      { value: 'Ima', label: 'Ima' },
-                      { value: 'Schelling', label: 'Schelling' },
-                      { value: 'Motoman', label: 'Motoman' },
-                      { value: 'Fanuc', label: 'Fanuc' },
-                      { value: 'Kawasaki', label: 'Kawasaki' },
-                      { value: 'Kuka', label: 'Kuka' },
-                    ]}
+                    options={brandOptions}
                   />
                   <FormikControl
                     control="textarea"

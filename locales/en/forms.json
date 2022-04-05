@@ -28,6 +28,11 @@
   "companyName": "Company Name",
   "city": "City",
   "country": "Country",
-  "contactInfo": "Contact Person"
+  "contactInfo": "Contact Person",
+  "addMachine": "Please Add Requested Machines",
+  "sector": "Specify the Sector",
+  "selectCat": "Select the Category",
+  "description": "Descriptions",
+  "addAnother": "Add Another"
 
 }

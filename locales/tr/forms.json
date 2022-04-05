@@ -19,7 +19,7 @@
   "currentPassword": "Mevcut Şifre",
   "newPassword": "Yeni Şifre",
   "minBrand": "En az 1 marka seçmeslisiniz",
-  "brandPrefer": "Tercih ettğiniz markalar",
+  "brandPrefer": "Tercih Edilen Markalar",
   "back": "önceki",
   "next": "sonraki",
   "select": "Seçiniz...",
@@ -28,7 +28,12 @@
   "companyName": "Firma Ünvanı",
   "city": "Şehir",
   "country": "Ülke",
-  "contactInfo": "İlgili Kişi Bilgileri"
+  "contactInfo": "İlgili Kişi Bilgileri",
+  "addMachine": "Talep Edilen Makineleri Ekleyiniz",
+  "sector": "Sektör Seçiniz",
+  "selectCat": "Kategori Seçiniz",
+  "description": "İlave Tanımlamalar",
+  "addAnother": "Yeni Talep Ekle"
 
 
 }

@@ -4,6 +4,9 @@ import Input from './Input'
 import TextArea from './TextArea'
 import Phone from './Phone'
 import Pass from './Pass'
+import RadioGroup from './RadioGroup'
+import RadioGroupSub from './RadioGroupSub'
+import CheckBoxGroup from './CheckBoxGroup'
 
 function FormikControl(props) {
   const { control, ...rest } = props
@@ -16,7 +19,11 @@ function FormikControl(props) {
     case 'reactSelect':
       return <ReactSelect {...rest} />
     case 'radio':
+      return <RadioGroup {...rest} />
+    case 'radioSub':
+      return <RadioGroupSub {...rest} />
     case 'checkbox':
+      return <CheckBoxGroup {...rest} />
     case 'date':
     case 'password':
       return <Pass {...rest} />
