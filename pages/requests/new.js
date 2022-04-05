@@ -108,13 +108,13 @@ const ReqForm = ({ initialValues, user }) => {
         country: Yup.string().required(t('forms:required')),
       }),
     }),
-    Yup.object({
+    Yup.object().shape({
       requests: Yup.array().of(
-        Yup.object({
-          sector: Yup.string().required(t('forms:required')),
+        Yup.object().shape({
           category: Yup.string().required(t('forms:required')),
           brand: Yup.array().min(1, t('forms:required')),
           description: Yup.string(),
+          sector: Yup.string().required(t('forms:required')),
         })
       ),
     }),
@@ -122,7 +122,6 @@ const ReqForm = ({ initialValues, user }) => {
 
   const next = (values) => {
     setSnapshot(values)
-
     setStepNumber(Math.min(stepNumber + 1, totalSteps - 1))
   }
 
@@ -132,9 +131,9 @@ const ReqForm = ({ initialValues, user }) => {
   }
 
   const handleSubmit = async (values, bag) => {
+    bag.setTouched({})
     if (isLast) {
       return setFormValues(values)
-      return
     } else {
       bag.setTouched({})
       next(values)
@@ -146,48 +145,50 @@ const ReqForm = ({ initialValues, user }) => {
       initialValues={snapshot}
       onSubmit={handleSubmit}
       validationSchema={schemaArray[stepNumber]}
+      enableReinitialize
     >
-      {(formik) => (
-        <Form autoComplete="off">
-          <div className="mx-auto max-w-4xl">
-            {React.cloneElement(steps[stepNumber], {
-              ...formik,
-              listType,
-              setListType,
-              user,
-            })}
+      {(formik) => {
+        return (
+          <Form autoComplete="off">
+            <div className="mx-auto max-w-4xl">
+              {React.cloneElement(steps[stepNumber], {
+                ...formik,
+                listType,
+                setListType,
+                user,
+              })}
 
-            <div className="flex flex-row divide-x-4 my-6">
-              {stepNumber !== 0 && (
+              <div className="flex flex-row divide-x-4 my-6">
+                {stepNumber !== 0 && (
+                  <button
+                    className="btn-cancel"
+                    onClick={() => previous(formik.values)}
+                    type="button"
+                  >
+                    {t('forms:back')}
+                  </button>
+                )}
+
                 <button
-                  className="btn-cancel"
-                  onClick={() => previous(formik.values)}
-                  type="button"
+                  className="btn-submit"
+                  type="submit"
                 >
-                  {t('forms:back')}
+                  {stepNumber === totalSteps - 1
+                    ? t('forms:save')
+                    : t('forms:next')}
                 </button>
-              )}
-
-              <button
-                className="btn-submit"
-                disabled={formik.isSubmitting}
-                type="submit"
-              >
-                {stepNumber === totalSteps - 1
-                  ? t('forms:save')
-                  : t('forms:next')}
-              </button>
-            </div>
-
-            {formValues.name ? (
-              <div className="m-2 p-2 text-indigo-600">
-                <div>Form Data Preview for Server Database</div>
-                <code>{JSON.stringify(formValues, null, '\t')}</code>
               </div>
-            ) : null}
-          </div>
-        </Form>
-      )}
+
+              {formValues.name ? (
+                <div className="m-2 p-2 text-indigo-600">
+                  <div>Form Data Preview for Server Database</div>
+                  <code>{JSON.stringify(formValues, null, '\t')}</code>
+                </div>
+              ) : null}
+            </div>
+          </Form>
+        )
+      }}
     </Formik>
   )
 }
@@ -313,15 +314,15 @@ const Step2 = (props) => {
                     options={sectorOptions}
                     sid={index}
                   />
-                  {requests[index].sector && (
-                    <FormikControl
-                      control="radioSub"
-                      name={`requests.${index}.category`}
-                      label={t('forms:selectCat')}
-                      options={categoryFiltered(req.sector)}
-                      sid={index}
-                    />
-                  )}
+
+                  <FormikControl
+                    control="radioSub"
+                    name={`requests.${index}.category`}
+                    label={t('forms:selectCat')}
+                    options={categoryFiltered(req.sector)}
+                    sid={index}
+                  />
+
                   <FormikControl
                     control="reactSelect"
                     name={`requests.${index}.brand`}
