@@ -52,7 +52,15 @@ const UserDropDown = ({ user, setIsOpen, isOpen, handleLogout }) => {
               className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white"
               onClick={() => setIsDropOpen(false)}
             >
-              {t('Add Machine')}
+              {t('menu:addMachine')}
+            </a>
+          </Link>
+          <Link href="/requests/new">
+            <a
+              className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white"
+              onClick={() => setIsDropOpen(false)}
+            >
+              {t('menu:addRequest')}
             </a>
           </Link>
           <Link href="/">

@@ -33,6 +33,7 @@
   "sector": "Specify the Sector",
   "selectCat": "Select the Category",
   "description": "Descriptions",
-  "addAnother": "Add Another"
+  "addAnother": "Add Another",
+  "newReqForm": "New Request Form"
 
 }

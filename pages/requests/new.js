@@ -5,16 +5,16 @@ import withSession from '../../lib/session'
 import Axios from 'axios'
 import FormikControl from '../../components/formik/FormikControl'
 
-
 import { Formik, Form, FieldArray } from 'formik'
 import * as Yup from 'yup'
 
 const New = (props) => {
+  const { t } = useTranslation()
   const { user } = props
   return (
-    <Layout>
+    <Layout noFooter>
       <div className="container mx-auto px-4">
-        <div className="text-center text-xs">ReqForm#New</div>
+        <div className="text-center text-xs">{t('forms:newReqForm')}</div>
         <ReqForm
           initialValues={{
             name: {
@@ -157,7 +157,7 @@ const ReqForm = ({ initialValues, user }) => {
               user,
             })}
 
-            <div className="flex flex-row divide-x-4 mt-6">
+            <div className="flex flex-row divide-x-4 my-6">
               {stepNumber !== 0 && (
                 <button
                   className="btn-cancel"
@@ -260,8 +260,10 @@ const Step1 = (props) => {
 }
 
 const Step2 = (props) => {
+  const {
+    values: { requests },
+  } = props
   const { t } = useTranslation()
-
 
   const sectorOptions = [
     { label: 'Ahşap', value: 'ahsap' },
@@ -302,7 +304,7 @@ const Step2 = (props) => {
               props.values.requests.map((req, index) => (
                 <div
                   key={index}
-                  className="bg-yellow-500 p-4 m-2 rounded-sm shadow-md"
+                  className="bg-blue-300 p-4 m-2 my-4 rounded-sm shadow-md"
                 >
                   <FormikControl
                     control="radio"
@@ -311,13 +313,15 @@ const Step2 = (props) => {
                     options={sectorOptions}
                     sid={index}
                   />
-                  <FormikControl
-                    control="radioSub"
-                    name={`requests.${index}.category`}
-                    label={t('forms:selectCat')}
-                    options={categoryFiltered(req.sector)}
-                    sid={index}
-                  />
+                  {requests[index].sector && (
+                    <FormikControl
+                      control="radioSub"
+                      name={`requests.${index}.category`}
+                      label={t('forms:selectCat')}
+                      options={categoryFiltered(req.sector)}
+                      sid={index}
+                    />
+                  )}
                   <FormikControl
                     control="reactSelect"
                     name={`requests.${index}.brand`}
@@ -344,7 +348,7 @@ const Step2 = (props) => {
 
             <button
               type="button"
-              className="btn-submit bg-green-700"
+              className="btn-submit bg-green-700 my-4"
               onClick={() =>
                 push({
                   brand: [],

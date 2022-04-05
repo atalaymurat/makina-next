@@ -217,7 +217,15 @@ const Navbar = () => {
                   className="block px-4 py-1 text-gray-300 hover:bg-gray-700 hover:text-white"
                   onClick={() => setIsOpen(false)}
                 >
-                  {t('Add Machine')}
+                  {t('menu:addMachine')}
+                </a>
+              </Link>
+              <Link href="/requests/new">
+                <a
+                  className="block px-4 py-1 text-gray-300 hover:bg-gray-700 hover:text-white"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {t('menu:addRequest')}
                 </a>
               </Link>
               <Link href="/">

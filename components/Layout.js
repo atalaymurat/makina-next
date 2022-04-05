@@ -7,13 +7,13 @@ const Layout = (props) => {
   const Router = useRouter()
   const path = Router.pathname
   const { t } = useTranslation('meta')
-  const { title, noindex } = props
+  const { title, noindex, noFooter } = props
   return (
     <>
       <Head>
         <title>
           {(title &&
-             `${t(title)} | ${t('site_title', {
+            `${t(title)} | ${t('site_title', {
               site_name: process.env.NEXT_PUBLIC_SITE_NAME,
             })}`) ||
             t('site_title', { site_name: process.env.NEXT_PUBLIC_SITE_NAME })}
@@ -71,13 +71,15 @@ const Layout = (props) => {
       </Head>
       <Navbar />
       <div className="main-content">{props.children}</div>
-      <div className="relative z-10 w-full footer-content">
-        <div className="h-20 font-semibold text-gray-500 border-t-2 border-gray-500">
-          <div className="mx-auto my-4 text-2xl text-center w-44">
-            {process.env.NEXT_PUBLIC_SITE_NAME}
+      {!noFooter && (
+        <div className="relative z-10 w-full footer-content">
+          <div className="h-20 font-semibold text-gray-500 border-t-2 border-gray-500">
+            <div className="mx-auto my-4 text-2xl text-center w-44">
+              {process.env.NEXT_PUBLIC_SITE_NAME}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   )
 }

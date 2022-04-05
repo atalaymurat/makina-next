@@ -11,5 +11,7 @@
 	"metal": "Metal",
 	"medical": "Medical",
 	"automation": "Automation",
-	"plastics": "Plastics"
+	"plastics": "Plastics",
+	"addMachine": "Add Machine",
+	"addRequest": "Add Request"
 }

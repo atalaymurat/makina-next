@@ -11,5 +11,7 @@
 	"metal": "Metal",
 	"medical": "Medikal",
 	"automation": "Otomasyon",
-	"plastics": "Plastikler"
+	"plastics": "Plastikler",
+	"addMachine": "Makina Ekle",
+	"addRequest": "Talep Ekle"
 }

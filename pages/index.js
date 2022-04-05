@@ -9,7 +9,7 @@ const Index = (props) => {
   const { t } = useTranslation()
 
   return (
-    <Layout title="index:title">
+    <Layout title={t('index:title')}>
       <div className="relative flex flex-col items-start w-full pt-12">
         <h1 className="w-full h-full max-w-5xl px-8 mx-auto text-5xl font-bold md:text-7xl lg:text-6xl ">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-green-600">
