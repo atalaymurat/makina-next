@@ -11,6 +11,7 @@ const Step2 = (props) => {
   const { t } = useTranslation()
 
   const setSectorOptions = (data) => {
+    console.log("Data Cat:", data)
     const sectorMain = data.filter((d) => d.depth === 0)
     const sectorOps = sectorMain.map((sec) => {
       return {

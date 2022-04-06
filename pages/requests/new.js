@@ -49,16 +49,16 @@ const New = (props) => {
 export const getServerSideProps = withSession(async ({ req, res }) => {
   try {
     const sessionUser = req.session.get('user')
-    if (!sessionUser) {
-      return { props: {} }
-    }
-
-    const apiRes = await Axios.get(`/api/auth/user`, {
-      headers: { cookie: req.headers.cookie },
-    })
 
     const cats = await Axios.get('/api/categories')
     const brands = await Axios.get('/api/brands')
+
+    if (!sessionUser) {
+      return { props: { categories: cats.data , brands : brands.data } }
+    }
+    const apiRes = await Axios.get(`/api/auth/user`, {
+      headers: { cookie: req.headers.cookie },
+    })
 
     if (sessionUser) {
       const user = apiRes.data
