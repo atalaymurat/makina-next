@@ -16,8 +16,8 @@ router
   .get('/', categoriesController.index)
   .get('/tree', categoriesController.tree)
   .get('/:name', categoriesController.show)
-  .post('/', categoriesController.create)
-  .patch('/:id', categoriesController.update)
-  .delete('/:id', categoriesController.destroy)
+  .post('/', session, categoriesController.create)
+  .patch('/:id', session, categoriesController.update)
+  .delete('/:id', session, categoriesController.destroy)
 
 module.exports = router

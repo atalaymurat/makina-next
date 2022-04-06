@@ -31,9 +31,15 @@ module.exports = {
   },
   create: async (req, res, next) => {
     try {
+      const sessionUser = req.session.get('user')
+      if (!sessionUser) return res.status(403)
+
+      if (!req.body || !req.body.name || !req.body.name.tr) {
+        return res.status(400).json({ success: false, error: 'missing fields' })
+      }
       let data = {
         name: { tr: req.body.name.tr, en: req.body.name.en },
-        label: { tr: req.body.name.tr , en: req.body.name.tr },
+        label: { tr: req.body.name.tr, en: req.body.name.tr },
         parentId: null,
       }
       let cat = new Category(data)
@@ -60,6 +66,9 @@ module.exports = {
   },
   update: async (req, res, next) => {
     try {
+      const sessionUser = req.session.get('user')
+      if (!sessionUser) return res.status(403)
+
       const cat = await Category.findOne({ _id: req.params.id })
       cat.name = { tr: req.body.name.tr, en: req.body.name.en }
       cat.parentId = req.body.parentId || null
@@ -73,12 +82,15 @@ module.exports = {
     }
   },
   tree: async (req, res, next) => {
-    console.log("Tree Controller at Categories")
+    console.log('Tree Controller at Categories')
     const fullTree = await Category.GetFullArrayTree()
     res.status(200).json({ success: true, tree: fullTree })
   },
   destroy: async (req, res, next) => {
     try {
+      const sessionUser = req.session.get('user')
+      if (!sessionUser) return res.status(403)
+
       await Category.findOne({ _id: req.params.id }, function (err, doc) {
         doc.getChildren(function (err, docs) {
           if (docs.length) {

@@ -24,8 +24,15 @@ module.exports = {
     }
   },
   create: async (req, res, next) => {
+    const sessionUser = req.session.get('user')
+      if (!sessionUser) return res.status(403)
     console.log(req.body)
+
     try {
+      if (!req.body.name || !req.body.label) {
+        res.status(400).json({ success: false, error: 'missing fields' })
+        return
+      }
       let data = req.body
 
       let brd = new Brand(data)
@@ -39,7 +46,10 @@ module.exports = {
     }
   },
   update: async (req, res, next) => {
+
     try {
+      const sessionUser = req.session.get('user')
+      if (!sessionUser) return res.status(403)
       const brd = await Brand.findOne({ _id: req.params.id })
       brd = req.body
       await brd.save()
@@ -53,11 +63,11 @@ module.exports = {
   },
   destroy: async (req, res, next) => {
     try {
+      const sessionUser = req.session.get('user')
+      if (!sessionUser) return res.status(403)
       res.end()
     } catch (err) {
-      res
-        .status(400)
-        .json({ success: false, error: 'Error on deleting brand' })
+      res.status(400).json({ success: false, error: 'Error on deleting brand' })
     }
   },
 }
