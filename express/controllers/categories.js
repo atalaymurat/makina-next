@@ -22,7 +22,7 @@ module.exports = {
       return {
         _id: item._id,
         depth: item.depth,
-        name: item.name,
+        name: { tr: item.name.tr, en: item.name.en },
         parentId: item.parentId,
         path: item.path,
       }
@@ -32,7 +32,8 @@ module.exports = {
   create: async (req, res, next) => {
     try {
       let data = {
-        name: req.body.name,
+        name: { tr: req.body.name.tr, en: req.body.name.en },
+        label: { tr: req.body.name.tr , en: req.body.name.tr },
         parentId: null,
       }
       let cat = new Category(data)
@@ -60,7 +61,7 @@ module.exports = {
   update: async (req, res, next) => {
     try {
       const cat = await Category.findOne({ _id: req.params.id })
-      cat.name = req.body.name
+      cat.name = { tr: req.body.name.tr, en: req.body.name.en }
       cat.parentId = req.body.parentId || null
       await cat.save()
       res.status(200).json({ success: true, cat })

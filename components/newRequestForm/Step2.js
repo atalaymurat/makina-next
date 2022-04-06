@@ -1,19 +1,22 @@
 import React from 'react'
-import useSWR from 'swr'
-import Axios from 'axios'
 import useTranslation from 'next-translate/useTranslation'
 import { FieldArray } from 'formik'
+import { useRouter } from 'next/router'
 
 import FormikControl from '../../components/formik/FormikControl'
 
 const Step2 = (props) => {
+  const Router = useRouter()
   const { values, categories, brands } = props
   const { t } = useTranslation()
 
   const setSectorOptions = (data) => {
     const sectorMain = data.filter((d) => d.depth === 0)
     const sectorOps = sectorMain.map((sec) => {
-      return { label: sec.name, value: sec._id }
+      return {
+        label: Router.locale === 'en' ? sec.name.en : sec.name.tr,
+        value: sec._id,
+      }
     })
     return sectorOps
   }
@@ -22,7 +25,7 @@ const Step2 = (props) => {
     const opsDepOne = data.filter((d) => d.depth === 1)
     const catOps = opsDepOne.map((op) => {
       return {
-        label: op.name,
+        label: Router.locale === 'en' ? op.name.en : op.name.tr,
         value: op._id,
         root: op.parentId,
       }

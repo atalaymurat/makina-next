@@ -4,7 +4,7 @@ const treePlugin = require('mongoose-tree-materialized')
 const Schema = mongoose.Schema
 
 const categorySchema = new Schema({
-  name: String,
+  name: { tr: String, en: String },
 })
 
 categorySchema.plugin(treePlugin)
