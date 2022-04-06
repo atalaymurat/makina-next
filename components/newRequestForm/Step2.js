@@ -11,7 +11,6 @@ const Step2 = (props) => {
   const { t } = useTranslation()
 
   const setSectorOptions = (data) => {
-    console.log("Data Cat:", data)
     const sectorMain = data.filter((d) => d.depth === 0)
     const sectorOps = sectorMain.map((sec) => {
       return {
@@ -53,7 +52,11 @@ const Step2 = (props) => {
               values.requests.map((req, index) => (
                 <div
                   key={index}
-                  className="bg-blue-300 p-4 m-2 my-4 rounded-sm shadow-md"
+                  className={
+                    index % 2 !== 0
+                      ? 'bg-sky-300 p-4 m-2 my-4 rounded-sm shadow-md'
+                      : 'bg-indigo-300 p-4 m-2 my-4 rounded-sm shadow-md'
+                  }
                 >
                   <FormikControl
                     control="radio"
@@ -101,7 +104,7 @@ const Step2 = (props) => {
 
             <button
               type="button"
-              className="btn-submit bg-green-700 my-4"
+              className="btn-submit bg-green-800 my-4"
               onClick={() =>
                 push({
                   brand: [],
