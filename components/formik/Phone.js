@@ -23,6 +23,7 @@ function Phone(props) {
             const { field, form, meta } = props
             return (
               <PhoneInput
+                name={name}
                 smartCaret={false}
                 flags={flags}
                 labels={router.locale === 'tr' ? TR : EN}

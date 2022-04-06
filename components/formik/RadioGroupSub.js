@@ -34,7 +34,7 @@ function RadioGroupSub(props) {
           }}
         </Field>
       </div>
-      {meta.error && (
+      {meta.error && meta.touched && (
         <div className="inline-block mb-2 font-light text-red-600 italic">
           {meta.error}
         </div>

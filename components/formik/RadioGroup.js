@@ -30,7 +30,12 @@ function RadioGroup(props) {
                     {...field}
                     value={option.value}
                     checked={field.value === option.value}
-                    onClick={() => formikProps.setFieldValue(`requests[${props.sid}].category`,'')}
+                    onClick={() =>
+                      formikProps.setFieldValue(
+                        `requests[${props.sid}].category`,
+                        ''
+                      )
+                    }
                   />
                   <label htmlFor={uid}>{option.label}</label>
                 </div>
@@ -39,14 +44,11 @@ function RadioGroup(props) {
           }}
         </Field>
       </div>
-      {meta.error && (
+      {meta.error && meta.touched && (
         <div className="inline-block mb-2 font-light text-red-600 italic">
           {meta.error}
         </div>
       )}
-      {/*
-      <ErrorMessage name={name} component={TextError} />
-      */}
     </div>
   )
 }
