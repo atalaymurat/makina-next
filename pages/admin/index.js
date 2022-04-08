@@ -7,7 +7,7 @@ import BrandForm from '../../components/admin/BrandForm'
 const fetcher = async () => {
   const resCat = await axios.get('/api/categories/tree')
   const resBrands = await axios.get('/api/brands')
-  const data = { cats: resCat.data.tree || [], brands: resBrands.data || [] }
+  const data = { cats: resCat.data.tree, brands: resBrands.data }
 
   return data
 }
@@ -39,7 +39,7 @@ function AdminIndex() {
               <span className="font-bold">
                 {catMain.name.tr} || {catMain.name.en}{' '}
               </span>
-              {catMain.children.map((child) => (
+              {catMain.children && catMain.children.map((child) => (
                 <div className="pl-4" key={child._id}>
                   {child.name.tr} || {child.name.en}
                 </div>
