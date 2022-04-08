@@ -7,7 +7,7 @@ import BrandForm from '../../components/admin/BrandForm'
 const fetcher = async () => {
   const resCat = await axios.get('/api/categories/tree')
   const resBrands = await axios.get('/api/brands')
-  const data = { cats: resCat.data.tree, brands: resBrands.data }
+  const data = { cats: resCat.data.tree || [], brands: resBrands.data || [] }
 
   return data
 }
