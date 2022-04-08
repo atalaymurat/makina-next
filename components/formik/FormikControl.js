@@ -7,6 +7,7 @@ import Pass from './Pass'
 import RadioGroup from './RadioGroup'
 import RadioGroupSub from './RadioGroupSub'
 import CheckBoxGroup from './CheckBoxGroup'
+import Select from './Select'
 
 function FormikControl(props) {
   const { control, ...rest } = props
@@ -16,6 +17,7 @@ function FormikControl(props) {
     case 'textarea':
       return <TextArea {...rest} />
     case 'select':
+      return <Select {...rest} />
     case 'reactSelect':
       return <ReactSelect {...rest} />
     case 'radio':

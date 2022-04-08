@@ -25,7 +25,7 @@ module.exports = {
   },
   create: async (req, res, next) => {
     const sessionUser = req.session.get('user')
-      if (!sessionUser) return res.status(403)
+    if (!sessionUser) return res.status(403)
     console.log(req.body)
 
     try {
@@ -46,13 +46,14 @@ module.exports = {
     }
   },
   update: async (req, res, next) => {
-
     try {
+      console.log('Brand Update Controler incoming body', req.body)
       const sessionUser = req.session.get('user')
       if (!sessionUser) return res.status(403)
-      const brd = await Brand.findOne({ _id: req.params.id })
-      brd = req.body
-      await brd.save()
+      const brd = await Brand.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+      })
+      console.log('Brand UPDATE :', brd)
       res.status(200).json({ success: true, brd })
     } catch (err) {
       res.status(400).json({
@@ -65,6 +66,10 @@ module.exports = {
     try {
       const sessionUser = req.session.get('user')
       if (!sessionUser) return res.status(403)
+      const id = req.params.id
+      // İlerde baglantıları da bulup temizlemek gerekecek
+      await Brand.findByIdAndDelete(id)
+      console.log("Brand deleted", id)
       res.end()
     } catch (err) {
       res.status(400).json({ success: false, error: 'Error on deleting brand' })

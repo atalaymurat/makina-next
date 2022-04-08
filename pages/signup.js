@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Layout from '../components/Layout'
 import useTranslation from 'next-translate/useTranslation'
 import Message from '../components/Message'
 import SocialLogin from '../components/signup/SocialLogin'
