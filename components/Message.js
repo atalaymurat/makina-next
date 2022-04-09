@@ -25,6 +25,9 @@ const Message = ({ data, className }) => {
       </div>
       <div className="border border-t-0 border-green-400 rounded-b text-lg bg-green-100 px-4 py-2 text-green-700">
         <p>{data.message[router.locale]}</p>
+
+
+
       </div>
     </div>
   )
